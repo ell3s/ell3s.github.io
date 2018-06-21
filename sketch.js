@@ -1,5 +1,3 @@
-//https://kylemcdonald.github.io/cv-examples/
-//https://developer.mozilla.org/en-US/docs/Web/API/DeviceLightEvent/Using_light_sensors
 
 
 /*
@@ -42,7 +40,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = 8;
+var avancement = 0;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -91,7 +89,7 @@ var choix_ok = -1;
  */
 
 var chrono = 0;
-var DEBUG = true;
+var DEBUG = false;
 var police;
 
 
@@ -107,7 +105,7 @@ var capture
 var w = 640
 var h = 480
 
-//Movie video;
+var video1;
 
 function windowResized() {
 
@@ -144,13 +142,22 @@ function preload() {
     verouiller = loadSound("assets/verouiller.mp3");
     heatbeat = loadSound("assets/heatbeat.mp3");
 
+    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4');
+    video1.hide();
+
+     video2 = createVideo('assets/videos/TRANSITION_1.mp4');
+    video2.hide();
+
+     video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4');
+    video3.hide();
+
 
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth-1, windowHeight-1);
 
-    pixelDensity(4);
+    pixelDensity(1);
 
 
     setShakeThreshold(15);
@@ -176,11 +183,23 @@ function setup() {
     textAlign(CENTER, BOTTOM);
     textSize(20);
     imageMode(CENTER);
+
+    video1.hide();
+    video1.play()
+    video1.loop();
+
+    video2.hide();
+    video2.play()
+    video2.loop();
+
+    video3.hide();
+    video3.play()
+    video3.loop();
 }
 
 
 function draw() {
-    background(0);
+  //  background(0);
     fill(255);
     textAlign(LEFT, CENTER)
     if (DEBUG) text("avancement : " + avancement, 20, 40);
@@ -194,6 +213,8 @@ function draw() {
      Action : Elle doit déverouiller son téléphone en le secouant
      */
     if (avancement == 0) {
+        //video1.loop();
+        image(video1,width/2,height/2, width, height)
         textAlign(CENTER, CENTER);
         //Son du vibreur et de l'ambiance de la sérénité
         if (millis() - chrono < 12000) {
@@ -245,6 +266,7 @@ function draw() {
      Action : Elle doix choisir entre 2 choix : A - porter une jupe, B - porter un pantalon
      */
     if (avancement == 1) {
+        image(video1,width/2,height/2, width, height)
         textAlign(CENTER, CENTER);
         boule0();
         var mavarenant = millis() - chrono;
@@ -340,9 +362,11 @@ function draw() {
      Emotion : surprise
      */
     if (avancement == 2) {
+
         boule0();
         var mavarenant = millis() - chrono;
         if ((mavarenant > 0) && (mavarenant < 4000)) {
+            image(video2,width/2,height/2, width, height)
             if (millis() - chrono < 4000) {
                 if (!porte_playing) porte.play();
                 porte_playing = true;
@@ -353,6 +377,7 @@ function draw() {
             text("Je suis prête ! J’y vais ! ", width / 2, height * 7 / 8);
         }
         if ((mavarenant > 4000) && (mavarenant < 8000)) {
+            image(video3,width/2,height/2, width, height)
             if (millis() - chrono > 4000) {
                 if (!marche_playing) marche.loop();
                 marche_playing = true;
@@ -364,7 +389,7 @@ function draw() {
                 if (!ruepeur_playing) ruepeur.loop(); // TODO baisser le volume de ce son manuellement
                 ruepeur_playing = true;
 
-                //ruepeur.amp(0.8);
+                ruepeur.setVolume(0.8);
             }
             stroke(255, 255, 255, (millis() - chrono - 4000) / 10);
             fill(255, 255, 255, (millis() - chrono - 4000) / 10);
@@ -372,9 +397,9 @@ function draw() {
         }
         if (mavarenant > 8000) {
             boule1();
-
+            image(video3,width/2,height/2, width, height)
             if (millis() - chrono > 9000) {
-                //ruepeur.amp(1);
+                ruepeur.setVolume(1);
                 fairechoix.display(width / 2, height * 6.95 / 8, 280, 130);
                 stroke(255, 255, 255, (millis() - chrono - 9000) / 10);
                 fill(255, 255, 255, (millis() - chrono - 9000) / 10);
@@ -447,16 +472,17 @@ function draw() {
      Emotion : énervement
      */
     if (avancement == 3) {
+        background(0);
         boule2();
         if (millis() - chrono < 4000) {
             if (!run_playing) run.loop();
             run_playing = true;
         }
         if (millis() - chrono < 4000) {
-            // ruepeur.amp(1);
+             ruepeur.setVolume(1);
             marche.stop();
 
-            //debut.amp(0.3);// TODO baisser le volume de ce son manuellement
+            debut.setVolume(0.3);// TODO baisser le volume de ce son manuellement
             stroke(255, 255, 255, (millis() - chrono) / 10);
             fill(255, 255, 255, (millis() - chrono) / 10);
             textAlign(CENTER, CENTER);
@@ -488,6 +514,7 @@ function draw() {
      Emotion : joie
      */
     if (avancement == 4) {
+        background(0);
         /*
         La boule joie est composée de plusieurs boules,
          une grosse au milieu et d'autre plus petites autour
@@ -508,7 +535,7 @@ function draw() {
             boulef();
             bouler();
             boulet();
-            //debut.amp(1);
+            debut.setVolume(1);
             ruepeur.stop();
             textAlign(CENTER, CENTER);
             stroke(255, 255, 255, (millis() - chrono) / 10);
@@ -551,6 +578,7 @@ function draw() {
      Emotion : séduction
      */
     if (avancement == 5) {
+        background(0);
         /*
         La boule séduction est composée de plusieurs boules,
          une grosse au milieu et d'autre plus petites autour
@@ -563,7 +591,7 @@ function draw() {
         if (millis() - chrono > 1) {
             if (!amour_playing) amour.play();
             amour_playing = true;
-            //  amour.amp(0.7);// TODO baisser le volume de ce son manuellement
+              amour.setVolume(0.7);// TODO baisser le volume de ce son manuellement
             debut.stop();
         }
 
@@ -659,14 +687,15 @@ function draw() {
      Emotion : stress
      */
     if (avancement == 6) {
+        background(0);
         if (millis() - chrono > 1) {
             if (!peur2_playing) peur2.play();
             peur2_playing = true;
-            //peur2.amp(3); // TODO augmenter le volume de ce son manuellement
+            peur2.setVolume(1); // TODO augmenter le volume de ce son manuellement
             if (!heatbeat_playing) heatbeat.play();
             heatbeat_playing = true;
-            //heatbeat.amp(4); // TODO baisser le volume de ce son manuellement
-            //amour.amp(0.2); // // TODO baisser le volume de ce son manuellement
+            heatbeat.setVolume(1.5); // TODO baisser le volume de ce son manuellement
+            amour.setVolume(0.2); // // TODO baisser le volume de ce son manuellement
             debut.stop();
         }
         var mavarenant = millis() - chrono;
@@ -760,6 +789,7 @@ function draw() {
      Action : se débattre (secouer la tablette)
      Emotion : peur
      */
+    background(0);
     if (avancement == 7) {
         boule5();
         if (millis() - chrono < 4000) {
@@ -794,10 +824,11 @@ function draw() {
      Emotion : peur, grande colère
      */
     if (avancement == 8) {
+        background(0);
         if (millis() - chrono < 5000) {
             if (!fin1_playing) fin1.play();
             fin1_playing = true;
-            // peur2.amp(0.7); // TODO baisser le volume de ce son manuellement
+            peur2.setVolume(0.7); // TODO baisser le volume de ce son manuellement
         }
         if (millis() - chrono > 5000) {
             if (!fin2_playing) fin2.play();
@@ -857,7 +888,7 @@ function draw() {
      */
     if (avancement == 9) {
 
-
+        background(0);
         var mavarenant = millis() - chrono;
         if ((mavarenant > 0) && (mavarenant < 4000)) {
             boule7();
@@ -918,7 +949,7 @@ function deviceShaken() {
 }
 
 
-var tlight
+
 
 
 /*
