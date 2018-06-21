@@ -42,7 +42,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = 0;
+var avancement = 8;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -103,7 +103,9 @@ var agression
 var marcherue
 var lumiere
 
-var cap
+var capture
+var w = 640
+var h = 480
 
 //Movie video;
 
@@ -153,26 +155,20 @@ function setup() {
 
     setShakeThreshold(15);
 
-    /*
-    var constraints = {
-    video: {
-      mandatory: {
-        minWidth: 320,
-        minHeight: 240
-      },
-      optional: [{ maxFrameRate: 10 }]
-    },
-    audio: false
-  };
- capture =  createCapture(constraints, function(stream) {
-    console.log(stream);
-  });
+    capture = createCapture({
+        audio: false,
+        video: {
+            width: w,
+            height: h
+        }
+    }, function () {
+        console.log('capture ready.')
+    });
+    capture.elt.setAttribute('playsinline', '');
+    capture.size(w, h);
+    capture.hide();
 
-    //capture = createCapture(VIDEO);
-    capture.size(320, 240);
-*/
-    // cap = createCapture(VIDEO);
-    //cap.hide();
+
 
 
     frameRate(25);
@@ -826,22 +822,23 @@ function draw() {
         }
         textAlign(LEFT, CENTER)
         if (DEBUG) text("appuer sur l pour passer à l'étape suivante", 20, 140)
-
-        /*
-        cap.loadPixels();
-        for (var cy = 0; cy < cap.height; cy += 10) {
-            for (var cx = 0; cx < cap.width; cx += 5) {
-                var offset = ((cy * cap.width) + cx) * 4;
-                var xpos = (cx / cap.width) * width;
-                var ypos = (cy / cap.height) * height;
-                rect(xpos, ypos, 10,
-                    10 * (cap.pixels[offset + 1] / 255));
+       // var avg =0
+        capture.loadPixels();
+        if (capture.pixels.length > 0) { // don't forget this!
+            var total = 0;
+            var i = 0;
+            for (var y = 0; y < h; y++) {
+                for (var x = 0; x < w; x++) {
+                    var redValue = capture.pixels[i];
+                    total += redValue;
+                    i += 4;
+                }
             }
+            var n = w * h;
+            var avg = int(total / n);
+            if (avg> 170) evenement(5)
         }
 
-        if (tlight < 500) {
-            evenement(5)
-        }*/
 
         if (derniere_action == 5) {
             avancement = 9;
