@@ -1,5 +1,3 @@
-
-
 /*
  Elle(s) est une représentation abstraite des émotions ressenties
  par une femme victime d’agression sexuelle.
@@ -40,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = 0;
+var avancement = -1;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -89,7 +87,7 @@ var choix_ok = -1;
  */
 
 var chrono = 0;
-var DEBUG = false;
+var DEBUG = true;
 var police;
 
 
@@ -105,7 +103,8 @@ var capture
 var w = 640
 var h = 480
 
-var video1;
+
+var canvas
 
 function windowResized() {
 
@@ -142,20 +141,14 @@ function preload() {
     verouiller = loadSound("assets/verouiller.mp3");
     heatbeat = loadSound("assets/heatbeat.mp3");
 
-    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4');
-    video1.hide();
 
-     video2 = createVideo('assets/videos/TRANSITION_1.mp4');
-    video2.hide();
-
-     video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4');
-    video3.hide();
 
 
 }
 
 function setup() {
-    createCanvas(windowWidth-1, windowHeight-1);
+    canvas = createCanvas(windowWidth - 2, windowHeight - 2);
+    canvas.position(1, 1)
 
     pixelDensity(1);
 
@@ -184,28 +177,39 @@ function setup() {
     textSize(20);
     imageMode(CENTER);
 
+
+    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4');
+
+    video2 = createVideo('assets/videos/TRANSITION_1.mp4');
+
+    video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4');
+
     video1.hide();
-    video1.play()
-    video1.loop();
-
     video2.hide();
-    video2.play()
-    video2.loop();
-
     video3.hide();
-    video3.play()
-    video3.loop();
+
+
 }
 
 
 function draw() {
-  //  background(0);
-    fill(255);
-    textAlign(LEFT, CENTER)
-    if (DEBUG) text("avancement : " + avancement, 20, 40);
-    if (DEBUG) text("dernière action : " + derniere_action, 20, 70);
-    if (DEBUG) text("chrono : " + nf((millis() - chrono) / 1000, 3, 1), 20, 100);
 
+
+
+    if (avancement == -1) {
+        push()
+        background(0);
+        textAlign(CENTER, CENTER)
+        fill(255)
+        stroke(255)
+        text("click to start", width / 2, height / 2)
+
+        if (mouseIsPressed) {
+            avancement = 0
+            video1.loop()
+        }
+        pop()
+    }
     // *************************************************************
     /* ETAPE 1
      Contexte : début, elle est chez elle
@@ -213,9 +217,10 @@ function draw() {
      Action : Elle doit déverouiller son téléphone en le secouant
      */
     if (avancement == 0) {
-        //video1.loop();
-        image(video1,width/2,height/2, width, height)
+
+        image(video1, width / 2, height / 2, width, height)
         textAlign(CENTER, CENTER);
+
         //Son du vibreur et de l'ambiance de la sérénité
         if (millis() - chrono < 12000) {
             if (!hit_playing) hit.play();
@@ -225,7 +230,6 @@ function draw() {
             if (!debut_playing) debut.play();
             debut_playing = true;
         }
-        fill(255, 255, 255, 255);
 
         //Le texte apparait en fonction d'un temps que nous avons défini grâce à un chronomètre
         if (millis() - chrono > 6000) {
@@ -233,30 +237,28 @@ function draw() {
             fill(255, (millis() - chrono - 6000) / 10);
             text("Pour répondre SECOUER le téléphone", width / 2, height * 7 / 8);
             deverouiller.display(width / 2, height * 6 / 8, 150, 150);
-
         }
-        textAlign(LEFT, CENTER)
-        if (key == '1') evenement(3);
-        if (DEBUG) text("appuer sur 1 pour passer à l'étape suivante", 20, 140)
-        //Appel d'une des boules du tableau par son nom (boule0, boule1,...)
+
         boule0();
 
-        // derniere_action correspond aux différentes vareractions réalisé avec la tablette,
-        // ces varerections permettent de passé à la case/partie suivant (avancement = 1, 2, 3,...)
+        if (key == '1') evenement(3);
+
+        textAlign(LEFT, CENTER)
+        if (DEBUG) text("appuer sur 1 pour passer à l'étape suivante", 20, 140)
+
         /*
          - dernière_action = 1 : Choix A
          - dernière_action = 2 : Choix B
          - dernière_action = 3 : Secouer
          - dernière_action = 5 : Explosion
          */
-        // Permet d'avancer à l'étape, action numéro 2
         if (derniere_action == 3) {
-
             avancement = 1;
             derniere_action = 0;
             chrono = millis();
             hit.stop();
         }
+
     }
 
     // *************************************************************
@@ -266,11 +268,15 @@ function draw() {
      Action : Elle doix choisir entre 2 choix : A - porter une jupe, B - porter un pantalon
      */
     if (avancement == 1) {
-        image(video1,width/2,height/2, width, height)
+
+        image(video1, width / 2, height / 2, width, height)
         textAlign(CENTER, CENTER);
+
         boule0();
-        var mavarenant = millis() - chrono;
-        if ((mavarenant > 0) && (mavarenant < 4000)) {
+
+        var maintenant = millis() - chrono;
+
+        if ((maintenant > 0) && (maintenant < 4000)) {
 
             if (!verouiller_playing) {
                 verouiller.play();
@@ -278,20 +284,25 @@ function draw() {
             }
 
             textAlign(CENTER, CENTER);
-
             stroke(255, (millis() - chrono) / 10);
             fill(255, (millis() - chrono) / 10);
             text("SMS: “Hey ! Tu viens à ma fête ce soir ?!”", width / 2, height * 7 / 8);
+
         }
-        if ((mavarenant > 4000) && (mavarenant < 8000)) {
+
+        else if ((maintenant > 4000) && (maintenant < 8000)) {
+
             stroke(255, 255, 255, (millis() - chrono - 4000) / 10);
             fill(255, 255, 255, (millis() - chrono - 4000) / 10);
             text("SMS: “Alors tu viens ou pas ?”", width / 2, height * 7 / 8);
+
         }
 
         //le texte de gauche (choix A) apparaît avant le texte de droite (choix B)
-        if (mavarenant > 8000) {
+        else if (maintenant > 8000) {
+
             if (millis() - chrono > 9000) {
+
                 fairechoix.display(width / 2, height * 7.2 / 8, 280, 130);
 
                 if (!habits_playing) {
@@ -316,42 +327,60 @@ function draw() {
 
                 if (rotationX < -45 || rotationY < -45) evenement(1)
                 if (rotationX > 45 || rotationY > 45) evenement(2)
+
             }
+
         }
 
         if (derniere_action == 1) {
+
             if (choix_ok == -1) {
                 choix_ok = 50;
             }
-            if (choix_ok > 0) {
+            else if (choix_ok > 0) {
+
                 stroke(140, 140, 140);
                 fill(140, 140, 140);
                 textAlign(RIGHT, CENTER);
                 text("Chouette je vais pouvoir mettre ma nouvelle jupe", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
                 choix_ok--;
+
             } else {
+
                 avancement = 2;
                 derniere_action = 0;
                 chrono = millis();
                 choix_ok = -1;
+                video1.stop()
+                video2.loop()
+
             }
+
         } else if (derniere_action == 2) {
+
             if (choix_ok == -1) {
                 choix_ok = 50;
             }
-            if (choix_ok > 0) {
+
+            else if (choix_ok > 0) {
                 stroke(140, 140, 140);
                 fill(140, 140, 140);
                 textAlign(LEFT, CENTER);
                 text("Rien de plus confortable qu’un vieux jean pour passer une bonne soirée", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
                 choix_ok--;
+
             } else {
+
                 avancement = 2;
                 derniere_action = 0;
                 chrono = millis();
                 choix_ok = -1;
+                video1.stop()
+                video2.loop()
+
             }
         }
+
     }
 
     // *************************************************************
@@ -363,27 +392,41 @@ function draw() {
      */
     if (avancement == 2) {
 
-        boule0();
-        var mavarenant = millis() - chrono;
-        if ((mavarenant > 0) && (mavarenant < 4000)) {
-            image(video2,width/2,height/2, width, height)
+        var maintenant = millis() - chrono;
+
+        if ((maintenant > 0) && (maintenant < 4000)) {
+
+            image(video2, width / 2, height / 2, width, height)
+
             if (millis() - chrono < 4000) {
                 if (!porte_playing) porte.play();
                 porte_playing = true;
             }
+
             stroke(255, 255, 255, (millis() - chrono) / 10);
             fill(255, 255, 255, (millis() - chrono) / 10);
             textAlign(CENTER, BOTTOM);
             text("Je suis prête ! J’y vais ! ", width / 2, height * 7 / 8);
+
+            video3.loop();
+            boule0();
+
         }
-        if ((mavarenant > 4000) && (mavarenant < 8000)) {
-            image(video3,width/2,height/2, width, height)
+        if ((maintenant > 4000) && (maintenant < 8000)) {
+
+            image(video3, width / 2, height / 2, width, height)
+
             if (millis() - chrono > 4000) {
+
                 if (!marche_playing) marche.loop();
                 marche_playing = true;
+
             }
-            //porte.stop();
+
+            porte.stop();
+
             if (millis() - chrono > 4000) {
+
                 boule1();
 
                 if (!ruepeur_playing) ruepeur.loop(); // TODO baisser le volume de ce son manuellement
@@ -391,14 +434,19 @@ function draw() {
 
                 ruepeur.setVolume(0.8);
             }
+
             stroke(255, 255, 255, (millis() - chrono - 4000) / 10);
             fill(255, 255, 255, (millis() - chrono - 4000) / 10);
             text("Je marche tranquillement dans la rue quand soudain un homme m’interpelle en me sifflant", width / 2, height * 7.2 / 8);
+
         }
-        if (mavarenant > 8000) {
+        if (maintenant > 8000) {
+
+            image(video3, width / 2, height / 2, width, height)
             boule1();
-            image(video3,width/2,height/2, width, height)
+
             if (millis() - chrono > 9000) {
+
                 ruepeur.setVolume(1);
                 fairechoix.display(width / 2, height * 6.95 / 8, 280, 130);
                 stroke(255, 255, 255, (millis() - chrono - 9000) / 10);
@@ -406,6 +454,7 @@ function draw() {
 
                 textAlign(RIGHT, CENTER);
                 text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+
             }
             if (millis() - chrono > 10000) {
 
@@ -415,53 +464,65 @@ function draw() {
                 text("Je me retourne pour voir qui c'est", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
 
             }
+
             if (key == '4') evenement(1)
             if (key == '5') evenement(2)
-
-
 
             textAlign(LEFT, CENTER)
             if (DEBUG) text("appuer sur 4 ou 5 pour passer à l'étape suivante", 20, 140)
 
             if (rotationX < -45 || rotationY < -45) evenement(2)
             if (rotationX > 45 || rotationY > 45) evenement(1)
+
         }
 
-
-
         if (derniere_action == 1) {
+
             if (choix_ok == -1) {
                 choix_ok = 50;
             }
-            if (choix_ok > 0) {
+
+            else if (choix_ok > 0) {
+
                 stroke(140, 140, 140);
                 fill(140, 140, 140);
                 textAlign(RIGHT, CENTER);
                 text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
                 choix_ok--;
+
             } else {
+
                 avancement = 3;
                 derniere_action = 0;
                 chrono = millis();
                 choix_ok = -1;
+
             }
+
         } else if (derniere_action == 2) {
+
             if (choix_ok == -1) {
                 choix_ok = 50;
             }
-            if (choix_ok > 0) {
+            else if (choix_ok > 0) {
+
                 stroke(140, 140, 140);
                 fill(140, 140, 140);
                 textAlign(LEFT, CENTER);
                 text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
                 choix_ok--;
+
             } else {
+
                 avancement = 3;
                 derniere_action = 0;
                 chrono = millis();
                 choix_ok = -1;
+
             }
+
         }
+
     }
 
     // *************************************************************
@@ -479,10 +540,10 @@ function draw() {
             run_playing = true;
         }
         if (millis() - chrono < 4000) {
-             ruepeur.setVolume(1);
+            ruepeur.setVolume(1);
             marche.stop();
 
-            debut.setVolume(0.3);// TODO baisser le volume de ce son manuellement
+            debut.setVolume(0.3); // TODO baisser le volume de ce son manuellement
             stroke(255, 255, 255, (millis() - chrono) / 10);
             fill(255, 255, 255, (millis() - chrono) / 10);
             textAlign(CENTER, CENTER);
@@ -490,6 +551,7 @@ function draw() {
         }
 
         //    textFont(police, 15);
+        textAlign(CENTER,CENTER)
         if (millis() - chrono > 4000) text("Pour marcher plus vite SECOUER le téléphone", width / 2, height * 7.2 / 8);
         if (millis() - chrono > 4000) marcherue.display(width / 2, height * 6.3 / 8, 150, 150);
 
@@ -591,7 +653,7 @@ function draw() {
         if (millis() - chrono > 1) {
             if (!amour_playing) amour.play();
             amour_playing = true;
-              amour.setVolume(0.7);// TODO baisser le volume de ce son manuellement
+            amour.setVolume(0.7); // TODO baisser le volume de ce son manuellement
             debut.stop();
         }
 
@@ -698,8 +760,8 @@ function draw() {
             amour.setVolume(0.2); // // TODO baisser le volume de ce son manuellement
             debut.stop();
         }
-        var mavarenant = millis() - chrono;
-        if ((mavarenant > 0) && (mavarenant < 10000)) {
+        var maintenant = millis() - chrono;
+        if ((maintenant > 0) && (maintenant < 10000)) {
             boule4();
             boulea();
             bouleb();
@@ -713,7 +775,7 @@ function draw() {
             text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas. Il m’attire vers une pièce à l’étage. Je me laisse entraîner.", width / 2, height * 7 / 8, width / 4);
 
         }
-        if ((mavarenant > 10000) && (mavarenant < 20000)) {
+        if ((maintenant > 10000) && (maintenant < 20000)) {
             boule5();
             stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
             fill(255, 255, 255, (millis() - chrono - 10000) / 10);
@@ -722,7 +784,7 @@ function draw() {
         }
 
 
-        if (mavarenant > 20000) {
+        if (maintenant > 20000) {
             boule5();
             if (millis() - chrono > 21000) {
                 stroke(255, 255, 255, (millis() - chrono - 21000) / 10);
@@ -789,8 +851,9 @@ function draw() {
      Action : se débattre (secouer la tablette)
      Emotion : peur
      */
-    background(0);
+
     if (avancement == 7) {
+        background(0);
         boule5();
         if (millis() - chrono < 4000) {
             if (!agres_playing) agres.play();
@@ -853,7 +916,7 @@ function draw() {
         }
         textAlign(LEFT, CENTER)
         if (DEBUG) text("appuer sur l pour passer à l'étape suivante", 20, 140)
-       // var avg =0
+        // var avg =0
         capture.loadPixels();
         if (capture.pixels.length > 0) { // don't forget this!
             var total = 0;
@@ -867,7 +930,7 @@ function draw() {
             }
             var n = w * h;
             var avg = int(total / n);
-            if (avg> 170) evenement(5)
+            if (avg > 170) evenement(5)
         }
 
 
@@ -889,11 +952,11 @@ function draw() {
     if (avancement == 9) {
 
         background(0);
-        var mavarenant = millis() - chrono;
-        if ((mavarenant > 0) && (mavarenant < 4000)) {
+        var maintenant = millis() - chrono;
+        if ((maintenant > 0) && (maintenant < 4000)) {
             boule7();
         }
-        if ((mavarenant > 4000) && (mavarenant < 8000)) {
+        if ((maintenant > 4000) && (maintenant < 8000)) {
             boule11();
         }
 
@@ -907,10 +970,10 @@ function draw() {
          + Message de dénonciation (statistique du nombre de victime de viol)
          */
 
-        if ((mavarenant > 13000) && (mavarenant < 21000)) {
+        if ((maintenant > 13000) && (maintenant < 21000)) {
             boule8();
         }
-        if (mavarenant > 21000) {
+        if (maintenant > 21000) {
             boule0();
             boule10();
             textAlign(CENTER, CENTER);
@@ -933,6 +996,17 @@ function draw() {
         derniere_action = 0;
         chrono = millis();
     }
+
+
+    push()
+    //  background(0);
+    fill(255);
+    textAlign(LEFT, CENTER)
+    textSize(16)
+    if (DEBUG) text("avancement : " + avancement, 20, 20);
+    if (DEBUG) text("dernière action : " + derniere_action, 20, 45);
+    if (DEBUG) text("chrono : " + nf((millis() - chrono) / 1000, 3, 1), 20, 70);
+    pop()
 }
 
 
