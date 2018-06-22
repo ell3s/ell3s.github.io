@@ -681,8 +681,7 @@ function draw() {
             textAlign(RIGHT, CENTER);
             text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7 / 8, width * 4 / 12, 100);
             fairechoix.display(width / 2, height * 6.8 / 8, 280, 130);
-            if (key == 'a') evenement(1)
-            if (key == 'b') evenement(2)
+
         }
 
         if (millis() - chrono > 8000) {
@@ -772,14 +771,15 @@ function draw() {
                 stroke(255, 255, 255, (millis() - chrono) / 10);
             fill(255, 255, 255, (millis() - chrono) / 10);
             textAlign(CENTER, CENTER);
-            text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas. Il m’attire vers une pièce à l’étage. Je me laisse entraîner.", width / 2, height * 7 / 8, width / 4);
+            text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas. Il m’attire vers une pièce à l’étage. Je me laisse entraîner.", width / 2, height * 7 / 8);
 
         }
         if ((maintenant > 10000) && (maintenant < 20000)) {
             boule5();
+            textAlign(CENTER, CENTER);
             stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
             fill(255, 255, 255, (millis() - chrono - 10000) / 10);
-            text("On entre dans une chambre, il ferme la porte derrière nous. Je suis un peu mal à l’aise.Que dois-je faire ? Il tente de m’embrasser.", width / 2, height * 7 / 8, width / 4);
+            text("On entre dans une chambre, il ferme la porte derrière nous. Je suis un peu mal à l’aise.Que dois-je faire ? Il tente de m’embrasser.", width / 2, height * 7 / 8);
 
         }
 
