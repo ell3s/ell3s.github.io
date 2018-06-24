@@ -216,7 +216,7 @@ function setup() {
     video3.hide();
     console.log(deviceOrientation)
 
-    location.reload(true);
+
 }
 
 
