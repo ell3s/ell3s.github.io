@@ -298,8 +298,14 @@ function draw() {
             textSize(dialogSize);
             if (DEBUG) text("appuer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
-            if (rotationX < -45 || rotationY < -45) evenement(1)
-            if (rotationX > 45 || rotationY > 45) evenement(2)
+            if(deviceOrientation === 'portrait'){
+                if (rotationX < -45) evenement(1)
+                if (rotationX > 45) evenement(2)
+            }
+            else {
+                if (rotationY < -45) evenement(1)
+                if (rotationY > 45) evenement(2)
+            }
         }
 
 
