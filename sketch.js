@@ -99,6 +99,9 @@ var agression
 var marcherue
 var lumiere
 
+var animSize
+var dialogSize
+
 var capture
 var w = 640
 var h = 480
@@ -106,9 +109,14 @@ var h = 480
 
 var canvas
 
+var french = true
+
+
 function windowResized() {
 
     resizeCanvas(windowWidth, windowHeight);
+    animSize = ((width + height) / 2) / 10
+    dialogSize = ((width + height) / 2) / 40
 }
 
 
@@ -141,6 +149,7 @@ function preload() {
     verouiller = loadSound("assets/verouiller.mp3");
     heatbeat = loadSound("assets/heatbeat.mp3");
 
+    logo = loadImage("assets/images/logo.png")
 
 
 
@@ -150,10 +159,13 @@ function setup() {
     canvas = createCanvas(windowWidth - 2, windowHeight - 2);
     canvas.position(1, 1)
 
+    animSize = ((width + height) / 2) / 10
+    dialogSize = ((width + height) / 2) / 40
+
     pixelDensity(1);
 
 
-    setShakeThreshold(15);
+    setShakeThreshold(20);
 
     capture = createCapture({
         audio: false,
@@ -163,6 +175,24 @@ function setup() {
         }
     }, function () {
         console.log('capture ready.')
+        capture.loadPixels();
+        ambientL = 0;
+        if (capture.pixels.length > 0) { // don't forget this!
+            var total = 0;
+            var i = 0;
+            for (var y = 0; y < h; y++) {
+                for (var x = 0; x < w; x++) {
+                    var redValue = capture.pixels[i];
+                    total += redValue;
+                    i += 4;
+                }
+            }
+            var n = w * h;
+            ambientL = int(total / n);
+
+
+        }
+        //console.log(ambientL)
     });
     capture.elt.setAttribute('playsinline', '');
     capture.size(w, h);
@@ -174,42 +204,49 @@ function setup() {
     frameRate(25);
     textFont('Lato');
     textAlign(CENTER, BOTTOM);
-    textSize(20);
+    textSize(dialogSize);
     imageMode(CENTER);
 
 
     video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4');
-
     video2 = createVideo('assets/videos/TRANSITION_1.mp4');
-
     video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4');
-
     video1.hide();
     video2.hide();
     video3.hide();
+    console.log(deviceOrientation)
 
-
+    location.reload(true);
 }
 
 
 function draw() {
 
-
+    // mouseIsPressed = false;
 
     if (avancement == -1) {
         push()
-        background(0);
+        image(video1, width / 2, height / 2, width, height)
         textAlign(CENTER, CENTER)
+        textSize(dialogSize);
         fill(255)
         stroke(255)
-        text("click to start", width / 2, height / 2)
+        if (french) {
+            text("cliquer pour démarrer", width / 2, height / 2)
+        } else {
+            text("click to start", width / 2, height / 2)
+        }
+
+        image(logo, width / 2, height / 3, animSize * 2, animSize * 2);
 
         if (mouseIsPressed) {
             avancement = 0
             video1.loop()
+            chrono = millis()
         }
         pop()
     }
+
     // *************************************************************
     /* ETAPE 1
      Contexte : début, elle est chez elle
@@ -218,40 +255,16 @@ function draw() {
      */
     if (avancement == 0) {
 
-        image(video1, width / 2, height / 2, width, height)
-        textAlign(CENTER, CENTER);
+        scenario0()
 
-        //Son du vibreur et de l'ambiance de la sérénité
-        if (millis() - chrono < 12000) {
-            if (!hit_playing) hit.play();
-            hit_playing = true;
-        }
-        if (millis() - chrono > 5000) {
-            if (!debut_playing) debut.play();
-            debut_playing = true;
-        }
-
-        //Le texte apparait en fonction d'un temps que nous avons défini grâce à un chronomètre
         if (millis() - chrono > 6000) {
-            stroke(255, (millis() - chrono - 6000) / 10);
-            fill(255, (millis() - chrono - 6000) / 10);
-            text("Pour répondre SECOUER le téléphone", width / 2, height * 7 / 8);
-            deverouiller.display(width / 2, height * 6 / 8, 150, 150);
+            if (key == '1') evenement(3);
+            if (mouseIsPressed) evenement(3);
+            textSize(dialogSize);
+            textAlign(LEFT, CENTER)
+            if (DEBUG) text("appuer sur 1 pour passer à l'étape suivante", 20, 140)
         }
 
-        boule0();
-
-        if (key == '1') evenement(3);
-
-        textAlign(LEFT, CENTER)
-        if (DEBUG) text("appuer sur 1 pour passer à l'étape suivante", 20, 140)
-
-        /*
-         - dernière_action = 1 : Choix A
-         - dernière_action = 2 : Choix B
-         - dernière_action = 3 : Secouer
-         - dernière_action = 5 : Explosion
-         */
         if (derniere_action == 3) {
             avancement = 1;
             derniere_action = 0;
@@ -269,80 +282,40 @@ function draw() {
      */
     if (avancement == 1) {
 
-        image(video1, width / 2, height / 2, width, height)
-        textAlign(CENTER, CENTER);
+        scenario1()
 
-        boule0();
+        if (millis() - chrono > 10500) {
+            if (key == '2') evenement(1)
+            if (key == '3') evenement(2)
 
-        var maintenant = millis() - chrono;
-
-        if ((maintenant > 0) && (maintenant < 4000)) {
-
-            if (!verouiller_playing) {
-                verouiller.play();
-                verouiller_playing = true;
+            if (mouseIsPressed && mouseX < width / 2) {
+                evenement(1)
+            } else if (mouseIsPressed && mouseX > width / 2) {
+                evenement(2)
             }
+            textSize(dialogSize);
+            textAlign(LEFT, CENTER)
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
-            textAlign(CENTER, CENTER);
-            stroke(255, (millis() - chrono) / 10);
-            fill(255, (millis() - chrono) / 10);
-            text("SMS: “Hey ! Tu viens à ma fête ce soir ?!”", width / 2, height * 7 / 8);
-
+            if (rotationX < -45 || rotationY < -45) evenement(1)
+            if (rotationX > 45 || rotationY > 45) evenement(2)
         }
 
-        else if ((maintenant > 4000) && (maintenant < 8000)) {
-
-            stroke(255, 255, 255, (millis() - chrono - 4000) / 10);
-            fill(255, 255, 255, (millis() - chrono - 4000) / 10);
-            text("SMS: “Alors tu viens ou pas ?”", width / 2, height * 7 / 8);
-
-        }
-
-        //le texte de gauche (choix A) apparaît avant le texte de droite (choix B)
-        else if (maintenant > 8000) {
-
-            if (millis() - chrono > 9000) {
-
-                fairechoix.display(width / 2, height * 7.2 / 8, 280, 130);
-
-                if (!habits_playing) {
-                    habits.play();
-                    habits_playing = true;
-                }
-
-                textAlign(RIGHT, CENTER);
-                stroke(255, 255, 255, (millis() - (chrono + 9000)) / 10);
-                fill(255, 255, 255, (millis() - (chrono + 9000)) / 10);
-                text("Chouette je vais pouvoir mettre ma nouvelle jupe", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                stroke(255, 255, 255, (millis() - (chrono + 10000)) / 10);
-                fill(255, 255, 255, (millis() - (chrono + 10000)) / 10);
-                textAlign(LEFT, CENTER);
-                text("Rien de plus confortable qu’un vieux jean pour passer une bonne soirée", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-
-                if (key == '2') evenement(1)
-                if (key == '3') evenement(2)
-
-                textAlign(LEFT, CENTER)
-                if (DEBUG) text("appuer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
-
-                if (rotationX < -45 || rotationY < -45) evenement(1)
-                if (rotationX > 45 || rotationY > 45) evenement(2)
-
-            }
-
-        }
 
         if (derniere_action == 1) {
 
             if (choix_ok == -1) {
                 choix_ok = 50;
-            }
-            else if (choix_ok > 0) {
+            } else if (choix_ok > 0) {
 
                 stroke(140, 140, 140);
                 fill(140, 140, 140);
                 textAlign(RIGHT, CENTER);
-                text("Chouette je vais pouvoir mettre ma nouvelle jupe", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                textSize(dialogSize);
+
+                if (french) text("Chouette ! je vais pouvoir mettre ma nouvelle jupe", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                else text("Great ! I'm gonna try on my new skirt", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
                 choix_ok--;
 
             } else {
@@ -360,13 +333,13 @@ function draw() {
 
             if (choix_ok == -1) {
                 choix_ok = 50;
-            }
-
-            else if (choix_ok > 0) {
+            } else if (choix_ok > 0) {
                 stroke(140, 140, 140);
                 fill(140, 140, 140);
                 textAlign(LEFT, CENTER);
-                text("Rien de plus confortable qu’un vieux jean pour passer une bonne soirée", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                textSize(dialogSize);
+                if (french) text("Rien de plus confortable qu’un vieux jean pour passer une bonne soirée", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                else text("Nothing better than a good old pair of jeans for a nice evening", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
                 choix_ok--;
 
             } else {
@@ -392,135 +365,73 @@ function draw() {
      */
     if (avancement == 2) {
 
-        var maintenant = millis() - chrono;
+        scenario2()
 
-        if ((maintenant > 0) && (maintenant < 4000)) {
+        if (millis() - chrono > 8500) {
 
-            image(video2, width / 2, height / 2, width, height)
+            if (derniere_action == 1) {
 
-            if (millis() - chrono < 4000) {
-                if (!porte_playing) porte.play();
-                porte_playing = true;
-            }
+                if (choix_ok == -1) {
+                    choix_ok = 50;
+                } else if (choix_ok > 0) {
 
-            stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            textAlign(CENTER, BOTTOM);
-            text("Je suis prête ! J’y vais ! ", width / 2, height * 7 / 8);
+                    stroke(140, 140, 140);
+                    fill(140, 140, 140);
+                    textAlign(RIGHT, CENTER);
+                    textSize(dialogSize);
+                    if (french) text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    else text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    choix_ok--;
 
-            video3.loop();
-            boule0();
+                } else {
 
-        }
-        if ((maintenant > 4000) && (maintenant < 8000)) {
+                    avancement = 3;
+                    derniere_action = 0;
+                    chrono = millis();
+                    choix_ok = -1;
 
-            image(video3, width / 2, height / 2, width, height)
+                }
 
-            if (millis() - chrono > 4000) {
+            } else if (derniere_action == 2) {
 
-                if (!marche_playing) marche.loop();
-                marche_playing = true;
+                if (choix_ok == -1) {
+                    choix_ok = 50;
+                } else if (choix_ok > 0) {
 
-            }
+                    stroke(140, 140, 140);
+                    fill(140, 140, 140);
+                    textAlign(LEFT, CENTER);
+                    textSize(dialogSize);
+                    if (french) text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    else text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    choix_ok--;
 
-            porte.stop();
+                } else {
 
-            if (millis() - chrono > 4000) {
+                    avancement = 3;
+                    derniere_action = 0;
+                    chrono = millis();
+                    choix_ok = -1;
 
-                boule1();
-
-                if (!ruepeur_playing) ruepeur.loop(); // TODO baisser le volume de ce son manuellement
-                ruepeur_playing = true;
-
-                ruepeur.setVolume(0.8);
-            }
-
-            stroke(255, 255, 255, (millis() - chrono - 4000) / 10);
-            fill(255, 255, 255, (millis() - chrono - 4000) / 10);
-            text("Je marche tranquillement dans la rue quand soudain un homme m’interpelle en me sifflant", width / 2, height * 7.2 / 8);
-
-        }
-        if (maintenant > 8000) {
-
-            image(video3, width / 2, height / 2, width, height)
-            boule1();
-
-            if (millis() - chrono > 9000) {
-
-                ruepeur.setVolume(1);
-                fairechoix.display(width / 2, height * 6.95 / 8, 280, 130);
-                stroke(255, 255, 255, (millis() - chrono - 9000) / 10);
-                fill(255, 255, 255, (millis() - chrono - 9000) / 10);
-
-                textAlign(RIGHT, CENTER);
-                text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                }
 
             }
-            if (millis() - chrono > 10000) {
 
-                stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
-                fill(255, 255, 255, (millis() - chrono - 10000) / 10);
-                textAlign(LEFT, CENTER);
-                text("Je me retourne pour voir qui c'est", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-
+            if (mouseIsPressed && mouseX < width / 2) {
+                evenement(1)
+            } else if (mouseIsPressed && mouseX > width / 2) {
+                evenement(2)
             }
 
             if (key == '4') evenement(1)
             if (key == '5') evenement(2)
 
             textAlign(LEFT, CENTER)
+            textSize(dialogSize);
             if (DEBUG) text("appuer sur 4 ou 5 pour passer à l'étape suivante", 20, 140)
 
             if (rotationX < -45 || rotationY < -45) evenement(2)
             if (rotationX > 45 || rotationY > 45) evenement(1)
-
-        }
-
-        if (derniere_action == 1) {
-
-            if (choix_ok == -1) {
-                choix_ok = 50;
-            }
-
-            else if (choix_ok > 0) {
-
-                stroke(140, 140, 140);
-                fill(140, 140, 140);
-                textAlign(RIGHT, CENTER);
-                text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                choix_ok--;
-
-            } else {
-
-                avancement = 3;
-                derniere_action = 0;
-                chrono = millis();
-                choix_ok = -1;
-
-            }
-
-        } else if (derniere_action == 2) {
-
-            if (choix_ok == -1) {
-                choix_ok = 50;
-            }
-            else if (choix_ok > 0) {
-
-                stroke(140, 140, 140);
-                fill(140, 140, 140);
-                textAlign(LEFT, CENTER);
-                text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-                choix_ok--;
-
-            } else {
-
-                avancement = 3;
-                derniere_action = 0;
-                chrono = millis();
-                choix_ok = -1;
-
-            }
-
         }
 
     }
@@ -533,38 +444,25 @@ function draw() {
      Emotion : énervement
      */
     if (avancement == 3) {
-        background(0);
-        boule2();
-        if (millis() - chrono < 4000) {
-            if (!run_playing) run.loop();
-            run_playing = true;
-        }
-        if (millis() - chrono < 4000) {
-            ruepeur.setVolume(1);
-            marche.stop();
+        scenario3()
 
-            debut.setVolume(0.3); // TODO baisser le volume de ce son manuellement
-            stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            textAlign(CENTER, CENTER);
-            text("“Hé t’as pas un 06” Je ne lui répond pas et accélère le pas. J’ai peur qu’il me suive...", width / 2, height * 7.2 / 8);
-        }
+        if (millis() - chrono > 4500) {
 
-        //    textFont(police, 15);
-        textAlign(CENTER,CENTER)
-        if (millis() - chrono > 4000) text("Pour marcher plus vite SECOUER le téléphone", width / 2, height * 7.2 / 8);
-        if (millis() - chrono > 4000) marcherue.display(width / 2, height * 6.3 / 8, 150, 150);
+            if (derniere_action == 3) {
+                derniere_action = 0;
+                chrono = millis();
+                avancement = 4;
+                run.stop();
+            }
 
-        if (key == '6') evenement(3)
-        textAlign(LEFT, CENTER)
-        if (DEBUG) text("appuer sur 6 pour passer à l'étape suivante", 20, 140)
 
-        if (derniere_action == 3) {
+            if (key == '6') evenement(3)
+            if (mouseIsPressed) evenement(3)
+            textAlign(LEFT, CENTER)
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur 6 pour passer à l'étape suivante", 20, 140)
 
-            derniere_action = 0;
-            chrono = millis();
-            avancement = 4;
-            run.stop();
+
         }
     }
 
@@ -576,58 +474,23 @@ function draw() {
      Emotion : joie
      */
     if (avancement == 4) {
-        background(0);
-        /*
-        La boule joie est composée de plusieurs boules,
-         une grosse au milieu et d'autre plus petites autour
-         */
-        boule3(); // boule principale
-        boulez(); // petite boule autour (haut - gauche)
-        boulef(); // petite boule autour (haut - droit)
-        bouler(); // petite boule autour (bas - droit)
-        boulet(); // petite boule autour (bas - gauche)
-        if (millis() - chrono < 5000) {
-            porte.stop();
-            if (!fete_playing) fete.loop();
-            fete_playing = true;
-        }
-        if (millis() - chrono < 3000) {
-            boule3();
-            boulez();
-            boulef();
-            bouler();
-            boulet();
-            debut.setVolume(1);
-            ruepeur.stop();
-            textAlign(CENTER, CENTER);
-            stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            text("J’arrive enfin chez mon amie, la fête bat déjà son plein. Je me faufile jusqu’au bar en saluant des amis sur le passage.", width / 2, height * 7.2 / 8);
-        }
+        scenario4()
+
         if (millis() - chrono > 4000) {
-            boule3();
-            boulez();
-            boulef();
-            bouler();
-            boulet();
-            stroke(255, 255, 255, 255);
-            fill(255, 255, 255, 255);
-            //    textFont(police, 15);
-            textAlign(CENTER, CENTER);
-            text("pour danser SECOUER le téléphone", width / 2, height * 7.2 / 8);
-            marcherue.display(width / 2, height * 6 / 8, 150, 150);
-
-            if (key == '7') evenement(3)
-            textAlign(LEFT, CENTER)
-            if (DEBUG) text("appuer sur 7 pour passer à l'étape suivante", 20, 140)
-
-
-
             if (derniere_action == 3) {
                 avancement = 5;
                 derniere_action = 0;
                 chrono = millis();
             }
+
+            if (key == '7') evenement(3)
+            if (mouseIsPressed) evenement(3)
+
+            textAlign(LEFT, CENTER)
+            stroke(255)
+            fill(255)
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur 7 pour passer à l'étape suivante", 20, 140)
         }
 
     }
@@ -640,102 +503,63 @@ function draw() {
      Emotion : séduction
      */
     if (avancement == 5) {
-        background(0);
-        /*
-        La boule séduction est composée de plusieurs boules,
-         une grosse au milieu et d'autre plus petites autour
-         */
-        boule4(); // boule principale
-        boulea(); // petite boule autour (haut - gauche)
-        bouleb(); // petite boule autour (haut - droit)
-        boulec(); // petite boule autour (bas - droit)
-        bouled(); // petite boule autour (bas - gauche)
-        if (millis() - chrono > 1) {
-            if (!amour_playing) amour.play();
-            amour_playing = true;
-            amour.setVolume(0.7); // TODO baisser le volume de ce son manuellement
-            debut.stop();
-        }
-
-        if (millis() - chrono < 6000) {
-            boule4();
-            boulea();
-            bouleb();
-            boulec();
-            bouled();
-            stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            textAlign(CENTER, CENTER);
-            text("Une personne de la soirée arrive vers moi, et me propose de danser", width / 2, height * 7 / 8);
-        }
-
-        if (millis() - chrono > 7000) {
-            if (millis() - chrono > 9000) {
-                if (!amour_playing) amour.play();
-                amour_playing = true;
-                debut.stop();
-            }
-
-            stroke(255, 255, 255, (millis() - chrono - 7000) / 10);
-            fill(255, 255, 255, (millis() - chrono - 7000) / 10);
-            textAlign(RIGHT, CENTER);
-            text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7 / 8, width * 4 / 12, 100);
-            fairechoix.display(width / 2, height * 6.8 / 8, 280, 130);
-
-        }
+        scenario5()
 
         if (millis() - chrono > 8000) {
-            boule4();
-            boulea();
-            bouleb();
-            boulec();
-            bouled();
-            textAlign(LEFT, CENTER);
-            stroke(255, 255, 255, (millis() - chrono - 8000) / 10);
-            fill(255, 255, 255, (millis() - chrono - 8000) / 10);
-            text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 7 / 8, width * 4 / 12, 100);
-        }
 
-        if (key == '7') evenement(1)
-        if (key == '8') evenement(2)
-        textAlign(LEFT, CENTER)
-        if (DEBUG) text("appuer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
+            if (derniere_action == 1) {
+                if (choix_ok == -1) {
+                    choix_ok = 50;
+                }
+                if (choix_ok > 0) {
+                    textAlign(RIGHT, CENTER);
+                    stroke(140, 140, 140);
+                    fill(140, 140, 140);
+                    textSize(dialogSize);
+                    if (french) text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    else text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    choix_ok--;
+                } else {
+                    avancement = 6;
+                    derniere_action = 0;
+                    chrono = millis();
+                    choix_ok = -1;
+                }
+            } else if (derniere_action == 2) {
+                if (choix_ok == -1) {
+                    choix_ok = 50;
+                }
+                if (choix_ok > 0) {
+                    textAlign(LEFT, CENTER);
+                    stroke(140, 140, 140);
+                    fill(140, 140, 140);
+                    textSize(dialogSize);
+                    if (french) text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    else text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    choix_ok--;
+                } else {
+                    avancement = 6;
+                    derniere_action = 0;
+                    chrono = millis();
+                    choix_ok = -1;
+                }
+            }
+            if (key == '7') evenement(1)
+            if (key == '8') evenement(2)
+            textAlign(LEFT, CENTER)
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
 
-        if (rotationX < -45 || rotationY < -45) evenement(1)
-        if (rotationX > 45 || rotationY > 45) evenement(2)
+            if (rotationX < -45 || rotationY < -45) evenement(1)
+            if (rotationX > 45 || rotationY > 45) evenement(2)
 
-        if (derniere_action == 1) {
-            if (choix_ok == -1) {
-                choix_ok = 50;
+
+            if (mouseIsPressed && mouseX < width / 2) {
+                evenement(1)
+            } else if (mouseIsPressed && mouseX > width / 2) {
+                evenement(2)
             }
-            if (choix_ok > 0) {
-                textAlign(RIGHT, CENTER);
-                stroke(140, 140, 140);
-                fill(140, 140, 140);
-                text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7 / 8, width * 4 / 12, 100);
-                choix_ok--;
-            } else {
-                avancement = 6;
-                derniere_action = 0;
-                chrono = millis();
-                choix_ok = -1;
-            }
-        } else if (derniere_action == 2) {
-            if (choix_ok == -1) {
-                choix_ok = 50;
-            }
-            if (choix_ok > 0) {
-                textAlign(LEFT, CENTER);
-                stroke(140, 140, 140);
-                fill(140, 140, 140);
-                text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 7 / 8, width * 4 / 12, 100);
-                choix_ok--;
-            } else {
-                avancement = 6;
-                derniere_action = 0;
-                chrono = millis();
-                choix_ok = -1;
-            }
+
         }
     }
 
@@ -748,98 +572,63 @@ function draw() {
      Emotion : stress
      */
     if (avancement == 6) {
-        background(0);
-        if (millis() - chrono > 1) {
-            if (!peur2_playing) peur2.play();
-            peur2_playing = true;
-            peur2.setVolume(1); // TODO augmenter le volume de ce son manuellement
-            if (!heatbeat_playing) heatbeat.play();
-            heatbeat_playing = true;
-            heatbeat.setVolume(1.5); // TODO baisser le volume de ce son manuellement
-            amour.setVolume(0.2); // // TODO baisser le volume de ce son manuellement
-            debut.stop();
-        }
-        var maintenant = millis() - chrono;
-        if ((maintenant > 0) && (maintenant < 10000)) {
-            boule4();
-            boulea();
-            bouleb();
-            boulec();
-            bouled();
-            if (millis() - chrono < 10000)
-                //fete.stop();
-                stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            textAlign(CENTER, CENTER);
-            text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas. Il m’attire vers une pièce à l’étage. Je me laisse entraîner.", width / 2, height * 7 / 8);
 
-        }
-        if ((maintenant > 10000) && (maintenant < 20000)) {
-            boule5();
-            textAlign(CENTER, CENTER);
-            stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
-            fill(255, 255, 255, (millis() - chrono - 10000) / 10);
-            text("On entre dans une chambre, il ferme la porte derrière nous. Je suis un peu mal à l’aise.Que dois-je faire ? Il tente de m’embrasser.", width / 2, height * 7 / 8);
+        scenario6()
 
-        }
+        if (millis() - chrono > 20000) {
 
 
-        if (maintenant > 20000) {
-            boule5();
-            if (millis() - chrono > 21000) {
-                stroke(255, 255, 255, (millis() - chrono - 21000) / 10);
-                fill(255, 255, 255, (millis() - chrono - 21000) / 10);
-                textAlign(RIGHT, CENTER);
-                text("Je le repousse", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+            if (derniere_action == 1) {
+                if (choix_ok == -1) {
+                    choix_ok = 50;
+                }
+                if (choix_ok > 0) {
+                    textAlign(RIGHT, CENTER);
+                    stroke(140, 140, 140);
+                    fill(140, 140, 140);
+                    textSize(dialogSize);
+                    if (french) text("Je le repousse", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    else text("Je le repousse", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    choix_ok--;
+                } else {
+                    avancement = 7;
+                    derniere_action = 0;
+                    chrono = millis();
+                    choix_ok = -1;
+                }
+            } else if (derniere_action == 2) {
+                if (choix_ok == -1) {
+                    choix_ok = 50;
+                }
+                if (choix_ok > 0) {
+                    textAlign(LEFT, CENTER);
+                    stroke(140, 140, 140);
+                    fill(140, 140, 140);
+                    textSize(dialogSize);
+                    if (french) text("Je suis surprise mais le laisse faire", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    else text("Je suis surprise mais le laisse faire", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    choix_ok--;
+                } else {
+                    avancement = 7;
+                    derniere_action = 0;
+                    chrono = millis();
+                    choix_ok = -1;
+                }
             }
-            if (millis() - chrono > 21000) {
-                boule5();
-                stroke(255, 255, 255, (millis() - chrono - 22000) / 10);
-                fill(255, 255, 255, (millis() - chrono - 22000) / 10);
-                textAlign(LEFT, CENTER);
-                text("Je suis surprise mais le laisse faire", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-            }
-            if (millis() - chrono > 21000) fairechoix.display(width / 2, height * 6.95 / 8, 280, 130);
+
             if (key == 'a') evenement(1)
             if (key == 'z') evenement(2)
             if (rotationX < -45 || rotationY < -45) evenement(1)
             if (rotationX > 45 || rotationY > 45) evenement(2)
             textAlign(LEFT, CENTER)
+            textSize(dialogSize);
             if (DEBUG) text("appuer sur a ou z pour passer à l'étape suivante", 20, 140)
-        }
 
 
-        if (derniere_action == 1) {
-            if (choix_ok == -1) {
-                choix_ok = 50;
-            }
-            if (choix_ok > 0) {
-                textAlign(RIGHT, CENTER);
-                stroke(140, 140, 140);
-                fill(140, 140, 140);
-                text("Je le repousse", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                choix_ok--;
-            } else {
-                avancement = 7;
-                derniere_action = 0;
-                chrono = millis();
-                choix_ok = -1;
-            }
-        } else if (derniere_action == 2) {
-            if (choix_ok == -1) {
-                choix_ok = 50;
-            }
-            if (choix_ok > 0) {
-                textAlign(LEFT, CENTER);
-                stroke(140, 140, 140);
-                fill(140, 140, 140);
-                text("Je suis surprise mais le laisse faire", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-                choix_ok--;
-            } else {
-                avancement = 7;
-                derniere_action = 0;
-                chrono = millis();
-                choix_ok = -1;
+            if (mouseIsPressed && mouseX < width / 2) {
+                evenement(1)
+            } else if (mouseIsPressed && mouseX > width / 2) {
+                evenement(2)
             }
         }
     }
@@ -853,28 +642,25 @@ function draw() {
      */
 
     if (avancement == 7) {
-        background(0);
-        boule5();
-        if (millis() - chrono < 4000) {
-            if (!agres_playing) agres.play();
-            agres_playing = true;
-        }
-        if (millis() - chrono < 20000) {
-            stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            textAlign(CENTER, CENTER);
-            text("Il est insistant et commence à avoir des gestes déplacés.", width / 2, height * 7 / 8);
-        }
-        if (millis() - chrono > 3000) text("pour me débattre SECOUER VIGOUREUSEMENT le téléphone ", width / 2, height * 7 / 8);
-        if (millis() - chrono > 3000) agression.display(width / 2, height * 6.7 / 8, 150, 150);
-        if (key == 'e') evenement(3)
 
-        textAlign(LEFT, CENTER)
-        if (DEBUG) text("appuer sur e pour passer à l'étape suivante", 20, 140)
-        if (derniere_action == 3) {
-            avancement = 8;
-            derniere_action = 0;
-            chrono = millis();
+        scenario7();
+
+        if (millis() - chrono > 8000) {
+
+            if (derniere_action == 3) {
+                avancement = 8;
+                derniere_action = 0;
+                chrono = millis();
+            }
+
+            if (mouseIsPressed) evenement(3)
+            if (key == 'e') evenement(3)
+
+            textAlign(LEFT, CENTER)
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur e pour passer à l'étape suivante", 20, 140)
+
+
         }
     }
 
@@ -887,57 +673,38 @@ function draw() {
      Emotion : peur, grande colère
      */
     if (avancement == 8) {
-        background(0);
-        if (millis() - chrono < 5000) {
-            if (!fin1_playing) fin1.play();
-            fin1_playing = true;
-            peur2.setVolume(0.7); // TODO baisser le volume de ce son manuellement
-        }
-        if (millis() - chrono > 5000) {
-            if (!fin2_playing) fin2.play();
-            fin2_playing = true;
-        }
-        if (millis() - chrono < 80000) {
-            boule6();
-            textAlign(CENTER, CENTER);
-            stroke(255, 255, 255, (millis() - chrono) / 10);
-            fill(255, 255, 255, (millis() - chrono) / 10);
-            text("Mais il continue, il est allé trop loin…", width / 2, height * 7 / 8);
-        }
+        scenario8()
 
-        textAlign(CENTER, CENTER);
-        stroke(255, 255, 255, 255);
-        fill(255, 255, 255, 255);
+        if (millis() - chrono > 8000) {
 
-        if (millis() - chrono > 3000) text("Cacher le capteur de luminosité du téléphone", width / 2, height * 7.2 / 8);
-        if (millis() - chrono > 3000) lumiere.display(width / 2, height * 6.2 / 8, 150, 200);
-        if (key == 'l') {
-            evenement(5)
-        }
-        textAlign(LEFT, CENTER)
-        if (DEBUG) text("appuer sur l pour passer à l'étape suivante", 20, 140)
-        // var avg =0
-        capture.loadPixels();
-        if (capture.pixels.length > 0) { // don't forget this!
-            var total = 0;
-            var i = 0;
-            for (var y = 0; y < h; y++) {
-                for (var x = 0; x < w; x++) {
-                    var redValue = capture.pixels[i];
-                    total += redValue;
-                    i += 4;
-                }
+            if (derniere_action == 5) {
+                avancement = 9;
+                derniere_action = 0;
+                chrono = millis();
             }
-            var n = w * h;
-            var avg = int(total / n);
-            if (avg > 170) evenement(5)
-        }
+            if (key == 'l') {
+                evenement(5)
+            }
 
+            textAlign(LEFT, CENTER)
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur l pour passer à l'étape suivante", 20, 140)
 
-        if (derniere_action == 5) {
-            avancement = 9;
-            derniere_action = 0;
-            chrono = millis();
+            capture.loadPixels();
+            if (capture.pixels.length > 0) { // don't forget this!
+                var total = 0;
+                var i = 0;
+                for (var y = 0; y < h; y++) {
+                    for (var x = 0; x < w; x++) {
+                        var redValue = capture.pixels[i];
+                        total += redValue;
+                        i += 4;
+                    }
+                }
+                var n = w * h;
+                var avg = int(total / n);
+                if (avg > ambientL + 200) evenement(5)
+            }
         }
     }
 
@@ -951,51 +718,57 @@ function draw() {
      */
     if (avancement == 9) {
 
-        background(0);
-        var maintenant = millis() - chrono;
-        if ((maintenant > 0) && (maintenant < 4000)) {
-            boule7();
-        }
-        if ((maintenant > 4000) && (maintenant < 8000)) {
-            boule11();
-        }
+        scenario9()
 
-        // FIN HISTOIRE - FOND NOIR "RIDEAU" - FINALITÉ
-        /*
-         Contexte : Elle est complètement anéantie.
-         Elle se reconstruit petit à petit, en créant une coquille de protection autour
-         de sa boule d'émotion.
-         Fond : bleu foncé qui s'éclairci
-         Emotion : néant et reconstruction
-         + Message de dénonciation (statistique du nombre de victime de viol)
-         */
+        if (millis() - chrono > 21000) {
 
-        if ((maintenant > 13000) && (maintenant < 21000)) {
-            boule8();
-        }
-        if (maintenant > 21000) {
-            boule0();
-            boule10();
-            textAlign(CENTER, CENTER);
-            stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
-            fill(255, 255, 255, (millis() - chrono - 10000) / 10);
-            text("62 000 femmes sont victimes chaque année de viol et de tentative de viol. ", width / 2, height * 7 / 8);
-        }
+            if (key == 'm') {
+                moment_derniere_action = millis();
+                avancement = 0
+                marche.stop();
+                verouiller.stop();
+                heatbeat.stop();
+                fin1.stop();
+                fin2.stop();
+                reconstruction.stop();
+                ruepeur.stop();
+                peur2.stop();
+                debut.stop();
+                hit.stop();
+                run.stop();
+                porte.stop();
+                habits.stop();
+                fete.stop();
+                fete2.stop();
+                agres.stop();
+                amour.stop();
 
-        if (key == 'm') {
-            moment_derniere_action = millis();
-            avancement = 0
+
+                hit_playing = false;
+                marche_playing = false;
+                run_playing = false;
+                porte_playing = false;
+                habits_playing = false;
+                fete_playing = false;
+                agres_playing = false;
+                debut_playing = false;
+                ruepeur_playing = false;
+                amour_playing = false;
+                peur2_playing = false;
+                fin1_playing = false;
+                fin2_playing = false;
+                reconstruction_playing = false;
+                verouiller_playing = false;
+                heatbeat_playing = false;
+
+            }
+            textSize(dialogSize);
+            if (DEBUG) text("appuer sur m pour revenir au début", 20, 140)
         }
-        if (DEBUG) text("appuer sur m pour revenir au début", 20, 140)
     }
 
 
 
-    if (derniere_action == 5) {
-        avancement = 9;
-        derniere_action = 0;
-        chrono = millis();
-    }
 
 
     push()
@@ -1007,6 +780,8 @@ function draw() {
     if (DEBUG) text("dernière action : " + derniere_action, 20, 45);
     if (DEBUG) text("chrono : " + nf((millis() - chrono) / 1000, 3, 1), 20, 70);
     pop()
+
+    mouseIsPressed = false
 }
 
 
@@ -1015,7 +790,6 @@ function draw() {
 function evenement(action) {
     moment_derniere_action = millis();
     derniere_action = action;
-    //prvarln("derniere action : " + derniere_action);
 }
 
 function deviceShaken() {
@@ -1023,18 +797,12 @@ function deviceShaken() {
 }
 
 
-
-
-
 /*
-
 window.addEventListener('devicelight', function(event) {
-		console.log("event",event)
-			tLight = event.value / 100;
-
+    console.log("event",event)
+    tLight = event.value / 100;
     if (event.value < 1000) {
-
-alert('Hey, you! You are working in a dark environment');
+        alert('Hey, you! You are working in a dark environment');
       //  evenement(5)
     }
-	});*/
+});*/

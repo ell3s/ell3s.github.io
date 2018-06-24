@@ -62,45 +62,47 @@ var xoff = 0;
  */
 
 function boule0() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .005;
-  for (var angle = 0; angle < 360; angle += 30) {
+    xoff = xoff + .005;
+    for (var angle = 0; angle < 360; angle += 30) {
 
-    var xc = 0;
-    var yc = 0;
+        var xc = 0;
+        var yc = 0;
 
-    if (counter%2 == 0) { //coordonées des povars pairs (counter%2)
-      xc = width/2 + (125 + noise(xoff, angle/10, 80) * 175) * cos(radians(angle));
-      yc = height*3/8 + (125 + noise(xoff, angle/10, 80) * 175) * sin(radians(angle));
-    } else { //coordonées des povars impairs
-      xc = width/2 + (125 + noise(xoff/2, angle/10, 100) * 155) * cos(radians(angle));
-      yc = height*3/8 + (125 + (noise(xoff/2, angle/10, 100) * 155))  * sin(radians(angle));
+        if (counter % 2 == 0) { //coordonées des povars pairs (counter%2)
+            xc = width / 2 + (125 + noise(xoff, angle / 10, 80) * 175) * cos(radians(angle));
+            yc = height * 3 / 8 + (125 + noise(xoff, angle / 10, 80) * 175) * sin(radians(angle));
+        } else { //coordonées des povars impairs
+            xc = width / 2 + (125 + noise(xoff / 2, angle / 10, 100) * 155) * cos(radians(angle));
+            yc = height * 3 / 8 + (125 + (noise(xoff / 2, angle / 10, 100) * 155)) * sin(radians(angle));
+        }
+
+        // cette partie permet de fermer la forme grâce au trois premiers points la composant
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    // cette partie permet de fermer la forme grâce au trois premiers points la composant
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -111,46 +113,48 @@ function boule0() {
  */
 
 function boule1() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .5;
-  for (var angle = 0; angle < 360; angle += 30) {
+    xoff = xoff + .5;
+    for (var angle = 0; angle < 360; angle += 30) {
 
-    var xc = 0;
-    var yc = 0;
+        var xc = 0;
+        var yc = 0;
 
 
-   if (counter%2 == 0) {
-      xc =  width/2  + (125 + noise(xoff, angle/10, 80) * 125) * cos(radians(angle));
-      yc = height*3/8 + (125 + noise(xoff, angle/10, 80) * 125) * sin(radians(angle));
-    } else {
-      xc =  width/2  + (125 + noise(xoff/2, angle/10, 100) * 125) * cos(radians(angle));
-      yc = height*3/8 + (125 + (noise(xoff/2, angle/10, 100) * 125))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + (125 + noise(xoff, angle / 10, 80) * 125) * cos(radians(angle));
+            yc = height * 3 / 8 + (125 + noise(xoff, angle / 10, 80) * 125) * sin(radians(angle));
+        } else {
+            xc = width / 2 + (125 + noise(xoff / 2, angle / 10, 100) * 125) * cos(radians(angle));
+            yc = height * 3 / 8 + (125 + (noise(xoff / 2, angle / 10, 100) * 125)) * sin(radians(angle));
+        }
+
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -162,45 +166,48 @@ function boule1() {
  */
 
 function boule2() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .25;
-  for (var angle = 0; angle < 360; angle = angle + 5) {
+    xoff = xoff + .25;
+    for (var angle = 0; angle < 360; angle = angle + 5) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
+        if (counter % 2 == 0) {
 
-      xc = width/2  + noise(xoff, angle/10, 100) * 300 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/10, 100) * 300 * sin(radians(angle));
-    } else {
-      xc = width/2  + noise(xoff/2, angle/10, 100) * 300 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff/2, angle/10, 100) * 300  * sin(radians(angle));
+            xc = width / 2 + noise(xoff, angle / 10, 100) * 300 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 10, 100) * 300 * sin(radians(angle));
+        } else {
+            xc = width / 2 + noise(xoff / 2, angle / 10, 100) * 300 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff / 2, angle / 10, 100) * 300 * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -212,44 +219,47 @@ function boule2() {
  */
 
 function boule3() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .005;
-  for (var angle = 0; angle < 360; angle += 28) {
+    xoff = xoff + .005;
+    for (var angle = 0; angle < 360; angle += 28) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/2 + (125 + noise(xoff, angle/10, 80) * 25) * cos(radians(angle));
-      yc = height*3/8 + (125 + noise(xoff, angle/10, 80) * 25) * sin(radians(angle));
-    } else {
-      xc = width/2 + (125 + noise(xoff/2, angle/10, 100) * 23) * cos(radians(angle));
-      yc = height*3/8 + (125 + (noise(xoff/2, angle/10, 100) * 23))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + (125 + noise(xoff, angle / 10, 80) * 25) * cos(radians(angle));
+            yc = height * 3 / 8 + (125 + noise(xoff, angle / 10, 80) * 25) * sin(radians(angle));
+        } else {
+            xc = width / 2 + (125 + noise(xoff / 2, angle / 10, 100) * 23) * cos(radians(angle));
+            yc = height * 3 / 8 + (125 + (noise(xoff / 2, angle / 10, 100) * 23)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -261,44 +271,47 @@ function boule3() {
  */
 
 function boulez() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .006;
-  for (var angle = 0; angle < 360; angle += 95) {
+    xoff = xoff + .006;
+    for (var angle = 0; angle < 360; angle += 95) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/3 + (10 + noise(xoff, angle/10, 80) * 6) * cos(radians(angle));
-      yc = height*1.5/12 + (10 + noise(xoff, angle/10, 80) * 6) * sin(radians(angle));
-    } else {
-      xc = width/3 + (10 + noise(xoff/2, angle/10, 100) * 3) * cos(radians(angle));
-      yc = height*1.5/12 + (10 + (noise(xoff/2, angle/10, 100) * 3))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 3 + (10 + noise(xoff, angle / 10, 80) * 6) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (10 + noise(xoff, angle / 10, 80) * 6) * sin(radians(angle));
+        } else {
+            xc = width / 3 + (10 + noise(xoff / 2, angle / 10, 100) * 3) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (10 + (noise(xoff / 2, angle / 10, 100) * 3)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -311,44 +324,47 @@ function boulez() {
  */
 
 function boulef() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .006;
-  for (var angle = 0; angle < 360; angle += 80) {
+    xoff = xoff + .006;
+    for (var angle = 0; angle < 360; angle += 80) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width*2/3 + (12 + noise(xoff, angle/10, 80) * 20) * cos(radians(angle));
-      yc = height*1.5/12 + (12 + noise(xoff, angle/10, 80) * 20) * sin(radians(angle));
-    } else {
-      xc = width*2/3 + (12 + noise(xoff/2, angle/10, 100) * 12) * cos(radians(angle));
-      yc = height*1.5/12 + (12+ (noise(xoff/2, angle/10, 100) * 12))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width * 2 / 3 + (12 + noise(xoff, angle / 10, 80) * 20) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (12 + noise(xoff, angle / 10, 80) * 20) * sin(radians(angle));
+        } else {
+            xc = width * 2 / 3 + (12 + noise(xoff / 2, angle / 10, 100) * 12) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (12 + (noise(xoff / 2, angle / 10, 100) * 12)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -362,44 +378,47 @@ function boulef() {
  */
 
 function boulet() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .006;
-  for (var angle = 0; angle < 360; angle += 80) {
+    xoff = xoff + .006;
+    for (var angle = 0; angle < 360; angle += 80) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/3 + (10 + noise(xoff, angle/10, 80) * 6) * cos(radians(angle));
-      yc = height*1.7/3 + (10 + noise(xoff, angle/10, 80) * 6) * sin(radians(angle));
-    } else {
-      xc = width/3 + (10 + noise(xoff/2, angle/10, 100) * 3) * cos(radians(angle));
-      yc = height*1.7/3 + (10 + (noise(xoff/2, angle/10, 100) * 3))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 3 + (10 + noise(xoff, angle / 10, 80) * 6) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (10 + noise(xoff, angle / 10, 80) * 6) * sin(radians(angle));
+        } else {
+            xc = width / 3 + (10 + noise(xoff / 2, angle / 10, 100) * 3) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (10 + (noise(xoff / 2, angle / 10, 100) * 3)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -412,44 +431,47 @@ function boulet() {
  */
 
 function bouler() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .006;
-  for (var angle = 0; angle < 360; angle += 85) {
+    xoff = xoff + .006;
+    for (var angle = 0; angle < 360; angle += 85) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width*2/3 + (10 + noise(xoff, angle/10, 80) * 12) * cos(radians(angle));
-      yc = height*1.7/3 + (10 + noise(xoff, angle/10, 80) * 12) * sin(radians(angle));
-    } else {
-      xc = width*2/3 + (10 + noise(xoff/2, angle/10, 100) * 6) * cos(radians(angle));
-      yc = height*1.7/3 + (10 + (noise(xoff/2, angle/10, 100) * 6))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width * 2 / 3 + (10 + noise(xoff, angle / 10, 80) * 12) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (10 + noise(xoff, angle / 10, 80) * 12) * sin(radians(angle));
+        } else {
+            xc = width * 2 / 3 + (10 + noise(xoff / 2, angle / 10, 100) * 6) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (10 + (noise(xoff / 2, angle / 10, 100) * 6)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -463,44 +485,47 @@ function bouler() {
  */
 
 function boule4() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .005;
-  for (var angle = 0; angle < 360; angle += 30) {
+    xoff = xoff + .005;
+    for (var angle = 0; angle < 360; angle += 30) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/2 + (100 + noise(xoff, angle/10, 80) * 140) * cos(radians(angle));
-      yc = height*3/8 + (100 + noise(xoff, angle/10, 80) * 140) * sin(radians(angle));
-    } else {
-      xc = width/2 + (100 + noise(xoff/2, angle/10, 100) * 120) * cos(radians(angle));
-      yc = height*3/8 + (100 + (noise(xoff/2, angle/10, 100) * 120))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + (100 + noise(xoff, angle / 10, 80) * 140) * cos(radians(angle));
+            yc = height * 3 / 8 + (100 + noise(xoff, angle / 10, 80) * 140) * sin(radians(angle));
+        } else {
+            xc = width / 2 + (100 + noise(xoff / 2, angle / 10, 100) * 120) * cos(radians(angle));
+            yc = height * 3 / 8 + (100 + (noise(xoff / 2, angle / 10, 100) * 120)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -512,44 +537,47 @@ function boule4() {
  */
 
 function boulea() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .00000005;
-  for (var angle = 0; angle < 360; angle += 67) {
+    xoff = xoff + .00000005;
+    for (var angle = 0; angle < 360; angle += 67) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/3 + (15 + noise(xoff, angle/1, 80) * 55) * cos(radians(angle));
-      yc = height*1.5/12 + (15 + noise(xoff, angle/1, 80) * 55) * sin(radians(angle));
-    } else {
-      xc = width/3 + (15 + noise(xoff/.2, angle/1, 102) * 35) * cos(radians(angle));
-      yc = height*1.5/12 + (15 + (noise(xoff/.2, angle/1, 107) * 35))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 3 + (15 + noise(xoff, angle / 1, 80) * 55) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (15 + noise(xoff, angle / 1, 80) * 55) * sin(radians(angle));
+        } else {
+            xc = width / 3 + (15 + noise(xoff / .2, angle / 1, 102) * 35) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (15 + (noise(xoff / .2, angle / 1, 107) * 35)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -561,44 +589,47 @@ function boulea() {
  */
 
 function bouleb() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .00000005;
-  for (var angle = 0; angle < 360; angle += 60) {
+    xoff = xoff + .00000005;
+    for (var angle = 0; angle < 360; angle += 60) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width*2/3 + (10 + noise(xoff, angle/1, 80) * 50) * cos(radians(angle));
-      yc = height*1.5/12 + (10 + noise(xoff, angle/1, 80) * 50) * sin(radians(angle));
-    } else {
-      xc = width*2/3 + (10 + noise(xoff/.2, angle/1, 100) * 30) * cos(radians(angle));
-      yc = height*1.5/12 + (10 + (noise(xoff/.2, angle/1, 100) * 30))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width * 2 / 3 + (10 + noise(xoff, angle / 1, 80) * 50) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (10 + noise(xoff, angle / 1, 80) * 50) * sin(radians(angle));
+        } else {
+            xc = width * 2 / 3 + (10 + noise(xoff / .2, angle / 1, 100) * 30) * cos(radians(angle));
+            yc = height * 1.5 / 12 + (10 + (noise(xoff / .2, angle / 1, 100) * 30)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -611,44 +642,47 @@ function bouleb() {
  */
 
 function boulec() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .00000005;
-  for (var angle = 0; angle < 360; angle += 56) {
+    xoff = xoff + .00000005;
+    for (var angle = 0; angle < 360; angle += 56) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/3 + (17 + noise(xoff, angle/1, 80) * 55) * cos(radians(angle));
-      yc = height*1.7/3 + (17 + noise(xoff, angle/1, 80) * 55) * sin(radians(angle));
-    } else {
-      xc = width/3 + (15 + noise(xoff/.2, angle/1, 102) * 35) * cos(radians(angle));
-      yc = height*1.7/3 + (15 + (noise(xoff/.2, angle/1, 107) * 35))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 3 + (17 + noise(xoff, angle / 1, 80) * 55) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (17 + noise(xoff, angle / 1, 80) * 55) * sin(radians(angle));
+        } else {
+            xc = width / 3 + (15 + noise(xoff / .2, angle / 1, 102) * 35) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (15 + (noise(xoff / .2, angle / 1, 107) * 35)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -660,44 +694,47 @@ function boulec() {
  */
 
 function bouled() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .005;
-  for (var angle = 0; angle < 360; angle += 70) {
+    xoff = xoff + .005;
+    for (var angle = 0; angle < 360; angle += 70) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width*2/3 + (10 + noise(xoff, angle/1, 80) * 68) * cos(radians(angle));
-      yc = height*1.7/3 + (10 + noise(xoff, angle/1, 80) * 68) * sin(radians(angle));
-    } else {
-      xc = width*2/3 + (12 + noise(xoff/.2, angle/1, 100) * 42) * cos(radians(angle));
-      yc = height*1.7/3 + (12 + (noise(xoff/.2, angle/1, 100) * 42))  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width * 2 / 3 + (10 + noise(xoff, angle / 1, 80) * 68) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (10 + noise(xoff, angle / 1, 80) * 68) * sin(radians(angle));
+        } else {
+            xc = width * 2 / 3 + (12 + noise(xoff / .2, angle / 1, 100) * 42) * cos(radians(angle));
+            yc = height * 1.7 / 3 + (12 + (noise(xoff / .2, angle / 1, 100) * 42)) * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -710,45 +747,48 @@ function bouled() {
  */
 
 function boule5() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(1);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(1);
+    counter = 0;
 
-  xoff = xoff + .25;
-  for (var angle = 0; angle < 360; angle = angle + 1) {
+    xoff = xoff + .25;
+    for (var angle = 0; angle < 360; angle = angle + 1) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/2 + noise(xoff, angle/2, 35) * 300 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/2, 45) * 300 * sin(radians(angle));
-    } else {
-      xc = width/2 + noise(xoff, angle/25, 100) * 250 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/25, 105) * 250  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + noise(xoff, angle / 2, 35) * 300 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 2, 45) * 300 * sin(radians(angle));
+        } else {
+            xc = width / 2 + noise(xoff, angle / 25, 100) * 250 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 25, 105) * 250 * sin(radians(angle));
+        }
+
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -759,46 +799,49 @@ function boule5() {
  */
 
 function boule6() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(1);
-  counter = 0;
-  // frameRate(50);
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(1);
+    counter = 0;
+    // frameRate(50);
 
-  xoff = xoff + .3;
-  for (var angle = 0; angle < 360; angle = angle + 1) {
+    xoff = xoff + .3;
+    for (var angle = 0; angle < 360; angle = angle + 1) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/2 + noise(xoff, angle/2, 35) * 300 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/2, 45) * 300 * sin(radians(angle));
-    } else {
-      xc = width/2 + noise(xoff, angle/25, 100) * 0 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/25, 105) * 0  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + noise(xoff, angle / 2, 35) * 300 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 2, 45) * 300 * sin(radians(angle));
+        } else {
+            xc = width / 2 + noise(xoff, angle / 25, 100) * 0 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 25, 105) * 0 * sin(radians(angle));
+        }
+
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -809,45 +852,48 @@ function boule6() {
  */
 
 function boule7() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(1);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(1);
+    counter = 0;
 
-  xoff = xoff + .3;
-  for (var angle = 0; angle < 360; angle = angle + 1) {
+    xoff = xoff + .3;
+    for (var angle = 0; angle < 360; angle = angle + 1) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/2 + noise(xoff, angle/2, 35) * 1000 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/2, 45) * 1000 * sin(radians(angle));
-    } else {
-      xc = width/2 + noise(xoff, angle/2, 35) * 250 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/2, 45) * 250  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + noise(xoff, angle / 2, 35) * 1000 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 2, 45) * 1000 * sin(radians(angle));
+        } else {
+            xc = width / 2 + noise(xoff, angle / 2, 35) * 250 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 2, 45) * 250 * sin(radians(angle));
+        }
+
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 //************************************************************************************
@@ -858,44 +904,46 @@ function boule7() {
  */
 
 function boule8() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(0);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
 
-  xoff = xoff + .0015;
-  for (var angle = 0; angle < 360; angle += 60) {
+    xoff = xoff + .0015;
+    for (var angle = 0; angle < 360; angle += 60) {
 
-    var xc;
-    var yc;
+        var xc;
+        var yc;
 
-    if (counter%2 == 0) {
-      xc = width/2 + noise(xoff, angle/1) * 150 * cos(radians(angle));
-      yc =  height*3/8 + noise(xoff, angle/1) * 150 * sin(radians(angle));
-    } else {
-      xc = width/2 + noise(xoff, angle/1) * 150 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/1) * 150 * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + noise(xoff, angle / 1) * 150 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 1) * 150 * sin(radians(angle));
+        } else {
+            xc = width / 2 + noise(xoff, angle / 1) * 150 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 1) * 150 * sin(radians(angle));
+        }
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
 
 
@@ -910,27 +958,30 @@ function boule8() {
  */
 
 function boule10() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(1);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(1);
+    counter = 0;
 
-  xoff = xoff + .0005;
-  var xc = 0, yc = 0;
+    xoff = xoff + .0005;
+    var xc = 0,
+        yc = 0;
 
 
-  for (var angle = 0; angle < 361; angle = angle += 30) {
+    for (var angle = 0; angle < 361; angle = angle += 30) {
 
-    var xc1 = width/2 + random(208, 210) * cos(radians(angle));
-    var yc1 = height*3/8 + random(208, 210) * sin(radians(angle));
+        var xc1 = width / 2 + random(208, 210) * cos(radians(angle));
+        var yc1 = height * 3 / 8 + random(208, 210) * sin(radians(angle));
 
-    if (angle > 0) {
-      line(xc, yc, xc1, yc1);
+        if (angle > 0) {
+            line(xc, yc, xc1, yc1);
+        }
+        xc = xc1;
+        yc = yc1;
     }
-    xc = xc1;
-    yc = yc1;
-  }
+    pop()
 }
 
 
@@ -942,43 +993,46 @@ function boule10() {
  */
 
 function boule11() {
-  stroke(255);
-  noFill();
-  beginShape();
-  curveTightness(1);
-  counter = 0;
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(1);
+    counter = 0;
 
-  xoff = xoff + .3;
-  for (var angle = 0; angle < 360; angle = angle + 1) {
+    xoff = xoff + .3;
+    for (var angle = 0; angle < 360; angle = angle + 1) {
 
-    var xc = 0, yc = 0;
+        var xc = 0,
+            yc = 0;
 
 
-    if (counter%2 == 0) {
-      xc = width/2 + noise(xoff, angle/2, 35) * 2500 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/2, 45) * 2500 * sin(radians(angle));
-    } else {
-      xc = width/2 + noise(xoff, angle/2, 35) * 800 * cos(radians(angle));
-      yc = height*3/8 + noise(xoff, angle/2, 45) * 800  * sin(radians(angle));
+        if (counter % 2 == 0) {
+            xc = width / 2 + noise(xoff, angle / 2, 35) * 2500 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 2, 45) * 2500 * sin(radians(angle));
+        } else {
+            xc = width / 2 + noise(xoff, angle / 2, 35) * 800 * cos(radians(angle));
+            yc = height * 3 / 8 + noise(xoff, angle / 2, 45) * 800 * sin(radians(angle));
+        }
+
+
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
     }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
 
-
-    curveVertex(xc, yc);
-    if (counter == 0) {
-      xc1 = xc;
-      yc1 = yc;
-    } else if (counter == 1) {
-      xc2 = xc;
-      yc2 = yc;
-    } else if (counter == 2) {
-      xc3 = xc;
-      yc3 = yc;
-    }
-    counter++;
-  }
-  curveVertex(xc1, yc1);
-  curveVertex(xc2, yc2);
-  curveVertex(xc3, yc3);
-
-  endShape();
+    endShape();
+    pop()
 }
