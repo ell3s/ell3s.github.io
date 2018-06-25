@@ -193,8 +193,6 @@ function setup() {
     capture.hide();
 
 
-
-
     frameRate(25);
     textFont('Lato');
     textAlign(CENTER, BOTTOM);
