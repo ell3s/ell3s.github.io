@@ -226,7 +226,7 @@ function setup() {
     video1.hide();
     video2.hide();
     video3.hide();
-    video5.hide();
+    video4.hide();
     video5.hide();
     video6.hide();
     video7.hide();
