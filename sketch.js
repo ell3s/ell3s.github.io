@@ -154,7 +154,7 @@ function setup() {
     canvas.position(1, 1)
 
     animSize = ((width + height) / 2) / 10
-    dialogSize = ((width + height) / 2) / 40
+    dialogSize = ((width + height) / 2) / 35
 
     pixelDensity(1);
 
