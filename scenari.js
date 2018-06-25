@@ -178,7 +178,7 @@ function scenario2() {
 function scenario3() {
     push()
     textSize(dialogSize);
-    background(0);
+    image(video3, width / 2, height / 2, width, height)
     boule2();
     if (millis() - chrono < 4000) {
         if (!run_playing) run.loop();
@@ -213,7 +213,7 @@ function scenario3() {
 function scenario4() {
     push()
     textSize(dialogSize);
-    background(0);
+     image(video4, width / 2, height / 2, width, height)
     /*
     La boule joie est composée de plusieurs boules,
      une grosse au milieu et d'autre plus petites autour
@@ -229,6 +229,7 @@ function scenario4() {
         fete_playing = true;
     }
     if (millis() - chrono < 5000) {
+
         //boule3();
         //boulez();
         //boulef();
@@ -263,7 +264,7 @@ function scenario4() {
 function scenario5() {
     push()
     textSize(dialogSize);
-    background(0);
+    image(video4, width / 2, height / 2, width, height)
     /*
     La boule séduction est composée de plusieurs boules,
      une grosse au milieu et d'autre plus petites autour
@@ -281,6 +282,7 @@ function scenario5() {
     }
 
     if (millis() - chrono < 6000) {
+        image(video5, width / 2, height / 2, width, height)
         boule4();
         boulea();
         bouleb();

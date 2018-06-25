@@ -122,13 +122,7 @@ function windowResized() {
 
 
 function preload() {
-    //Chargement de nos animations
-    lumiere = new Animation("assets/anim_lumiere/lumiere_", 120);
-    deverouiller = new Animation("assets/anim_deverouiller/deverrouiller_", 48);
-    fairechoix = new Animation("assets/anim_choix/fairechoix_", 75);
-    boussole = new Animation("assets/anim_boussole/boussole_", 143);
-    agression = new Animation("assets/anim_agression/agression_", 36);
-    marcherue = new Animation("assets/anim_marche/marcherrue_", 32);
+
 
 
     hit = loadSound("assets/vibeurtelephone.mp3");
@@ -207,13 +201,43 @@ function setup() {
     textSize(dialogSize);
     imageMode(CENTER);
 
+     //Chargement de nos animations
+    lumiere = new Animation("assets/anim_lumiere/lumiere_", 120);
+    deverouiller = new Animation("assets/anim_deverouiller/deverrouiller_", 48);
+    fairechoix = new Animation("assets/anim_choix/fairechoix_", 75);
+    boussole = new Animation("assets/anim_boussole/boussole_", 143);
+    agression = new Animation("assets/anim_agression/agression_", 36);
+    marcherue = new Animation("assets/anim_marche/marcherrue_", 32);
+
 
     video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4');
     video2 = createVideo('assets/videos/TRANSITION_1.mp4');
     video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4');
+    video4 = createVideo('assets/videos/TRANSITION_2.mp4');
+    video5 = createVideo('assets/videos/PARTIE_3_boucle.mp4');
+    video6 = createVideo('assets/videos/TRANSITION_3.mp4');
+    video7 = createVideo('assets/videos/PARTIE_4_boucle.mp4');
+    video8 = createVideo('assets/videos/TRANSITION_4.mp4');
+    video9 = createVideo('assets/videos/TRANSITION_5.mp4');
+    video10 = createVideo('assets/videos/TRANSITION_6.mp4');
+    video11 = createVideo('assets/videos/TRANSITION_7.mp4');
+    video12 = createVideo('assets/videos/PARTIE_8_boucle.mp4');
+    video13 = createVideo('assets/videos/TRANSITION_8.mp4');
+
+
     video1.hide();
     video2.hide();
     video3.hide();
+    video5.hide();
+    video5.hide();
+    video6.hide();
+    video7.hide();
+    video8.hide();
+    video9.hide();
+    video10.hide();
+    video11.hide();
+    video12.hide();
+    video13.hide();
     console.log(deviceOrientation)
 
 
@@ -298,11 +322,10 @@ function draw() {
             textSize(dialogSize);
             if (DEBUG) text("appuer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
-            if(deviceOrientation === 'portrait'){
+            if (deviceOrientation === 'portrait') {
                 if (rotationX < -45) evenement(1)
                 if (rotationX > 45) evenement(2)
-            }
-            else {
+            } else {
                 if (rotationY < -45) evenement(1)
                 if (rotationY > 45) evenement(2)
             }
