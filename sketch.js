@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = -1;
+var avancement = 8;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -109,7 +109,7 @@ var h = 480
 
 var canvas
 
-var french = true
+var french = false
 
 
 function windowResized() {
@@ -236,6 +236,19 @@ function setup() {
     video11.hide();
     video12.hide();
     video13.hide();
+    video1.loop();
+    video2.loop();
+    video3.loop();
+    video4.loop();
+    video5.loop();
+    video6.loop();
+    video7.loop();
+    video8.loop();
+    video9.loop();
+    video10.loop();
+    video11.loop();
+    video12.loop();
+    video13.loop();
     console.log(deviceOrientation)
 
 
@@ -254,9 +267,9 @@ function draw() {
         fill(255)
         stroke(255)
         if (french) {
-            text("cliquer pour démarrer", width / 2, height / 2)
+            text("cliquer pour démarrer ", width / 2, height / 2)
         } else {
-            text("click to start", width / 2, height / 2)
+            text("click to start ", width / 2, height / 2)
         }
 
         image(logo, width / 2, height / 3, animSize * 2, animSize * 2);
@@ -284,7 +297,7 @@ function draw() {
             if (mouseIsPressed) evenement(3);
             textSize(dialogSize);
             textAlign(LEFT, CENTER)
-            if (DEBUG) text("appuer sur 1 pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur 1 pour passer à l'étape suivante", 20, 140)
         }
 
         if (derniere_action == 3) {
@@ -318,7 +331,7 @@ function draw() {
             textSize(dialogSize);
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
             if (deviceOrientation === 'portrait') {
                 if (rotationX < -45) evenement(1)
@@ -341,8 +354,8 @@ function draw() {
                 textAlign(RIGHT, CENTER);
                 textSize(dialogSize);
 
-                if (french) text("Chouette ! je vais pouvoir mettre ma nouvelle jupe", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                else text("Great ! I'm gonna try on my new skirt", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                if (french) text("Chouette ! je vais pouvoir mettre ma nouvelle jupe ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
+                else text("Great ! I'm going to wear my new skirt ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
                 choix_ok--;
 
             } else {
@@ -365,8 +378,8 @@ function draw() {
                 fill(140, 140, 140);
                 textAlign(LEFT, CENTER);
                 textSize(dialogSize);
-                if (french) text("Rien de plus confortable qu’un vieux jean pour passer une bonne soirée", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-                else text("Nothing better than a good old pair of jeans for a nice evening", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                if (french) text("Rien de plus confortable qu’un vieux jean pour passer une bonne soirée ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+                else text("Nothing better than a good old pair of jeans to enjoy a good party ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
                 choix_ok--;
 
             } else {
@@ -406,8 +419,8 @@ function draw() {
                     fill(140, 140, 140);
                     textAlign(RIGHT, CENTER);
                     textSize(dialogSize);
-                    if (french) text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                    else text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    if (french) text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
+                    else text("I continue on my way like nothing ever happened ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
                     choix_ok--;
 
                 } else {
@@ -429,8 +442,8 @@ function draw() {
                     fill(140, 140, 140);
                     textAlign(LEFT, CENTER);
                     textSize(dialogSize);
-                    if (french) text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-                    else text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    if (french) text("Je me retourne pour voir qui c’est ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+                    else text("I look back to see who it is ", width * 7 / 12, height * 6.8 / 8, width * 6.8 / 12);
                     choix_ok--;
 
                 } else {
@@ -455,7 +468,7 @@ function draw() {
 
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur 4 ou 5 pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur 4 ou 5 pour passer à l'étape suivante", 20, 140)
 
             if (rotationX < -45 || rotationY < -45) evenement(2)
             if (rotationX > 45 || rotationY > 45) evenement(1)
@@ -487,7 +500,7 @@ function draw() {
             if (mouseIsPressed) evenement(3)
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur 6 pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur 6 pour passer à l'étape suivante", 20, 140)
 
 
         }
@@ -517,7 +530,7 @@ function draw() {
             stroke(255)
             fill(255)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur 7 pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur 7 pour passer à l'étape suivante", 20, 140)
         }
 
     }
@@ -543,8 +556,8 @@ function draw() {
                     stroke(140, 140, 140);
                     fill(140, 140, 140);
                     textSize(dialogSize);
-                    if (french) text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                    else text("Par politesse j’accepte de danser avec lui", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    if (french) text("Par politesse j’accepte de danser avec lui ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
+                    else text("Out of courtesy I agree to dance with him ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
                     choix_ok--;
                 } else {
                     avancement = 6;
@@ -561,8 +574,8 @@ function draw() {
                     stroke(140, 140, 140);
                     fill(140, 140, 140);
                     textSize(dialogSize);
-                    if (french) text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-                    else text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    if (french) text("Je lui propose plutôt de discuter autour d’un verre", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+                    else text("I suggest instead to discuss over a drink ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
                     choix_ok--;
                 } else {
                     avancement = 6;
@@ -575,7 +588,7 @@ function draw() {
             if (key == '8') evenement(2)
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
 
             if (rotationX < -45 || rotationY < -45) evenement(1)
             if (rotationX > 45 || rotationY > 45) evenement(2)
@@ -614,8 +627,8 @@ function draw() {
                     stroke(140, 140, 140);
                     fill(140, 140, 140);
                     textSize(dialogSize);
-                    if (french) text("Je le repousse", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
-                    else text("Je le repousse", width * 1 / 12, height * 7.2 / 8, width * 4 / 12);
+                    if (french) text("Je le repousse ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
+                    else text("I reject him ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
                     choix_ok--;
                 } else {
                     avancement = 7;
@@ -632,8 +645,8 @@ function draw() {
                     stroke(140, 140, 140);
                     fill(140, 140, 140);
                     textSize(dialogSize);
-                    if (french) text("Je suis surprise mais le laisse faire", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
-                    else text("Je suis surprise mais le laisse faire", width * 7 / 12, height * 7.2 / 8, width * 4 / 12);
+                    if (french) text("Je suis surprise mais le laisse faire ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+                    else text("I'm surprised but let him go ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
                     choix_ok--;
                 } else {
                     avancement = 7;
@@ -649,7 +662,7 @@ function draw() {
             if (rotationX > 45 || rotationY > 45) evenement(2)
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur a ou z pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur a ou z pour passer à l'étape suivante", 20, 140)
 
 
             if (mouseIsPressed && mouseX < width / 2) {
@@ -685,7 +698,7 @@ function draw() {
 
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur e pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur e pour passer à l'étape suivante", 20, 140)
 
 
         }
@@ -715,7 +728,7 @@ function draw() {
 
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur l pour passer à l'étape suivante", 20, 140)
+            if (DEBUG) text("appuyer sur l pour passer à l'étape suivante", 20, 140)
 
             capture.loadPixels();
             if (capture.pixels.length > 0) { // don't forget this!
@@ -790,7 +803,7 @@ function draw() {
 
             }
             textSize(dialogSize);
-            if (DEBUG) text("appuer sur m pour revenir au début", 20, 140)
+            if (DEBUG) text("appuyer sur m pour revenir au début", 20, 140)
         }
     }
 
