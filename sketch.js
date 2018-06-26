@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = 9;
+var avancement = -1;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
