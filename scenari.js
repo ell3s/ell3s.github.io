@@ -1,3 +1,5 @@
+
+
 function scenario0() {
     push()
     image(video1, width / 2, height / 2, width, height)
@@ -125,7 +127,8 @@ function scenario2() {
             if (!ruepeur_playing) ruepeur.loop(); // TODO baisser le volume de ce son manuellement
             ruepeur_playing = true;
 
-            ruepeur.setVolume(0.8);
+            ruepeur.setVolume(1);
+              debut.setVolume(0.6);
 
         }
 
@@ -147,7 +150,7 @@ function scenario2() {
 
         if (millis() - chrono > 9000) {
 
-            ruepeur.setVolume(1);
+            ruepeur.setVolume(1.5);
              fairechoix.display(width / 2, height * 6.8 / 8, animSize*2, animSize);
             stroke(255, 255, 255, (millis() - chrono - 9000) / 10);
             fill(255, 255, 255, (millis() - chrono - 9000) / 10);
@@ -183,10 +186,9 @@ function scenario3() {
         run_playing = true;
     }
     if (millis() - chrono < 6000) {
-        ruepeur.setVolume(1);
         marche.stop();
 
-        debut.setVolume(0.3); // TODO baisser le volume de ce son manuellement
+        debut.setVolume(1); // TODO baisser le volume de ce son manuellement
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
         textAlign(CENTER, CENTER);
@@ -197,7 +199,8 @@ function scenario3() {
     if ((maintenant > 6000) && (maintenant < 11000)) {
         //ruepeur.setVolume(1);
         //marche.stop();
-
+  debut.setVolume(0.5);
+  ruepeur.setVolume(1.5);
         //debut.setVolume(0.3); // TODO baisser le volume de ce son manuellement
         stroke(255, 255, 255, (millis() - chrono - 6000) / 10);
         fill(255, 255, 255, (millis() - chrono - 6000) / 10);
@@ -247,7 +250,7 @@ function scenario4() {
         //boulef();
         //bouler();
         //boulet();
-        debut.setVolume(1);
+        debut.setVolume(0.5);
         ruepeur.stop();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 1) / 10);
@@ -260,7 +263,7 @@ function scenario4() {
         stroke(255, 255, 255, (millis() - chrono - 6000) / 10);
         fill(255, 255, 255, (millis() - chrono - 6000) / 10);
         if(french) text("Je me faufile jusqu’au bar en saluant des amis sur le passage. ", width / 4, height * 6.8 / 8, width/2);
-        else text("I sneak in to the bar, greeting friends on the way. ", width / 4, height * 6.8 / 8, width/2);
+        else text("I sneak into the bar, greeting friends on the way. ", width / 4, height * 6.8 / 8, width/2);
     }
     if (millis() - chrono > 10000) {
         //boule3();
@@ -294,7 +297,7 @@ function scenario5() {
     boulec(); // petite boule autour (bas - droit)
     bouled(); // petite boule autour (bas - gauche)
     if (millis() - chrono > 1) {
-        if (!amour_playing) amour.play();
+        if (!amour_playing) amour.loop();
         amour_playing = true;
         amour.setVolume(0.7); // TODO baisser le volume de ce son manuellement
         debut.stop();
@@ -362,12 +365,10 @@ function scenario6() {
     if (millis() - chrono > 1) {
         if (!peur2_playing) peur2.play();
         peur2_playing = true;
-        peur2.setVolume(1); // TODO augmenter le volume de ce son manuellement
-        if (!heatbeat_playing) heatbeat.play();
+        if (!heatbeat_playing) heatbeat.loop();
         heatbeat_playing = true;
-        heatbeat.setVolume(1.5); // TODO baisser le volume de ce son manuellement
+
         amour.setVolume(0.2); // // TODO baisser le volume de ce son manuellement
-        debut.stop();
     }
     var maintenant = millis() - chrono;
     if ((maintenant > 0) && (maintenant < 5000)) {
@@ -377,7 +378,7 @@ function scenario6() {
         boulec();
         bouled();
         if (millis() - chrono < 10000)
-
+        fete.stop();
             //fete.stop();
             stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
@@ -385,8 +386,11 @@ function scenario6() {
 
         if (french) text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas.", width / 4, height * 6.8 / 8, width/2);
         else text("He tells me something but sound level of the party increases and I do not hear him.", width / 4, height * 6.8 / 8, width/2);
-
+  amour.setVolume(0.5); // // TODO baisser le volume de ce son manuellement
     }
+
+
+
 
     var maintenant = millis() - chrono;
     if ((maintenant > 5000) && (maintenant < 10000)) {
@@ -406,6 +410,8 @@ function scenario6() {
     }
 
     if ((maintenant > 10000) && (maintenant < 16000)) {
+        peur2.setVolume(1.3); // TODO augmenter le volume de ce son manuellement
+        amour.stop();
         boule5();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
@@ -495,11 +501,11 @@ function scenario8() {
         if (!fin1_playing) fin1.play();
         fin1_playing = true;
         peur2.setVolume(0.7); // TODO baisser le volume de ce son manuellement
+heatbeat.stop();
     }
     if (millis() - chrono > 5000) {
         image(video10, width / 2, height / 2, width, height)
-        if (!fin2_playing) fin2.play();
-        fin2_playing = true;
+
     }
     var maintenant = millis() - chrono;
     if ((maintenant > 0) && (maintenant < 5000)) {
@@ -543,6 +549,8 @@ function scenario9() {
 
 
     if ((maintenant > 0) && (maintenant < 4000)) {
+      if (!fin2_playing) fin2.play();
+      fin2_playing = true;
         boule7();
     }
     if ((maintenant > 4000) && (maintenant < 8000)) {
@@ -564,7 +572,7 @@ function scenario9() {
     }
     if (maintenant > 18000) {
         image(video12, width / 2, height / 2, width, height)
-        boule0();
+        boule0bis();
         boule10();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 18000) / 10);

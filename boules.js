@@ -951,6 +951,56 @@ function boule8() {
 //************************************************************************************
 //BOULE 0 SÉRÉNITÉ + BOULE 10 COQUILLE PROTECTION == RECONSTRUCTION
 
+/* BOULE 0bis = SERENITE petite
+ Vitesse : lente
+ Contour : courbe
+ Taille : Moyenne
+ */
+
+function boule0bis() {
+    push()
+    stroke(255);
+    noFill();
+    beginShape();
+    curveTightness(0);
+    counter = 0;
+
+    xoff = xoff + .005;
+    for (var angle = 0; angle < 360; angle += 30) {
+
+        var xc = 0;
+        var yc = 0;
+
+        if (counter % 2 == 0) { //coordonées des povars pairs (counter%2)
+            xc = width / 2 + (100 + noise(xoff, angle / 10, 80) * 150) * cos(radians(angle));
+            yc = height * 3 / 8 + (100 + noise(xoff, angle / 10, 80) * 150) * sin(radians(angle));
+        } else { //coordonées des povars impairs
+            xc = width / 2 + (100 + noise(xoff / 2, angle / 10, 100) * 135) * cos(radians(angle));
+            yc = height * 3 / 8 + (100 + (noise(xoff / 2, angle / 10, 100) * 135)) * sin(radians(angle));
+        }
+
+        // cette partie permet de fermer la forme grâce au trois premiers points la composant
+        curveVertex(xc, yc);
+        if (counter == 0) {
+            xc1 = xc;
+            yc1 = yc;
+        } else if (counter == 1) {
+            xc2 = xc;
+            yc2 = yc;
+        } else if (counter == 2) {
+            xc3 = xc;
+            yc3 = yc;
+        }
+        counter++;
+    }
+    curveVertex(xc1, yc1);
+    curveVertex(xc2, yc2);
+    curveVertex(xc3, yc3);
+
+    endShape();
+    pop()
+}
+
 /* BOULE 10 = COQUILLE PROTECTION
  Vitesse : rapide (frémissement : bouge rapidement sur une très petite zone)
  Contour : piquant ligne (sorte d'hexagone)

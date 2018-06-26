@@ -109,7 +109,7 @@ var h = 480
 
 var canvas
 
-var french = false
+var french = true
 
 
 function windowResized() {
@@ -237,13 +237,9 @@ function setup() {
     video12.hide();
     video13.hide();
     video1.loop();
-    video2.loop();
     video3.loop();
-    video4.loop();
     video5.loop();
-    video6.loop();
     video7.loop();
-    video8.loop();
     video9.loop();
     video10.loop();
     video11.loop();
@@ -266,13 +262,22 @@ function draw() {
         textSize(dialogSize);
         fill(255)
         stroke(255)
-        if (french) {
-            text("cliquer pour démarrer ", width / 2, height / 2)
-        } else {
-            text("click to start ", width / 2, height / 2)
-        }
 
-        image(logo, width / 2, height / 3, animSize * 2, animSize * 2);
+       text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 6.8 / 8, width/2)
+
+
+        if (french) {
+            text("cliquer pour démarrer ", width / 2, height * 2 / 3)
+        } else {
+            text("click to start ", width / 2, height * 2 / 3)
+        }
+    /*
+    textFont('La+Belle+Aurore');
+    textAlign(CENTER, BOTTOM);
+    textSize(dialogSize);
+        text("Elle(s)", width / 2, height / 3,)
+    */
+        image(logo, width / 2, height / 3, animSize * 6, animSize * 6);
 
         if (mouseIsPressed) {
             avancement = 0
@@ -334,11 +339,11 @@ function draw() {
             if (DEBUG) text("appuyer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
             if (deviceOrientation === 'portrait') {
-                if (rotationX < -45) evenement(1)
-                if (rotationX > 45) evenement(2)
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
             } else {
-                if (rotationY < -45) evenement(1)
-                if (rotationY > 45) evenement(2)
+                if (rotationY < -45) evenement(2)
+                if (rotationY > 45) evenement(1)
             }
         }
 
@@ -470,8 +475,13 @@ function draw() {
             textSize(dialogSize);
             if (DEBUG) text("appuyer sur 4 ou 5 pour passer à l'étape suivante", 20, 140)
 
-            if (rotationX < -45 || rotationY < -45) evenement(2)
-            if (rotationX > 45 || rotationY > 45) evenement(1)
+            if (deviceOrientation === 'portrait') {
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
+            } else {
+                if (rotationY < -45) evenement(2)
+                if (rotationY > 45) evenement(1)
+            }
         }
 
     }
@@ -590,9 +600,13 @@ function draw() {
             textSize(dialogSize);
             if (DEBUG) text("appuyer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
 
-            if (rotationX < -45 || rotationY < -45) evenement(1)
-            if (rotationX > 45 || rotationY > 45) evenement(2)
-
+            if (deviceOrientation === 'portrait') {
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
+            } else {
+                if (rotationY < -45) evenement(2)
+                if (rotationY > 45) evenement(1)
+            }
 
             if (mouseIsPressed && mouseX < width / 2) {
                 evenement(1)
@@ -658,12 +672,19 @@ function draw() {
 
             if (key == 'a') evenement(1)
             if (key == 'z') evenement(2)
-            if (rotationX < -45 || rotationY < -45) evenement(1)
-            if (rotationX > 45 || rotationY > 45) evenement(2)
+
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
             if (DEBUG) text("appuyer sur a ou z pour passer à l'étape suivante", 20, 140)
 
+
+            if (deviceOrientation === 'portrait') {
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
+            } else {
+                if (rotationY < -45) evenement(2)
+                if (rotationY > 45) evenement(1)
+            }
 
             if (mouseIsPressed && mouseX < width / 2) {
                 evenement(1)
@@ -764,7 +785,7 @@ function draw() {
 
             if (key == 'm') {
                 moment_derniere_action = millis();
-                avancement = 0
+                avancement = -1
                 marche.stop();
                 verouiller.stop();
                 heatbeat.stop();
