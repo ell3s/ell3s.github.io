@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = -1;
+var avancement = 9;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -87,7 +87,7 @@ var choix_ok = -1;
  */
 
 var chrono = 0;
-var DEBUG = true;
+var DEBUG = false;
 var police;
 
 
@@ -245,7 +245,13 @@ function setup() {
     video11.loop();
     video12.loop();
     video13.loop();
+
     console.log(deviceOrientation)
+
+    buttonfr = new Button("Français","French")
+    buttoneng = new Button("Anglais", "English")
+    buttonstart = new Button("Cliquer pour démarrer", "Click to start")
+    buttonhome = new Button("Retour", "Home")
 
 
 }
@@ -263,23 +269,28 @@ function draw() {
         fill(255)
         stroke(255)
 
-       text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 6.8 / 8, width/2)
+        text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 6.8 / 8, width/2)
+
+        buttonstart.display(width/2, height/2, dialogSize *2)
+        buttonstart.over(mouseX, mouseY)
 
 
-        if (french) {
-            text("cliquer pour démarrer ", width / 2, height * 2 / 3)
-        } else {
-            text("click to start ", width / 2, height * 2 / 3)
-        }
+        buttoneng.display(width-100, 50, dialogSize*0.5 )
+        buttoneng.over(mouseX, mouseY)
+        if(buttoneng.isPressed){ french = false}
+
+        buttonfr.display(width-250, 50, dialogSize*0.5 )
+        buttonfr.over(mouseX, mouseY)
+        if(buttonfr.isPressed){ french = true}
     /*
     textFont('La+Belle+Aurore');
     textAlign(CENTER, BOTTOM);
     textSize(dialogSize);
         text("Elle(s)", width / 2, height / 3,)
     */
-        image(logo, width / 2, height / 3, animSize * 6, animSize * 6);
+        //image(logo, width / 2, height / 3, animSize * 6, animSize * 6);
 
-        if (mouseIsPressed) {
+        if (buttonstart.isPressed) {
             avancement = 0
             video1.loop()
             chrono = millis()
@@ -785,7 +796,10 @@ function draw() {
 
         if (millis() - chrono > 21000) {
 
-            if (key == 'm') {
+            buttonhome.display(width/2, height*3/4, dialogSize*3)
+            buttonhome.over(mouseX,mouseY)
+
+            if (buttonhome.isPressed) {
                 moment_derniere_action = millis();
                 avancement = -1
                 marche.stop();
