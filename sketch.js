@@ -339,11 +339,11 @@ function draw() {
             if (DEBUG) text("appuyer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
             if (deviceOrientation === 'portrait') {
-                if (rotationX < -45) evenement(2)
-                if (rotationX > 45) evenement(1)
-            } else {
                 if (rotationY < -45) evenement(2)
                 if (rotationY > 45) evenement(1)
+            } else {
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
             }
         }
 
@@ -475,12 +475,13 @@ function draw() {
             textSize(dialogSize);
             if (DEBUG) text("appuyer sur 4 ou 5 pour passer à l'étape suivante", 20, 140)
 
+
             if (deviceOrientation === 'portrait') {
-                if (rotationX < -45) evenement(2)
-                if (rotationX > 45) evenement(1)
-            } else {
                 if (rotationY < -45) evenement(2)
                 if (rotationY > 45) evenement(1)
+            } else {
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
             }
         }
 
@@ -678,12 +679,13 @@ function draw() {
             if (DEBUG) text("appuyer sur a ou z pour passer à l'étape suivante", 20, 140)
 
 
+
             if (deviceOrientation === 'portrait') {
-                if (rotationX < -45) evenement(2)
-                if (rotationX > 45) evenement(1)
-            } else {
                 if (rotationY < -45) evenement(2)
                 if (rotationY > 45) evenement(1)
+            } else {
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
             }
 
             if (mouseIsPressed && mouseX < width / 2) {
