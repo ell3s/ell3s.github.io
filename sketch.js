@@ -269,7 +269,9 @@ function draw() {
         fill(255)
         stroke(255)
 
-        text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 4.3 / 8, width/2)
+        if (french)text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 4.3 / 8, width/2)
+        else text("Abstract representation of a woman's emotions being sexually assaulted", width / 4, height * 4.3 / 8, width/2)
+
 
         buttonstart.display(width/2, height* 3/4, dialogSize *2)
         buttonstart.over(mouseX, mouseY)
