@@ -143,7 +143,7 @@ function preload() {
     verouiller = loadSound("assets/verouiller.mp3");
     heatbeat = loadSound("assets/heatbeat.mp3");
 
-    logo = loadImage("assets/images/logo.png")
+    logo = loadImage("assets/images/logoelles.png")
 
 
 
@@ -269,9 +269,9 @@ function draw() {
         fill(255)
         stroke(255)
 
-        text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 6.8 / 8, width/2)
+        text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 4.3 / 8, width/2)
 
-        buttonstart.display(width/2, height/2, dialogSize *2)
+        buttonstart.display(width/2, height* 3/4, dialogSize *2)
         buttonstart.over(mouseX, mouseY)
 
 
@@ -288,7 +288,7 @@ function draw() {
     textSize(dialogSize);
         text("Elle(s)", width / 2, height / 3,)
     */
-        //image(logo, width / 2, height / 3, animSize * 6, animSize * 6);
+        image(logo, width / 2, height / 3, animSize * 4, animSize * 4);
 
         if (buttonstart.isPressed) {
             avancement = 0
@@ -794,14 +794,13 @@ function draw() {
 
         scenario9()
 
-        if (millis() - chrono > 21000) {
+        if (millis() - chrono > 26000) {
 
-            buttonhome.display(width/2, height*3/4, dialogSize*3)
-            buttonhome.over(mouseX,mouseY)
 
-            if (buttonhome.isPressed) {
+
+
                 moment_derniere_action = millis();
-                avancement = -1
+                avancement = 10
                 marche.stop();
                 verouiller.stop();
                 heatbeat.stop();
@@ -837,15 +836,124 @@ function draw() {
                 reconstruction_playing = false;
                 verouiller_playing = false;
                 heatbeat_playing = false;
+                chrono = millis()
 
-            }
+
             textSize(dialogSize);
             if (DEBUG) text("appuyer sur m pour revenir au début", 20, 140)
         }
+
     }
 
+    if(avancement == 10){
+      var maintenant = millis() - chrono;
+      image(video3, width / 2, height / 2, width, height)
+      buttonhome.display(width/2, height*4.5/5, dialogSize*3)
+      buttonhome.over(mouseX,mouseY)
+      if(buttonhome.isPressed){
+        avancement = -1;
+
+      }
+      if ((maintenant > 2600) && (maintenant < 12600)) {
+
+      textAlign(CENTER, CENTER)
+      textSize(dialogSize);
+      fill(255, 255, 255);
+      fill(255, 255, 255);
+    textStyle(BOLD);
+      textSize(dialogSize);
+      text("Merci à Bérenger RECOULES", width / 4, height * 1 / 8, width/2)
+    textStyle(NORMAL);
+    textSize(dialogSize*0.7);
+text("d'avoir participer à la conception de notre projet et de nous avoir aidé à le réaliser", width / 4, height * 1.5 / 8, width/2)
+textStyle(BOLD);
+  textSize(dialogSize);
+text("Merci à Pierre COMMERGE", width / 4, height * 2.7 / 8, width/2)
+textStyle(NORMAL);
+textSize(dialogSize*0.7);
+text("pour son aide lors du workshop", width / 4, height * 3.2 / 8, width/2)
+noFill();
+stroke(255)
+textStyle(BOLD);
+var txt1 = " Par Auriane POUZIN, Raphaëlle GORENBOUH "
+var txt2 = " Camille CAMPO et Bérenger RECOULES "
+line(width/4, height*4/8, width*3/4, height*4/8)
+text(txt1, width / 4, height * 4.5 / 8, width/2)
+text(txt2, width / 4, height * 5 / 8, width/2)
+line(width/4, height*5.5/8, width*3/4, height*5.5/8)
+textStyle(NORMAL);
+text("L'Ecole de design de Nantes Atlantique  ", width / 4, height * 6 / 8, width/2)
+text("Bachelor design d'interactivité - 2018", width / 4, height * 6.5 / 8, width/2)
+}
+
+if ((maintenant > 12600) && (maintenant < 20000)) {
+
+textAlign(CENTER, CENTER)
+textSize(dialogSize*0.7);
+fill(255, 255, 255);
+fill(255, 255, 255);
+text("1- vibeur_telephone.wav", width / 4, height * 0.5/ 8, width/2)
+text("https://freesound.org/people/SpliceSound/sounds/369841/ ", width / 4, height * 0.8/ 8, width/2)
+text("Auteur : SpliceSound", width / 4, height * 1.1 / 8, width/2)
+text("2- touche_telephone.wav ", width / 4, height * 1.7/ 8, width/2)
+text("https://freesound.org/people/halimturk/sounds/392634/", width / 4, height * 2 /8, width/2)
+text("Auteur : halimturk", width / 4, height * 2.3/ 8, width/2)
+text("3- verouiller_d_telephone.wav", width / 4, height * 2.9 / 8, width/2)
+text("https://freesound.org/people/thegoose09/sounds/125384/", width / 4, height * 3.2/ 8, width/2)
+text("4- marche.wav", width / 4, height * 3.8/ 8, width/2)
+text("https://freesound.org/people/allrealsound/sounds/161756/", width / 4, height * 4.1 / 8, width/2)
+text("Auteur : allrealsound", width / 4, height * 4.4 / 8, width/2)
+text("5- marche2.wav ", width / 4, height * 5/ 8, width/2)
+text("https://freesound.org/people/Robinhood76/sounds/318900/ ", width / 4, height * 5.3 / 8, width/2)
+text("Auteur : Robinhood76", width / 4, height * 5.6 / 8, width/2)
+text("6- habits", width / 4, height * 6.2 / 8, width/2)
+text("https://freesound.org/people/pfranzen/sounds/331354/", width / 4, height * 6.5 / 8, width/2)
 
 
+}
+if ((maintenant > 20000) && (maintenant < 30000)) {
+
+textAlign(CENTER, CENTER)
+textSize(dialogSize*0.7);
+fill(255, 255, 255);
+fill(255, 255, 255);
+text("7-fête.wav", width / 4, height * 0.5/ 8, width/2)
+text("https://freesound.org/people/winsx87/sounds/152026/", width / 4, height * 0.8/ 8, width/2)
+text("Auteur : winsx87", width / 4, height * 1.1 / 8, width/2)
+text("8- personnebourée.wav", width / 4, height * 2.1/ 8, width/2)
+text("https://freesound.org/people/Robinhood76/sounds/271447/", width / 4, height * 2.4 /8, width/2)
+text("Auteur : Robinhood76", width / 4, height * 2.7/ 8, width/2)
+text("9- fete2.wav", width / 4, height * 3.7/ 8, width/2)
+text("https://freesound.org/people/soundhunterjulie/sounds/395315/", width / 4, height * 4/ 8, width/2)
+text("Auteur : soundhunterjulie", width / 4, height * 4.3/ 8, width/2)
+text("10-streetsound.wav", width / 4, height * 5.3/ 8, width/2)
+text("https://freesound.org/people/smsh110/sounds/346945/", width / 4, height *  5.6/ 8, width/2)
+text("Auteur : smsh110", width / 4, height * 5.9/ 8, width/2)
+
+}
+
+  if (millis() - chrono > 30000){
+
+textAlign(CENTER, CENTER)
+textSize(dialogSize*0.7);
+fill(255, 255, 255);
+fill(255, 255, 255);
+text("11-run", width / 4, height * 0.5/ 8, width/2)
+text("https://freesound.org/people/AlexMurphy53/sounds/328458/", width / 4, height * 0.8/ 8, width/2)
+text("Auteur : AlexMurphy53", width / 4, height * 1.1 / 8, width/2)
+text("12- marchecouloir", width / 4, height * 2.1/ 8, width/2)
+text("https://freesound.org/people/Robinhood76/sounds/70914/", width / 4, height * 2.4 /8, width/2)
+text("Auteur:Robinhood76", width / 4, height * 2.7/ 8, width/2)
+text("13- porte", width / 4, height * 3.7/ 8, width/2)
+text("https://freesound.org/people/rivernile7/sounds/234244/", width / 4, height * 5/ 8, width/2)
+text("Auteur:rivernile7", width / 4, height * 4.3/ 8, width/2)
+text("14- agression", width / 4, height * 5.3/ 8, width/2)
+text("https://freesound.org/people/alex_audio/sounds/179129/", width / 4, height *  5.6/ 8, width/2)
+text("Auteur :alex_audio", width / 4, height * 5.9/ 8, width/2)
+
+}
+
+    }
 
 
     push()
