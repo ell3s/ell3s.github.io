@@ -227,22 +227,29 @@ function scenario4() {
     push()
 
     textSize(dialogSize);
-     image(video4, width / 2, height / 2, width, height)
+
     /*
     La boule joie est composée de plusieurs boules,
      une grosse au milieu et d'autre plus petites autour
      */
-    boule3(); // boule principale
-    boulez(); // petite boule autour (haut - gauche)
-    boulef(); // petite boule autour (haut - droit)
-    bouler(); // petite boule autour (bas - droit)
-    boulet(); // petite boule autour (bas - gauche)
+
     if (millis() - chrono < 5000) {
         porte.stop();
         if (!fete_playing) fete.loop();
         fete_playing = true;
     }
     var maintenant = millis() - chrono;
+     if ((maintenant > 0) && (maintenant < 2300)) {
+     image(video4, width / 2, height / 2, width, height)
+     }
+    else {
+        image(video5, width / 2, height / 2, width, height)
+    }
+     boule3(); // boule principale
+    boulez(); // petite boule autour (haut - gauche)
+    boulef(); // petite boule autour (haut - droit)
+    bouler(); // petite boule autour (bas - droit)
+    boulet(); // petite boule autour (bas - gauche)
     if ((maintenant > 0) && (maintenant < 5000)) {
 
         //boule3();

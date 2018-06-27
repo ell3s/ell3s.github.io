@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = -1;
+var avancement = 3;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -517,6 +517,7 @@ function draw() {
                 chrono = millis();
                 avancement = 4;
                 run.stop();
+                video4.loop()
             }
 
 
