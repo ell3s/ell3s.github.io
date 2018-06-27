@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = 3;
+var avancement = 10;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -199,7 +199,7 @@ function setup() {
     textSize(dialogSize);
     imageMode(CENTER);
 
-     //Chargement de nos animations
+    //Chargement de nos animations
     lumiere = new Animation("assets/anim_lumiere/lumiere_", 120);
     deverouiller = new Animation("assets/anim_deverouiller/deverrouiller_", 48);
     fairechoix = new Animation("assets/anim_choix/fairechoix_", 75);
@@ -248,7 +248,7 @@ function setup() {
 
     console.log(deviceOrientation)
 
-    buttonfr = new Button("Français","French")
+    buttonfr = new Button("Français", "French")
     buttoneng = new Button("Anglais", "English")
     buttonstart = new Button("Cliquer pour démarrer", "Click to start")
     buttonhome = new Button("Retour", "Home")
@@ -269,27 +269,31 @@ function draw() {
         fill(255)
         stroke(255)
 
-        if (french)text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 4.3 / 8, width/2)
-        else text("Abstract representation of a woman's emotions being sexually assaulted", width / 4, height * 4.3 / 8, width/2)
+        if (french) text("Représentation abstraire des émotions ressenties par une femme victime d’agression sexuelle.", width / 4, height * 4.3 / 8, width / 2)
+        else text("Abstract representation of a woman's emotions being sexually assaulted", width / 4, height * 4.3 / 8, width / 2)
 
 
-        buttonstart.display(width/2, height* 3/4, dialogSize *2)
+        buttonstart.display(width / 2, height * 3 / 4, dialogSize * 2)
         buttonstart.over(mouseX, mouseY)
 
 
-        buttoneng.display(width-100, 50, dialogSize*0.5 )
+        buttoneng.display(width - 100, 50, dialogSize * 0.5)
         buttoneng.over(mouseX, mouseY)
-        if(buttoneng.isPressed){ french = false}
+        if (buttoneng.isPressed) {
+            french = false
+        }
 
-        buttonfr.display(width-250, 50, dialogSize*0.5 )
+        buttonfr.display(width - 250, 50, dialogSize * 0.5)
         buttonfr.over(mouseX, mouseY)
-        if(buttonfr.isPressed){ french = true}
-    /*
-    textFont('La+Belle+Aurore');
-    textAlign(CENTER, BOTTOM);
-    textSize(dialogSize);
-        text("Elle(s)", width / 2, height / 3,)
-    */
+        if (buttonfr.isPressed) {
+            french = true
+        }
+        /*
+        textFont('La+Belle+Aurore');
+        textAlign(CENTER, BOTTOM);
+        textSize(dialogSize);
+            text("Elle(s)", width / 2, height / 3,)
+        */
         image(logo, width / 2, height / 3, animSize * 4, animSize * 4);
 
         if (buttonstart.isPressed) {
@@ -802,44 +806,44 @@ function draw() {
 
 
 
-                moment_derniere_action = millis();
-                avancement = 10
-                marche.stop();
-                verouiller.stop();
-                heatbeat.stop();
-                fin1.stop();
-                fin2.stop();
-                reconstruction.stop();
-                ruepeur.stop();
-                peur2.stop();
-                debut.stop();
-                hit.stop();
-                run.stop();
-                porte.stop();
-                habits.stop();
-                fete.stop();
-                fete2.stop();
-                agres.stop();
-                amour.stop();
+            moment_derniere_action = millis();
+            avancement = 10
+            marche.stop();
+            verouiller.stop();
+            heatbeat.stop();
+            fin1.stop();
+            fin2.stop();
+            reconstruction.stop();
+            ruepeur.stop();
+            peur2.stop();
+            debut.stop();
+            hit.stop();
+            run.stop();
+            porte.stop();
+            habits.stop();
+            fete.stop();
+            fete2.stop();
+            agres.stop();
+            amour.stop();
 
 
-                hit_playing = false;
-                marche_playing = false;
-                run_playing = false;
-                porte_playing = false;
-                habits_playing = false;
-                fete_playing = false;
-                agres_playing = false;
-                debut_playing = false;
-                ruepeur_playing = false;
-                amour_playing = false;
-                peur2_playing = false;
-                fin1_playing = false;
-                fin2_playing = false;
-                reconstruction_playing = false;
-                verouiller_playing = false;
-                heatbeat_playing = false;
-                chrono = millis()
+            hit_playing = false;
+            marche_playing = false;
+            run_playing = false;
+            porte_playing = false;
+            habits_playing = false;
+            fete_playing = false;
+            agres_playing = false;
+            debut_playing = false;
+            ruepeur_playing = false;
+            amour_playing = false;
+            peur2_playing = false;
+            fin1_playing = false;
+            fin2_playing = false;
+            reconstruction_playing = false;
+            verouiller_playing = false;
+            heatbeat_playing = false;
+            chrono = millis()
 
 
             textSize(dialogSize);
@@ -848,113 +852,115 @@ function draw() {
 
     }
 
-    if(avancement == 10){
-      var maintenant = millis() - chrono;
-      image(video3, width / 2, height / 2, width, height)
-      buttonhome.display(width/2, height*4.5/5, dialogSize*3)
-      buttonhome.over(mouseX,mouseY)
-      if(buttonhome.isPressed){
-        avancement = -1;
+    if (avancement == 10) {
+        var maintenant = millis() - chrono;
+        image(video3, width / 2, height / 2, width, height)
+        buttonhome.display(width / 2, height * 4.5 / 5, dialogSize * 3)
+        buttonhome.over(mouseX, mouseY)
+        if (buttonhome.isPressed) {
+            avancement = -1;
 
-      }
-      if ((maintenant > 2600) && (maintenant < 12600)) {
+        }
+        if ((maintenant > 2600) && (maintenant < 12600)) {
 
-      textAlign(CENTER, CENTER)
-      textSize(dialogSize);
-      fill(255, 255, 255);
-      fill(255, 255, 255);
-    textStyle(BOLD);
-      textSize(dialogSize);
-      text("Merci à Bérenger RECOULES", width / 4, height * 1 / 8, width/2)
-    textStyle(NORMAL);
-    textSize(dialogSize*0.7);
-text("d'avoir participer à la conception de notre projet et de nous avoir aidé à le réaliser", width / 4, height * 1.5 / 8, width/2)
-textStyle(BOLD);
-  textSize(dialogSize);
-text("Merci à Pierre COMMERGE", width / 4, height * 2.7 / 8, width/2)
-textStyle(NORMAL);
-textSize(dialogSize*0.7);
-text("pour son aide lors du workshop", width / 4, height * 3.2 / 8, width/2)
-noFill();
-stroke(255)
-textStyle(BOLD);
-var txt1 = " Par Auriane POUZIN, Raphaëlle GORENBOUH "
-var txt2 = " Camille CAMPO et Bérenger RECOULES "
-line(width/4, height*4/8, width*3/4, height*4/8)
-text(txt1, width / 4, height * 4.5 / 8, width/2)
-text(txt2, width / 4, height * 5 / 8, width/2)
-line(width/4, height*5.5/8, width*3/4, height*5.5/8)
-textStyle(NORMAL);
-text("L'Ecole de design de Nantes Atlantique  ", width / 4, height * 6 / 8, width/2)
-text("Bachelor design d'interactivité - 2018", width / 4, height * 6.5 / 8, width/2)
-}
+            textAlign(CENTER, CENTER)
+            textSize(dialogSize);
+            fill(255, 255, 255);
+            fill(255, 255, 255);
+            textStyle(BOLD);
+            textSize(dialogSize*0.8);
+            text("Merci à Bérenger RECOULES", width / 4, height * 1 / 8, width / 2)
+            textStyle(NORMAL);
+            textSize(dialogSize * 0.7);
+            text("d'avoir participer à la conception de notre projet et de nous avoir aidé à le réaliser", width / 4, height * 1.5 / 8, width / 2)
+            textStyle(BOLD);
+            textSize(dialogSize*0.8);
+            text("Merci à Pierre COMMERGE", width / 4, height * 2.7 / 8, width / 2)
+            textStyle(NORMAL);
+            textSize(dialogSize * 0.7);
+            text("pour son aide lors du workshop", width / 4, height * 3.2 / 8, width / 2)
+            noFill();
+            stroke(255)
+            textStyle(BOLD);
+            textSize(dialogSize);
+            var txt1 = " Par Auriane POUZIN, Raphaëlle GORENBOUH "
+            var txt2 = " Camille CAMPO et Bérenger RECOULES "
+            line(width / 4, height * 4 / 8, width * 3 / 4, height * 4 / 8)
+            text(txt1, width / 4, height * 4.5 / 8, width / 2)
+            text(txt2, width / 4, height * 5 / 8, width / 2)
+            line(width / 4, height * 5.5 / 8, width * 3 / 4, height * 5.5 / 8)
+            textStyle(NORMAL);
+            strokeWeight(1)
+            text("L'Ecole de design de Nantes Atlantique  ", width / 4, height * 6 / 8, width / 2)
+            text("Bachelor design d'interactivité - 2018", width / 4, height * 6.5 / 8, width / 2)
+        }
 
-if ((maintenant > 12600) && (maintenant < 20000)) {
+        if ((maintenant > 12600) && (maintenant < 20000)) {
 
-textAlign(CENTER, CENTER)
-textSize(dialogSize*0.7);
-fill(255, 255, 255);
-fill(255, 255, 255);
-text("1- vibeur_telephone.wav", width / 4, height * 0.5/ 8, width/2)
-text("https://freesound.org/people/SpliceSound/sounds/369841/ ", width / 4, height * 0.8/ 8, width/2)
-text("Auteur : SpliceSound", width / 4, height * 1.1 / 8, width/2)
-text("2- touche_telephone.wav ", width / 4, height * 1.7/ 8, width/2)
-text("https://freesound.org/people/halimturk/sounds/392634/", width / 4, height * 2 /8, width/2)
-text("Auteur : halimturk", width / 4, height * 2.3/ 8, width/2)
-text("3- verouiller_d_telephone.wav", width / 4, height * 2.9 / 8, width/2)
-text("https://freesound.org/people/thegoose09/sounds/125384/", width / 4, height * 3.2/ 8, width/2)
-text("4- marche.wav", width / 4, height * 3.8/ 8, width/2)
-text("https://freesound.org/people/allrealsound/sounds/161756/", width / 4, height * 4.1 / 8, width/2)
-text("Auteur : allrealsound", width / 4, height * 4.4 / 8, width/2)
-text("5- marche2.wav ", width / 4, height * 5/ 8, width/2)
-text("https://freesound.org/people/Robinhood76/sounds/318900/ ", width / 4, height * 5.3 / 8, width/2)
-text("Auteur : Robinhood76", width / 4, height * 5.6 / 8, width/2)
-text("6- habits", width / 4, height * 6.2 / 8, width/2)
-text("https://freesound.org/people/pfranzen/sounds/331354/", width / 4, height * 6.5 / 8, width/2)
+            textAlign(CENTER, CENTER)
+            textSize(dialogSize * 0.7);
+            fill(255, 255, 255);
+            fill(255, 255, 255);
+            text("1- vibeur_telephone.wav", width / 4, height * 0.5 / 8, width / 2)
+            text("https://freesound.org/people/SpliceSound/sounds/369841/ ", width / 4, height * 0.8 / 8, width / 2)
+            text("Auteur : SpliceSound", width / 4, height * 1.1 / 8, width / 2)
+            text("2- touche_telephone.wav ", width / 4, height * 1.7 / 8, width / 2)
+            text("https://freesound.org/people/halimturk/sounds/392634/", width / 4, height * 2 / 8, width / 2)
+            text("Auteur : halimturk", width / 4, height * 2.3 / 8, width / 2)
+            text("3- verouiller_d_telephone.wav", width / 4, height * 2.9 / 8, width / 2)
+            text("https://freesound.org/people/thegoose09/sounds/125384/", width / 4, height * 3.2 / 8, width / 2)
+            text("4- marche.wav", width / 4, height * 3.8 / 8, width / 2)
+            text("https://freesound.org/people/allrealsound/sounds/161756/", width / 4, height * 4.1 / 8, width / 2)
+            text("Auteur : allrealsound", width / 4, height * 4.4 / 8, width / 2)
+            text("5- marche2.wav ", width / 4, height * 5 / 8, width / 2)
+            text("https://freesound.org/people/Robinhood76/sounds/318900/ ", width / 4, height * 5.3 / 8, width / 2)
+            text("Auteur : Robinhood76", width / 4, height * 5.6 / 8, width / 2)
+            text("6- habits", width / 4, height * 6.2 / 8, width / 2)
+            text("https://freesound.org/people/pfranzen/sounds/331354/", width / 4, height * 6.5 / 8, width / 2)
 
 
-}
-if ((maintenant > 20000) && (maintenant < 30000)) {
+        }
+        if ((maintenant > 20000) && (maintenant < 30000)) {
 
-textAlign(CENTER, CENTER)
-textSize(dialogSize*0.7);
-fill(255, 255, 255);
-fill(255, 255, 255);
-text("7-fête.wav", width / 4, height * 0.5/ 8, width/2)
-text("https://freesound.org/people/winsx87/sounds/152026/", width / 4, height * 0.8/ 8, width/2)
-text("Auteur : winsx87", width / 4, height * 1.1 / 8, width/2)
-text("8- personnebourée.wav", width / 4, height * 2.1/ 8, width/2)
-text("https://freesound.org/people/Robinhood76/sounds/271447/", width / 4, height * 2.4 /8, width/2)
-text("Auteur : Robinhood76", width / 4, height * 2.7/ 8, width/2)
-text("9- fete2.wav", width / 4, height * 3.7/ 8, width/2)
-text("https://freesound.org/people/soundhunterjulie/sounds/395315/", width / 4, height * 4/ 8, width/2)
-text("Auteur : soundhunterjulie", width / 4, height * 4.3/ 8, width/2)
-text("10-streetsound.wav", width / 4, height * 5.3/ 8, width/2)
-text("https://freesound.org/people/smsh110/sounds/346945/", width / 4, height *  5.6/ 8, width/2)
-text("Auteur : smsh110", width / 4, height * 5.9/ 8, width/2)
+            textAlign(CENTER, CENTER)
+            textSize(dialogSize * 0.7);
+            fill(255, 255, 255);
+            fill(255, 255, 255);
+            text("7-fête.wav", width / 4, height * 0.5 / 8, width / 2)
+            text("https://freesound.org/people/winsx87/sounds/152026/", width / 4, height * 0.8 / 8, width / 2)
+            text("Auteur : winsx87", width / 4, height * 1.1 / 8, width / 2)
+            text("8- personnebourée.wav", width / 4, height * 2.1 / 8, width / 2)
+            text("https://freesound.org/people/Robinhood76/sounds/271447/", width / 4, height * 2.4 / 8, width / 2)
+            text("Auteur : Robinhood76", width / 4, height * 2.7 / 8, width / 2)
+            text("9- fete2.wav", width / 4, height * 3.7 / 8, width / 2)
+            text("https://freesound.org/people/soundhunterjulie/sounds/395315/", width / 4, height * 4 / 8, width / 2)
+            text("Auteur : soundhunterjulie", width / 4, height * 4.3 / 8, width / 2)
+            text("10-streetsound.wav", width / 4, height * 5.3 / 8, width / 2)
+            text("https://freesound.org/people/smsh110/sounds/346945/", width / 4, height * 5.6 / 8, width / 2)
+            text("Auteur : smsh110", width / 4, height * 5.9 / 8, width / 2)
 
-}
+        }
 
-  if (millis() - chrono > 30000){
+        if (millis() - chrono > 30000) {
 
-textAlign(CENTER, CENTER)
-textSize(dialogSize*0.7);
-fill(255, 255, 255);
-fill(255, 255, 255);
-text("11-run", width / 4, height * 0.5/ 8, width/2)
-text("https://freesound.org/people/AlexMurphy53/sounds/328458/", width / 4, height * 0.8/ 8, width/2)
-text("Auteur : AlexMurphy53", width / 4, height * 1.1 / 8, width/2)
-text("12- marchecouloir", width / 4, height * 2.1/ 8, width/2)
-text("https://freesound.org/people/Robinhood76/sounds/70914/", width / 4, height * 2.4 /8, width/2)
-text("Auteur:Robinhood76", width / 4, height * 2.7/ 8, width/2)
-text("13- porte", width / 4, height * 3.7/ 8, width/2)
-text("https://freesound.org/people/rivernile7/sounds/234244/", width / 4, height * 5/ 8, width/2)
-text("Auteur:rivernile7", width / 4, height * 4.3/ 8, width/2)
-text("14- agression", width / 4, height * 5.3/ 8, width/2)
-text("https://freesound.org/people/alex_audio/sounds/179129/", width / 4, height *  5.6/ 8, width/2)
-text("Auteur :alex_audio", width / 4, height * 5.9/ 8, width/2)
+            textAlign(CENTER, CENTER)
+            textSize(dialogSize * 0.7);
+            fill(255, 255, 255);
+            fill(255, 255, 255);
+            text("11-run", width / 4, height * 0.5 / 8, width / 2)
+            text("https://freesound.org/people/AlexMurphy53/sounds/328458/", width / 4, height * 0.8 / 8, width / 2)
+            text("Auteur : AlexMurphy53", width / 4, height * 1.1 / 8, width / 2)
+            text("12- marchecouloir", width / 4, height * 2.1 / 8, width / 2)
+            text("https://freesound.org/people/Robinhood76/sounds/70914/", width / 4, height * 2.4 / 8, width / 2)
+            text("Auteur:Robinhood76", width / 4, height * 2.7 / 8, width / 2)
+            text("13- porte", width / 4, height * 3.7 / 8, width / 2)
+            text("https://freesound.org/people/rivernile7/sounds/234244/", width / 4, height * 4 / 8, width / 2)
+            text("Auteur:rivernile7", width / 4, height * 4.3 / 8, width / 2)
+            text("14- agression", width / 4, height * 5.3 / 8, width / 2)
+            text("https://freesound.org/people/alex_audio/sounds/179129/", width / 4, height * 5.6 / 8, width / 2)
+            text("Auteur :alex_audio", width / 4, height * 5.9 / 8, width / 2)
 
-}
+        }
 
     }
 
