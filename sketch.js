@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = 10;
+var avancement = -1;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -356,8 +356,8 @@ function draw() {
             if (DEBUG) text("appuyer sur 2 ou 3 pour passer à l'étape suivante", 20, 140)
 
             if (deviceOrientation === 'portrait') {
-                if (rotationY < -45) evenement(2)
-                if (rotationY > 45) evenement(1)
+                if (rotationY < -45) evenement(1)
+                if (rotationY > 45) evenement(2)
             } else {
                 if (rotationX < -45) evenement(2)
                 if (rotationX > 45) evenement(1)
@@ -494,8 +494,8 @@ function draw() {
 
 
             if (deviceOrientation === 'portrait') {
-                if (rotationY < -45) evenement(2)
-                if (rotationY > 45) evenement(1)
+                if (rotationY < -45) evenement(1)
+                if (rotationY > 45) evenement(2)
             } else {
                 if (rotationX < -45) evenement(2)
                 if (rotationX > 45) evenement(1)
@@ -620,8 +620,8 @@ function draw() {
             if (DEBUG) text("appuyer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
 
             if (deviceOrientation === 'portrait') {
-                if (rotationX < -45) evenement(2)
-                if (rotationX > 45) evenement(1)
+                if (rotationX < -45) evenement(1)
+                if (rotationX > 45) evenement(2)
             } else {
                 if (rotationY < -45) evenement(2)
                 if (rotationY > 45) evenement(1)
@@ -699,8 +699,8 @@ function draw() {
 
 
             if (deviceOrientation === 'portrait') {
-                if (rotationY < -45) evenement(2)
-                if (rotationY > 45) evenement(1)
+                if (rotationY < -45) evenement(1)
+                if (rotationY > 45) evenement(2)
             } else {
                 if (rotationX < -45) evenement(2)
                 if (rotationX > 45) evenement(1)
@@ -875,7 +875,7 @@ function draw() {
             text("d'avoir participer à la conception de notre projet et de nous avoir aidé à le réaliser", width / 4, height * 1.5 / 8, width / 2)
             textStyle(BOLD);
             textSize(dialogSize*0.8);
-            text("Merci à Pierre COMMERGE", width / 4, height * 2.7 / 8, width / 2)
+            text("Merci à Pierre COMMENGE", width / 4, height * 2.7 / 8, width / 2)
             textStyle(NORMAL);
             textSize(dialogSize * 0.7);
             text("pour son aide lors du workshop", width / 4, height * 3.2 / 8, width / 2)

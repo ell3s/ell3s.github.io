@@ -1,5 +1,3 @@
-
-
 function scenario0() {
     push()
     image(video1, width / 2, height / 2, width, height)
@@ -67,7 +65,7 @@ function scenario1() {
 
         if (millis() - chrono > 9000) {
 
-            fairechoix.display(width / 2, height * 6.8 / 8, animSize*2, animSize);
+            fairechoix.display(width / 2, height * 6.8 / 8, animSize * 2, animSize);
 
             if (!habits_playing) {
                 habits.play();
@@ -128,7 +126,7 @@ function scenario2() {
             ruepeur_playing = true;
 
             ruepeur.setVolume(1);
-              debut.setVolume(0.6);
+            debut.setVolume(0.6);
 
         }
 
@@ -136,11 +134,11 @@ function scenario2() {
 
 
         boule1();
-        textAlign(CENTER,CENTER)
+        textAlign(CENTER, CENTER)
         stroke(255, 255, 255, (millis() - chrono - 4000) / 10);
         fill(255, 255, 255, (millis() - chrono - 4000) / 10);
-        if (french) text("Je marche tranquillement dans la rue quand soudain un homme m’interpelle en me sifflant ", width/4 , height * 6.8 / 8, width/2);
-        else text("I walk peacefully in the street when suddenly a man whistles at me ", width/4 , height * 6.8 / 8, width/2);
+        if (french) text("Je marche tranquillement dans la rue quand soudain un homme m’interpelle en me sifflant ", width / 4, height * 6.8 / 8, width / 2);
+        else text("I walk peacefully in the street when suddenly a man whistles at me ", width / 4, height * 6.8 / 8, width / 2);
 
     }
     if (maintenant > 8000) {
@@ -151,12 +149,12 @@ function scenario2() {
         if (millis() - chrono > 9000) {
 
             ruepeur.setVolume(1.5);
-             fairechoix.display(width / 2, height * 6.8 / 8, animSize*2, animSize);
+            fairechoix.display(width / 2, height * 6.8 / 8, animSize * 2, animSize);
             stroke(255, 255, 255, (millis() - chrono - 9000) / 10);
             fill(255, 255, 255, (millis() - chrono - 9000) / 10);
 
             textAlign(RIGHT, CENTER);
-            if(french) text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
+            if (french) text("Je continue mon chemin l’air de rien ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
             else text("I continue on my way like nothing ever happened ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
 
         }
@@ -165,7 +163,7 @@ function scenario2() {
             stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
             fill(255, 255, 255, (millis() - chrono - 10000) / 10);
             textAlign(LEFT, CENTER);
-            if(french) text("Je me retourne pour voir qui c'est ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+            if (french) text("Je me retourne pour voir qui c'est ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
             else text("I look back to see who it is ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
 
         }
@@ -192,21 +190,21 @@ function scenario3() {
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
         textAlign(CENTER, CENTER);
-        if(french)text("“Hé t’as pas un 06 ? ” ...  ", width / 4, height * 6.8 / 8, width/2);
-        else text("“Hey do you have a 06?”... ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("“Hé t’as pas un 06 ? ” ...  ", width / 4, height * 6.8 / 8, width / 2);
+        else text("“Hey do you have a 06?”... ", width / 4, height * 6.8 / 8, width / 2);
     }
     var maintenant = millis() - chrono;
     if ((maintenant > 6000) && (maintenant < 11000)) {
         //ruepeur.setVolume(1);
         //marche.stop();
-  debut.setVolume(0.5);
-  ruepeur.setVolume(1.5);
+        debut.setVolume(0.5);
+        ruepeur.setVolume(1.5);
         //debut.setVolume(0.3); // TODO baisser le volume de ce son manuellement
         stroke(255, 255, 255, (millis() - chrono - 6000) / 10);
         fill(255, 255, 255, (millis() - chrono - 6000) / 10);
         textAlign(CENTER, CENTER);
-        if(french)text("Je ne lui répond pas et accélère le pas. \n J’ai peur qu’il me suive... ", width / 4, height * 6.8 / 8, width/2);
-        else text("I don’t answer him and I speed up. \n I am afraid he'll follow me... ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Je ne lui répond pas et accélère le pas. \n J’ai peur qu’il me suive... ", width / 4, height * 6.8 / 8, width / 2);
+        else text("I don’t answer him and I speed up. \n I am afraid he'll follow me... ", width / 4, height * 6.8 / 8, width / 2);
     }
 
     textAlign(CENTER, CENTER)
@@ -239,13 +237,12 @@ function scenario4() {
         fete_playing = true;
     }
     var maintenant = millis() - chrono;
-     if ((maintenant > 0) && (maintenant < 2300)) {
-     image(video4, width / 2, height / 2, width, height)
-     }
-    else {
+    if ((maintenant > 0) && (maintenant < 2200)) {
+        image(video4, width / 2, height / 2, width, height)
+    } else {
         image(video5, width / 2, height / 2, width, height)
     }
-     boule3(); // boule principale
+    boule3(); // boule principale
     boulez(); // petite boule autour (haut - gauche)
     boulef(); // petite boule autour (haut - droit)
     bouler(); // petite boule autour (bas - droit)
@@ -262,15 +259,15 @@ function scenario4() {
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 1) / 10);
         fill(255, 255, 255, (millis() - chrono - 1) / 10);
-        if(french) text("J’arrive enfin chez mon amie, la fête bat déjà son plein.", width / 4, height * 6.8 / 8, width/2);
-        else text("I finally arrive to my friend’s home, the party is already at its best.", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("J’arrive enfin chez mon amie, la fête bat déjà son plein.", width / 4, height * 6.8 / 8, width / 2);
+        else text("I finally arrive to my friend’s home, the party is already at its best.", width / 4, height * 6.8 / 8, width / 2);
     }
     if ((maintenant > 6000) && (maintenant < 10000)) {
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 6000) / 10);
         fill(255, 255, 255, (millis() - chrono - 6000) / 10);
-        if(french) text("Je me faufile jusqu’au bar en saluant des amis sur le passage. ", width / 4, height * 6.8 / 8, width/2);
-        else text("I sneak into the bar, greeting friends on the way. ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Je me faufile jusqu’au bar en saluant des amis sur le passage. ", width / 4, height * 6.8 / 8, width / 2);
+        else text("I sneak into the bar, greeting friends on the way. ", width / 4, height * 6.8 / 8, width / 2);
     }
     if (millis() - chrono > 10000) {
         //boule3();
@@ -282,7 +279,7 @@ function scenario4() {
         fill(255, 255, 255, (millis() - chrono - 10000) / 10);
         //    textFont(police, 15);
         textAlign(CENTER, CENTER);
-        if(french) text("pour danser SECOUER le téléphone ", width / 2, height * 6.8 / 8);
+        if (french) text("pour danser SECOUER le téléphone ", width / 2, height * 6.8 / 8);
         else text("To dance: SHAKE the smartphone ", width / 2, height * 6.8 / 8);
         marcherue.display(width / 2, height * 6 / 8, animSize, animSize);
     }
@@ -293,7 +290,7 @@ function scenario4() {
 function scenario5() {
     push()
     textSize(dialogSize);
-   // image(video4, width / 2, height / 2, width, height)
+    // image(video4, width / 2, height / 2, width, height)
     /*
     La boule séduction est composée de plusieurs boules,
      une grosse au milieu et d'autre plus petites autour
@@ -309,10 +306,9 @@ function scenario5() {
         amour.setVolume(0.7); // TODO baisser le volume de ce son manuellement
         debut.stop();
     }
-    if (millis() - chrono < 6000){
+    if (millis() - chrono < 6000) {
         image(video5, width / 2, height / 2, width, height)
-    }
-    else{
+    } else {
         image(video6, width / 2, height / 2, width, height)
     }
     if (millis() - chrono < 6000) {
@@ -325,12 +321,12 @@ function scenario5() {
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
         textAlign(CENTER, CENTER);
-        if (french) text("Une personne de la soirée arrive vers moi, et me propose de danser ", width / 4, height * 6.8 / 8, width/2);
-        else text("Someone at the party comes to me, and proposes me to dance ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Une personne de la soirée arrive vers moi, et me propose de danser ", width / 4, height * 6.8 / 8, width / 2);
+        else text("Someone at the party comes to me, and proposes me to dance ", width / 4, height * 6.8 / 8, width / 2);
     }
 
     if (millis() - chrono > 7000) {
-         boule4();
+        boule4();
         boulea();
         bouleb();
         boulec();
@@ -347,7 +343,7 @@ function scenario5() {
         textAlign(RIGHT, CENTER);
         if (french) text("Par politesse j’accepte de danser avec lui ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
         else text("Out of courtesy I agree to dance with him ", width * 1 / 12, height * 6.8 / 8, width * 4 / 12);
-         fairechoix.display(width / 2, height * 6.8 / 8, animSize*2, animSize);
+        fairechoix.display(width / 2, height * 6.8 / 8, animSize * 2, animSize);
 
     }
 
@@ -356,7 +352,7 @@ function scenario5() {
         textAlign(LEFT, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 8000) / 10);
         fill(255, 255, 255, (millis() - chrono - 8000) / 10);
-        if(french) text("Je lui propose plutôt de discuter autour d’un verre ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+        if (french) text("Je lui propose plutôt de discuter autour d’un verre ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
         else text("I suggest instead to discuss over a drink ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
     }
 
@@ -367,8 +363,8 @@ function scenario5() {
 function scenario6() {
     push()
     textSize(dialogSize);
-   // background(0);
-     image(video7, width / 2, height / 2, width, height)
+    // background(0);
+    image(video7, width / 2, height / 2, width, height)
     if (millis() - chrono > 1) {
         if (!peur2_playing) peur2.play();
         peur2_playing = true;
@@ -385,15 +381,15 @@ function scenario6() {
         boulec();
         bouled();
         if (millis() - chrono < 10000)
-        fete.stop();
-            //fete.stop();
-            stroke(255, 255, 255, (millis() - chrono) / 10);
+            fete.stop();
+        //fete.stop();
+        stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
         textAlign(CENTER, CENTER);
 
-        if (french) text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas.", width / 4, height * 6.8 / 8, width/2);
-        else text("He tells me something but sound level of the party increases and I do not hear him.", width / 4, height * 6.8 / 8, width/2);
-  amour.setVolume(0.5); // // TODO baisser le volume de ce son manuellement
+        if (french) text("Il me dit quelque chose mais le volume sonore de la fête augmente et je ne l’entend pas.", width / 4, height * 6.8 / 8, width / 2);
+        else text("He tells me something but sound level of the party increases and I do not hear him.", width / 4, height * 6.8 / 8, width / 2);
+        amour.setVolume(0.5); // // TODO baisser le volume de ce son manuellement
     }
 
 
@@ -411,8 +407,8 @@ function scenario6() {
             stroke(255, 255, 255, (millis() - chrono - 5000) / 10);
         fill(255, 255, 255, (millis() - chrono - 5000) / 10);
         textAlign(CENTER, CENTER);
-        if (french) text("Il m’attire vers une pièce à l’étage.\n Je me laisse entraîner. ", width / 4, height * 6.8 / 8, width/2);
-        else text("He attracts me to a room upstairs.\n  I let myself be dragged into it. ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Il m’attire vers une pièce à l’étage.\n Je me laisse entraîner. ", width / 4, height * 6.8 / 8, width / 2);
+        else text("He attracts me to a room upstairs.\n  I let myself be dragged into it. ", width / 4, height * 6.8 / 8, width / 2);
 
     }
 
@@ -423,18 +419,18 @@ function scenario6() {
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
         fill(255, 255, 255, (millis() - chrono - 10000) / 10);
-        if (french) text("On entre dans une chambre, il ferme la porte derrière nous. Je suis un peu mal à l’aise.", width / 4, height * 6.8 / 8, width/2);
-        else text("We enter a room, he closes the door behind us. I am a little uncomfortable.", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("On entre dans une chambre, il ferme la porte derrière nous. Je suis un peu mal à l’aise.", width / 4, height * 6.8 / 8, width / 2);
+        else text("We enter a room, he closes the door behind us. I am a little uncomfortable.", width / 4, height * 6.8 / 8, width / 2);
 
     }
 
-    if ((maintenant > 16000) && (maintenant <20000)) {
+    if ((maintenant > 16000) && (maintenant < 20000)) {
         boule5();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 16000) / 10);
         fill(255, 255, 255, (millis() - chrono - 16000) / 10);
-        if (french) text("Que dois-je faire ? \n Il tente de m’embrasser. ", width / 4, height * 6.8 / 8, width/2);
-        else text("What should I do ? He tries to kiss me. ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Que dois-je faire ? \n Il tente de m’embrasser. ", width / 4, height * 6.8 / 8, width / 2);
+        else text("What should I do ? He tries to kiss me. ", width / 4, height * 6.8 / 8, width / 2);
 
     }
 
@@ -453,10 +449,10 @@ function scenario6() {
             stroke(255, 255, 255, (millis() - chrono - 22000) / 10);
             fill(255, 255, 255, (millis() - chrono - 22000) / 10);
             textAlign(LEFT, CENTER);
-            if(french) text("Je suis surprise mais le laisse faire ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
+            if (french) text("Je suis surprise mais le laisse faire ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
             else text("I'm surprised but let him go ", width * 7 / 12, height * 6.8 / 8, width * 4 / 12);
         }
-        if (millis() - chrono > 21000)  fairechoix.display(width / 2, height * 6.8 / 8, animSize*2, animSize);
+        if (millis() - chrono > 21000) fairechoix.display(width / 2, height * 6.8 / 8, animSize * 2, animSize);
 
 
 
@@ -481,19 +477,19 @@ function scenario7() {
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
         textAlign(CENTER, CENTER);
-        if (french) text("Il est insistant et commence à avoir des gestes déplacés. ", width / 4, height * 6.8 / 8, width/2);
-        else text("He is insistent and begins to have inappropriate gestures. ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Il est insistant et commence à avoir des gestes déplacés. ", width / 4, height * 6.8 / 8, width / 2);
+        else text("He is insistent and begins to have inappropriate gestures. ", width / 4, height * 6.8 / 8, width / 2);
     }
     if (millis() - chrono > 8000) {
 
-        textAlign(CENTER,CENTER)
+        textAlign(CENTER, CENTER)
         stroke(255)
         fill(255)
-        if (french) text("pour se débattre SECOUER VIGOUREUSEMENT le téléphone ", width / 4, height * 6.8/ 8, width/2);
-        else text("To struggle: SHAKE VIGOROUSLY the smartphone ", width / 4, height * 6.8/ 8, width/2);
+        if (french) text("pour se débattre SECOUER VIGOUREUSEMENT le téléphone ", width / 4, height * 6.8 / 8, width / 2);
+        else text("To struggle: SHAKE VIGOROUSLY the smartphone ", width / 4, height * 6.8 / 8, width / 2);
 
     }
-    if (millis() - chrono > 8000) agression.display(width / 2, height * 6/ 8, animSize, animSize);
+    if (millis() - chrono > 8000) agression.display(width / 2, height * 6 / 8, animSize, animSize);
     pop()
 }
 
@@ -502,13 +498,13 @@ function scenario8() {
     push()
 
     textSize(dialogSize);
-   // background(0);
+    // background(0);
     if (millis() - chrono < 5000) {
-         image(video9, width / 2, height / 2, width, height)
+        image(video9, width / 2, height / 2, width, height)
         if (!fin1_playing) fin1.play();
         fin1_playing = true;
         peur2.setVolume(0.7); // TODO baisser le volume de ce son manuellement
-heatbeat.stop();
+        heatbeat.stop();
     }
     if (millis() - chrono > 5000) {
         image(video10, width / 2, height / 2, width, height)
@@ -520,8 +516,8 @@ heatbeat.stop();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
-        if(french) text("Mais il continue, il est allé trop loin… ", width / 4, height * 6.8 / 8, width/2);
-        else text("But he continues, he went too far… ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("Mais il continue, il est allé trop loin… ", width / 4, height * 6.8 / 8, width / 2);
+        else text("But he continues, he went too far… ", width / 4, height * 6.8 / 8, width / 2);
     }
 
     if (millis() - chrono > 5000) {
@@ -534,10 +530,10 @@ heatbeat.stop();
         if (millis() - chrono > 8000) {
             image(video11, width / 2, height / 2, width, height)
             if (french) text("Cacher le capteur de luminosité du téléphone ", width / 2, height * 6.8 / 8);
-            else text("Hide the light sensor of the smartphone ", width / 2, height * 6.8/ 8);
+            else text("Hide the light sensor of the smartphone ", width / 2, height * 6.8 / 8);
         }
-        if (millis() - chrono > 8000) lumiere.display(width / 2, height * 6 / 8, animSize*3/4, animSize*1.5);
-         boule6();
+        if (millis() - chrono > 8000) lumiere.display(width / 2, height * 6 / 8, animSize * 3 / 4, animSize * 1.5);
+        boule6();
     }
 
     pop()
@@ -550,14 +546,14 @@ function scenario9() {
     //background(0);
 
     var maintenant = millis() - chrono;
-     if(maintenant < 18000){
-         image(video12, width / 2, height / 2, width, height)
+    if (maintenant < 18000) {
+        image(video12, width / 2, height / 2, width, height)
     }
 
 
     if ((maintenant > 0) && (maintenant < 4000)) {
-      if (!fin2_playing) fin2.play();
-      fin2_playing = true;
+        if (!fin2_playing) fin2.play();
+        fin2_playing = true;
         boule7();
     }
     if ((maintenant > 4000) && (maintenant < 8000)) {
@@ -584,8 +580,8 @@ function scenario9() {
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 18000) / 10);
         fill(255, 255, 255, (millis() - chrono - 18000) / 10);
-        if (french) text("62 000 femmes sont victimes, chaque année, de viol et de tentative de viol. ", width / 4, height * 6.8 / 8, width/2);
-        else text("62,000 women are victims of rape and attempt of sexual assault each year. ", width / 4, height * 6.8 / 8, width/2);
+        if (french) text("62 000 femmes sont victimes, chaque année, de viol et de tentative de viol. ", width / 4, height * 6.8 / 8, width / 2);
+        else text("62,000 women are victims of rape and attempt of sexual assault each year. ", width / 4, height * 6.8 / 8, width / 2);
     }
 
     pop()
