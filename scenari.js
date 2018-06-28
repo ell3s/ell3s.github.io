@@ -114,13 +114,18 @@ function scenario2() {
         boule0();
 
     }
+
+    if(maintenant> 4000){
+        video3.loop()
+        video2.stop()
+    }
     if ((maintenant > 4000) && (maintenant < 8000)) {
 
         image(video3, width / 2, height / 2, width, height)
 
         if (millis() - chrono > 4000) {
 
-            if (!marche_playing) marche.loop();
+            if (!marche_playing) marche.play();
             marche_playing = true;
             if (!ruepeur_playing) ruepeur.loop(); // TODO baisser le volume de ce son manuellement
             ruepeur_playing = true;
@@ -130,7 +135,7 @@ function scenario2() {
 
         }
 
-        porte.stop();
+       // porte.stop();
 
 
         boule1();
@@ -184,7 +189,7 @@ function scenario3() {
         run_playing = true;
     }
     if (millis() - chrono < 6000) {
-        marche.stop();
+        //marche.stop();
 
         debut.setVolume(1); // TODO baisser le volume de ce son manuellement
         stroke(255, 255, 255, (millis() - chrono) / 10);
@@ -232,7 +237,7 @@ function scenario4() {
      */
 
     if (millis() - chrono < 5000) {
-        porte.stop();
+        //porte.stop();
         if (!fete_playing) fete.loop();
         fete_playing = true;
     }
@@ -255,7 +260,7 @@ function scenario4() {
         //bouler();
         //boulet();
         debut.setVolume(0.5);
-        ruepeur.stop();
+        //ruepeur.stop();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 1) / 10);
         fill(255, 255, 255, (millis() - chrono - 1) / 10);
@@ -304,7 +309,7 @@ function scenario5() {
         if (!amour_playing) amour.loop();
         amour_playing = true;
         amour.setVolume(0.7); // TODO baisser le volume de ce son manuellement
-        debut.stop();
+        debut.setVolume(0);
     }
     if (millis() - chrono < 6000) {
         image(video5, width / 2, height / 2, width, height)
@@ -335,7 +340,7 @@ function scenario5() {
 
             if (!amour_playing) amour.play();
             amour_playing = true;
-            debut.stop();
+            debut.setVolume(0);
         }
 
         stroke(255, 255, 255, (millis() - chrono - 7000) / 10);
@@ -381,7 +386,7 @@ function scenario6() {
         boulec();
         bouled();
         if (millis() - chrono < 10000)
-            fete.stop();
+            fete.setVolume(0);
         //fete.stop();
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
@@ -414,7 +419,7 @@ function scenario6() {
 
     if ((maintenant > 10000) && (maintenant < 16000)) {
         peur2.setVolume(1.3); // TODO augmenter le volume de ce son manuellement
-        amour.stop();
+        amour.setVolume(0);
         boule5();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
@@ -504,7 +509,7 @@ function scenario8() {
         if (!fin1_playing) fin1.play();
         fin1_playing = true;
         peur2.setVolume(0.7); // TODO baisser le volume de ce son manuellement
-        heatbeat.stop();
+        heatbeat.setVolume(0);
     }
     if (millis() - chrono > 5000) {
         image(video10, width / 2, height / 2, width, height)

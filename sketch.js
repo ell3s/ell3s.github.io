@@ -808,23 +808,23 @@ function draw() {
 
             moment_derniere_action = millis();
             avancement = 10
-            marche.stop();
-            verouiller.stop();
-            heatbeat.stop();
-            fin1.stop();
-            fin2.stop();
-            reconstruction.stop();
-            ruepeur.stop();
-            peur2.stop();
-            debut.stop();
-            hit.stop();
-            run.stop();
-            porte.stop();
-            habits.stop();
-            fete.stop();
-            fete2.stop();
-            agres.stop();
-            amour.stop();
+            marche.setVolume(0)
+            verouiller.setVolume(0)
+            heatbeat.setVolume(0)
+            fin1.setVolume(0)
+            fin2.setVolume(0)
+            reconstruction.setVolume(0)
+            ruepeur.setVolume(0)
+            peur2.setVolume(0)
+            debut.setVolume(0)
+            hit.setVolume(0)
+            run.setVolume(0)
+            porte.setVolume(0)
+            habits.setVolume(0)
+            fete.setVolume(0)
+            fete2.setVolume(0)
+            agres.setVolume(0)
+            amour.setVolume(0)
 
 
             hit_playing = false;
