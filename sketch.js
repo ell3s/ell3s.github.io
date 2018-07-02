@@ -304,6 +304,9 @@ function draw() {
         if (buttonstart.isPressed) {
             avancement = 0
             video1.loop()
+            derniere_action = 0;
+            /*
+            video1.loop()
             video2.loop();
             video3.loop();
             // video4.loop();
@@ -315,7 +318,7 @@ function draw() {
             video10.loop();
             video11.loop();
             video12.loop();
-            video13.loop();
+            video13.loop();*/
 
             chrono = millis()
         }
@@ -345,6 +348,8 @@ function draw() {
             derniere_action = 0;
             chrono = millis();
             hit.stop();
+           // video1.stop()
+            video2.loop()
         }
 
     }
@@ -406,6 +411,7 @@ function draw() {
                 choix_ok = -1;
                 video1.stop()
                 video2.loop()
+                video3.loop()
 
             }
 
@@ -430,6 +436,7 @@ function draw() {
                 choix_ok = -1;
                 video1.stop()
                 video2.loop()
+                video3.loop()
 
             }
         }
@@ -539,7 +546,9 @@ function draw() {
                 chrono = millis();
                 avancement = 4;
                 run.stop();
+                video3.stop()
                 video4.loop()
+                video5.loop()
             }
 
 
@@ -568,6 +577,8 @@ function draw() {
                 avancement = 5;
                 derniere_action = 0;
                 chrono = millis();
+                video4.stop();
+                video6.loop();
             }
 
             if (key == '7') evenement(3)
@@ -611,6 +622,9 @@ function draw() {
                     derniere_action = 0;
                     chrono = millis();
                     choix_ok = -1;
+                    video5.stop()
+                    video6.stop()
+                    video7.loop()
                 }
             } else if (derniere_action == 2) {
                 if (choix_ok == -1) {
@@ -629,6 +643,9 @@ function draw() {
                     derniere_action = 0;
                     chrono = millis();
                     choix_ok = -1;
+                    video5.stop()
+                    video6.stop()
+                    video7.loop()
                 }
             }
             if (key == '7') evenement(1)
@@ -784,6 +801,9 @@ function draw() {
             if (key == 'l') {
                 evenement(5)
             }
+            if(mouseIsPressed){
+                evenement(5)
+            }
 
             textAlign(LEFT, CENTER)
             textSize(dialogSize);
@@ -843,6 +863,24 @@ function draw() {
             fete2.setVolume(0)
             agres.setVolume(0)
             amour.setVolume(0)
+
+             marche.stop()
+            verouiller.stop()
+            heatbeat.stop()
+            fin1.stop()
+            fin2.stop()
+            reconstruction.stop()
+            ruepeur.stop()
+            peur2.stop()
+            debut.stop()
+            hit.stop()
+            run.stop()
+            porte.stop()
+            habits.stop()
+            fete.stop()
+            fete2.stop()
+            agres.stop()
+            amour.stop()
 
 
             hit_playing = false;

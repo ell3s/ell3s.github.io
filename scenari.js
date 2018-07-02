@@ -1,4 +1,8 @@
 function scenario0() {
+
+    if(millis() - chrono < 100){
+        video1.loop();
+    }
     push()
     image(video1, width / 2, height / 2, width, height)
     textAlign(CENTER, CENTER);
@@ -123,7 +127,7 @@ function scenario2() {
         if (french) text("Je suis prête ! J’y vais ! ", width / 2, height * 6.8 / 8);
         else text("I’m ready! Let’s go! ", width / 2, height * 6.8 / 8);
 
-        //video3.loop();
+
         boule0();
 
     }
@@ -322,6 +326,11 @@ function scenario4() {
 function scenario5() {
     push()
     textSize(dialogSize);
+    if (millis() - chrono < 6000) {
+        image(video5, width / 2, height / 2, width, height)
+    } else {
+        image(video6, width / 2, height / 2, width, height)
+    }
     // image(video4, width / 2, height / 2, width, height)
     /*
     La boule séduction est composée de plusieurs boules,
@@ -340,11 +349,7 @@ function scenario5() {
             debut.setVolume(0);
         }
     }
-    if (millis() - chrono < 6000) {
-        image(video5, width / 2, height / 2, width, height)
-    } else {
-        image(video6, width / 2, height / 2, width, height)
-    }
+
     if (millis() - chrono < 6000) {
 
         boule4();
@@ -406,12 +411,12 @@ function scenario6() {
     if (maintenant > 1 && maintenant < 10000) {
         if (!peur2_playing) {
             peur2.play();
-            peut2.setVolume(1)
+            peur2.setVolume(1)
             peur2_playing = true;
         }
         if (!heatbeat_playing) {
             heatbeat.loop();
-            heartbeat.setVolume(1)
+            heatbeat.setVolume(1)
             heatbeat_playing = true;
             amour.setVolume(0.2); // // TODO baisser le volume de ce son manuellement
         }
@@ -421,7 +426,7 @@ function scenario6() {
         fete.setVolume(0);
         //fete.stop();
         debut.setVolume(0)
-        amour.setVolume(0);
+        //amour.setVolume(0);
         //  amour.stop();
     }
 
@@ -561,7 +566,7 @@ function scenario8() {
         image(video9, width / 2, height / 2, width, height)
         if (!fin1_playing) {
             fin1.play();
-            fin.setVolume(1)
+            fin1.setVolume(1)
             fin1_playing = true;
             peur2.setVolume(0.7); // TODO baisser le volume de ce son manuellement
             heatbeat.setVolume(0);
