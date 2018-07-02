@@ -143,7 +143,7 @@ function preload() {
     verouiller = loadSound("assets/verouiller.mp3");
     heatbeat = loadSound("assets/heatbeat.mp3");
 
-    logo = loadImage("assets/images/logoelles.png")
+
 
 
 
@@ -198,7 +198,7 @@ function setup() {
     textAlign(CENTER, BOTTOM);
     textSize(dialogSize);
     imageMode(CENTER);
-
+    logo = loadImage("assets/images/logoelles.png")
     //Chargement de nos animations
     lumiere = new Animation("assets/anim_lumiere/lumiere_", 120);
     deverouiller = new Animation("assets/anim_deverouiller/deverrouiller_", 48);
