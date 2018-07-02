@@ -123,7 +123,7 @@ function scenario2() {
         if (french) text("Je suis prête ! J’y vais ! ", width / 2, height * 6.8 / 8);
         else text("I’m ready! Let’s go! ", width / 2, height * 6.8 / 8);
 
-        video3.loop();
+        //video3.loop();
         boule0();
 
     }

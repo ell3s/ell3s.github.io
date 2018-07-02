@@ -304,7 +304,7 @@ function draw() {
         if (buttonstart.isPressed) {
             avancement = 0
             video1.loop()
-            video1.loop();
+            video2.loop();
             video3.loop();
             // video4.loop();
             video5.loop();
