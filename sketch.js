@@ -237,6 +237,20 @@ function setup() {
     video12.hide();
     video13.hide();
 
+    video1.elt.setAttribute('playsinline','')
+    video2.elt.setAttribute('playsinline','')
+    video3.elt.setAttribute('playsinline','')
+    video4.elt.setAttribute('playsinline','')
+    video5.elt.setAttribute('playsinline','')
+    video6.elt.setAttribute('playsinline','')
+    video7.elt.setAttribute('playsinline','')
+    video8.elt.setAttribute('playsinline','')
+    video9.elt.setAttribute('playsinline','')
+    video10.elt.setAttribute('playsinline','')
+    video11.elt.setAttribute('playsinline','')
+    video12.elt.setAttribute('playsinline','')
+    video13.elt.setAttribute('playsinline','')
+
     console.log(deviceOrientation)
 
     buttonfr = new Button("Français", "French", 1)
