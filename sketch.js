@@ -38,7 +38,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = -1;
+var avancement = 5;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -248,10 +248,10 @@ function setup() {
 
     console.log(deviceOrientation)
 
-    buttonfr = new Button("Français", "French")
-    buttoneng = new Button("Anglais", "English")
-    buttonstart = new Button("Cliquer pour démarrer", "Click to start")
-    buttonhome = new Button("Retour", "Home")
+    buttonfr = new Button("Français", "French", 1)
+    buttoneng = new Button("Anglais", "English",1)
+    buttonstart = new Button("Cliquer pour démarrer", "Click to start",3)
+    buttonhome = new Button("Retour", "Home",3)
 
 
 }

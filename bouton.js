@@ -2,7 +2,7 @@
 Ce programme permet de récuperer les GIFs qui seront appelés dans le programme sc_nario.
  */
 
-function Button(txtfr, txteng) {
+function Button(txtfr, txteng, strokeW) {
     this.txtfr = txtfr;
     this.txteng = txteng;
     this.isPressed = false;
@@ -10,6 +10,7 @@ function Button(txtfr, txteng) {
     this.ypos;
     this.xsize
     this.ysize
+    this.strokeW = strokeW
 
     this.display = function (xpos, ypos) {
         this.xpos = xpos
@@ -18,7 +19,7 @@ function Button(txtfr, txteng) {
         push()
         rectMode(CENTER)
         noFill()
-        strokeWeight(3)
+        strokeWeight(this.strokeW)
         stroke(255)
 
         if (french) this.xsize = textWidth(this.txtfr)+20;

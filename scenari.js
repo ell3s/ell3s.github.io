@@ -369,8 +369,9 @@ function scenario6() {
     push()
     textSize(dialogSize);
     // background(0);
+     var maintenant = millis() - chrono;
     image(video7, width / 2, height / 2, width, height)
-    if (millis() - chrono > 1) {
+    if (maintenant > 1 && maintenant < 10000) {
         if (!peur2_playing) peur2.play();
         peur2_playing = true;
         if (!heatbeat_playing) heatbeat.loop();
@@ -378,7 +379,14 @@ function scenario6() {
 
         amour.setVolume(0.2); // // TODO baisser le volume de ce son manuellement
     }
-    var maintenant = millis() - chrono;
+    else{
+    fete.setVolume(0);
+    //fete.stop();
+    debut.setVolume(0)
+         amour.setVolume(0);
+      //  amour.stop();
+    }
+
     if ((maintenant > 0) && (maintenant < 5000)) {
         boule4();
         boulea();
@@ -386,7 +394,7 @@ function scenario6() {
         boulec();
         bouled();
         if (millis() - chrono < 10000)
-            fete.setVolume(0);
+           // fete.setVolume(0);
         //fete.stop();
         stroke(255, 255, 255, (millis() - chrono) / 10);
         fill(255, 255, 255, (millis() - chrono) / 10);
@@ -400,7 +408,7 @@ function scenario6() {
 
 
 
-    var maintenant = millis() - chrono;
+    //var maintenant = millis() - chrono;
     if ((maintenant > 5000) && (maintenant < 10000)) {
         boule4();
         boulea();
@@ -419,7 +427,7 @@ function scenario6() {
 
     if ((maintenant > 10000) && (maintenant < 16000)) {
         peur2.setVolume(1.3); // TODO augmenter le volume de ce son manuellement
-        amour.setVolume(0);
+
         boule5();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 10000) / 10);
@@ -430,6 +438,8 @@ function scenario6() {
     }
 
     if ((maintenant > 16000) && (maintenant < 20000)) {
+        amour.setVolume(0);
+
         boule5();
         textAlign(CENTER, CENTER);
         stroke(255, 255, 255, (millis() - chrono - 16000) / 10);
@@ -441,6 +451,8 @@ function scenario6() {
 
 
     if (maintenant > 20000) {
+        amour.setVolume(0);
+
         boule5();
         if (millis() - chrono > 21000) {
             stroke(255, 255, 255, (millis() - chrono - 21000) / 10);
