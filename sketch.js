@@ -972,11 +972,11 @@ function draw() {
 function mousePressed(){
      video1.loop();
     video3.loop();
-    video4.loop();
+   // video4.loop();
     video5.loop();
-    video6.loop();
+   // video6.loop();
     video7.loop();
-    video8.loop();
+   // video8.loop();
     video9.loop();
     video10.loop();
     video11.loop();
