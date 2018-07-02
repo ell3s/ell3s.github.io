@@ -240,9 +240,9 @@ function setup() {
     console.log(deviceOrientation)
 
     buttonfr = new Button("Français", "French", 1)
-    buttoneng = new Button("Anglais", "English",1)
-    buttonstart = new Button("Cliquer pour démarrer", "Click to start",3)
-    buttonhome = new Button("Retour", "Home",3)
+    buttoneng = new Button("Anglais", "English", 1)
+    buttonstart = new Button("Cliquer pour démarrer", "Click to start", 3)
+    buttonhome = new Button("Retour", "Home", 3)
 
 
 }
@@ -290,6 +290,19 @@ function draw() {
         if (buttonstart.isPressed) {
             avancement = 0
             video1.loop()
+            video1.loop();
+            video3.loop();
+            // video4.loop();
+            video5.loop();
+            // video6.loop();
+            video7.loop();
+            // video8.loop();
+            video9.loop();
+            video10.loop();
+            video11.loop();
+            video12.loop();
+            video13.loop();
+
             chrono = millis()
         }
         pop()
@@ -859,13 +872,13 @@ function draw() {
             fill(255, 255, 255);
             fill(255, 255, 255);
             textStyle(BOLD);
-            textSize(dialogSize*0.8);
+            textSize(dialogSize * 0.8);
             text("Merci à Bérenger RECOULES", width / 4, height * 1 / 8, width / 2)
             textStyle(NORMAL);
             textSize(dialogSize * 0.7);
             text("d'avoir participer à la conception de notre projet et de nous avoir aidé à le réaliser", width / 4, height * 1.5 / 8, width / 2)
             textStyle(BOLD);
-            textSize(dialogSize*0.8);
+            textSize(dialogSize * 0.8);
             text("Merci à Pierre COMMENGE", width / 4, height * 2.7 / 8, width / 2)
             textStyle(NORMAL);
             textSize(dialogSize * 0.7);
@@ -969,22 +982,6 @@ function draw() {
     mouseIsPressed = false
 }
 
-function mousePressed(){
-     video1.loop();
-    video3.loop();
-   // video4.loop();
-    video5.loop();
-   // video6.loop();
-    video7.loop();
-   // video8.loop();
-    video9.loop();
-    video10.loop();
-    video11.loop();
-    video12.loop();
-    video13.loop();
-
-
-}
 
 
 
