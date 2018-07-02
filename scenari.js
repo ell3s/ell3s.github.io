@@ -130,7 +130,7 @@ function scenario2() {
 
     if (maintenant > 4000) {
         video3.loop()
-        video2.stop()
+       // video2.stop()
     }
     if ((maintenant > 4000) && (maintenant < 8000)) {
 
