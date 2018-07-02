@@ -236,15 +236,6 @@ function setup() {
     video11.hide();
     video12.hide();
     video13.hide();
-    video1.loop();
-    video3.loop();
-    video5.loop();
-    video7.loop();
-    video9.loop();
-    video10.loop();
-    video11.loop();
-    video12.loop();
-    video13.loop();
 
     console.log(deviceOrientation)
 
@@ -620,11 +611,11 @@ function draw() {
             if (DEBUG) text("appuyer sur 7 ou 8 pour passer à l'étape suivante", 20, 140)
 
             if (deviceOrientation === 'portrait') {
-                if (rotationX < -45) evenement(1)
-                if (rotationX > 45) evenement(2)
+                if (rotationY < -45) evenement(1)
+                if (rotationY > 45) evenement(2)
             } else {
-                if (rotationY < -45) evenement(2)
-                if (rotationY > 45) evenement(1)
+                if (rotationX < -45) evenement(2)
+                if (rotationX > 45) evenement(1)
             }
 
             if (mouseIsPressed && mouseX < width / 2) {
@@ -978,6 +969,22 @@ function draw() {
     mouseIsPressed = false
 }
 
+function mousePressed(){
+     video1.loop();
+    video3.loop();
+    video4.loop();
+    video5.loop();
+    video6.loop();
+    video7.loop();
+    video8.loop();
+    video9.loop();
+    video10.loop();
+    video11.loop();
+    video12.loop();
+    video13.loop();
+
+
+}
 
 
 

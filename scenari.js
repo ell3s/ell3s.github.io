@@ -331,6 +331,7 @@ function scenario5() {
     }
 
     if (millis() - chrono > 7000) {
+         image(video6, width / 2, height / 2, width, height)
         boule4();
         boulea();
         bouleb();
