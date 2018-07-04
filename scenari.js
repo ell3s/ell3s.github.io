@@ -362,7 +362,7 @@ function scenario4() {
 function scenario5() {
     push()
     textSize(dialogSize);
-    if (millis() - chrono < 7200) {
+    if (millis() - chrono <= 7200) {
         image(video5, width / 2, height / 2, width, height)
     } else if (millis() - chrono > 7200 && millis() - chrono < 14200) {
         if (video6_playing == false) {
@@ -458,10 +458,10 @@ function scenario6() {
     // background(0);
     var maintenant = millis() - chrono;
     if (video7_playing == false) {
-            video7.time(0);
-            video7.play();
-            video7_playing = true;
-        }
+        video7.time(0);
+        video7.play();
+        video7_playing = true;
+    }
 
     image(video7, width / 2, height / 2, width, height)
     if (maintenant > 1 && maintenant < 10000) {
@@ -623,12 +623,12 @@ function scenario8() {
 
     textSize(dialogSize);
     // background(0);
-    if (millis() - chrono < 5000) {
-          if (video9_playing == false) {
-        video9.time(0)
-        video9.loop();
-        video9_playing = false;
-    }
+    if (millis() - chrono <= 5000) {
+        if (video9_playing == false) {
+            video9.time(0)
+            video9.loop();
+            video9_playing = false;
+        }
         image(video9, width / 2, height / 2, width, height)
         if (!fin1_playing) {
             fin1.play();
@@ -638,7 +638,7 @@ function scenario8() {
             heatbeat.setVolume(0);
         }
     }
-    if (millis() - chrono > 5000 && millis() - chrono < 8000) {
+    if (millis() - chrono > 5000 && millis() - chrono <= 8000) {
         if (video10_playing == false) {
             video10.time(0)
             video10.play()
@@ -646,7 +646,7 @@ function scenario8() {
         }
         image(video10, width / 2, height / 2, width, height)
 
-    } else if (millis() - chrono > 8000) {
+    } else if (millis() - chrono >= 8000) {
         if (video11_playing == false) {
             video11.time(0)
             video11.play()

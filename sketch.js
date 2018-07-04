@@ -1,5 +1,3 @@
-
-
 // mentioner que c'est developpé pour chrome sous android
 
 // vérifier sous safari mais ne pas trop faire de changements ou pusher un tag avant.
@@ -144,7 +142,9 @@ function windowResized() {
 
 
 function preload() {
-     logo = loadImage("assets/images/logoelles.png")
+    logo = loadImage("assets/images/logoelles.png")
+
+
 }
 
 function setup() {
@@ -194,24 +194,60 @@ function setup() {
     capture.size(w, h);
     capture.hide();
 
+
     // sounds
-    hit = loadSound("assets/vibeurtelephone.mp3", function(){loading +=1});
-    run = loadSound("assets/run.mp3", function(){loading +=1});
-    porte = loadSound("assets/porte2.mp3", function(){loading +=1});
-    habits = loadSound("assets/habits.mp3", function(){loading +=1});
-    marche = loadSound("assets/marche3.mp3", function(){loading +=1});
-    fete = loadSound("assets/fete2.mp3", function(){loading +=1});
-    fete2 = loadSound("assets/fete2_lop.mp3", function(){loading +=1});
-    agres = loadSound("assets/agression.mp3", function(){loading +=1});
-    debut = loadSound("assets/debut.mp3", function(){loading +=1});
-    ruepeur = loadSound("assets/ruepeur.mp3", function(){loading +=1});
-    amour = loadSound("assets/amour.mp3", function(){loading +=1});
-    peur2 = loadSound("assets/peur2.mp3", function(){loading +=1});
-    fin2 = loadSound("assets/fin2.mp3", function(){loading +=1});
-    fin1 = loadSound("assets/fin1.mp3", function(){loading +=1});
-    reconstruction = loadSound("assets/reconstruction.mp3", function(){loading +=1});
-    verouiller = loadSound("assets/verouiller.mp3", function(){loading +=1});
-    heatbeat = loadSound("assets/heatbeat.mp3", function(){loading +=1});
+    hit = loadSound("assets/vibeurtelephone.mp3", function () {
+        loading += 1
+    });
+    run = loadSound("assets/run.mp3", function () {
+        loading += 1
+    });
+    porte = loadSound("assets/porte2.mp3", function () {
+        loading += 1
+    });
+    habits = loadSound("assets/habits.mp3", function () {
+        loading += 1
+    });
+    marche = loadSound("assets/marche3.mp3", function () {
+        loading += 1
+    });
+    fete = loadSound("assets/fete2.mp3", function () {
+        loading += 1
+    });
+    fete2 = loadSound("assets/fete2_lop.mp3", function () {
+        loading += 1
+    });
+    agres = loadSound("assets/agression.mp3", function () {
+        loading += 1
+    });
+    debut = loadSound("assets/debut.mp3", function () {
+        loading += 1
+    });
+    ruepeur = loadSound("assets/ruepeur.mp3", function () {
+        loading += 1
+    });
+    amour = loadSound("assets/amour.mp3", function () {
+        loading += 1
+    });
+    peur2 = loadSound("assets/peur2.mp3", function () {
+        loading += 1
+    });
+    fin2 = loadSound("assets/fin2.mp3", function () {
+        loading += 1
+    });
+    fin1 = loadSound("assets/fin1.mp3", function () {
+        loading += 1
+    });
+    reconstruction = loadSound("assets/reconstruction.mp3", function () {
+        loading += 1
+    });
+    verouiller = loadSound("assets/verouiller.mp3", function () {
+        loading += 1
+    });
+    heatbeat = loadSound("assets/heatbeat.mp3", function () {
+        loading += 1
+    });
+
 
     //Chargement de nos animations
     lumiere = new Animation("assets/anim_lumiere/lumiere_", 120);
@@ -222,18 +258,40 @@ function setup() {
     marcherue = new Animation("assets/anim_marche/marcherrue_", 32);
 
     // videos
-    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4', function(){loading +=1});
-    video2 = createVideo('assets/videos/TRANSITION_1.mp4', function(){loading +=1});
-    video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4', function(){loading +=1});
-    video4 = createVideo('assets/videos/TRANSITION_2.mp4', function(){loading +=1});
-    video5 = createVideo('assets/videos/PARTIE_3_boucle.mp4', function(){loading +=1});
-    video6 = createVideo('assets/videos/TRANSITION_3.mp4', function(){loading +=1});
-    video7 = createVideo('assets/videos/PARTIE_4_boucle.mp4', function(){loading +=1});
+    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4', function () {
+        loading += 1
+    });
+    video2 = createVideo('assets/videos/TRANSITION_1.mp4', function () {
+        loading += 1
+    });
+    video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4', function () {
+        loading += 1
+    });
+    video4 = createVideo('assets/videos/TRANSITION_2.mp4', function () {
+        loading += 1
+    });
+    video5 = createVideo('assets/videos/PARTIE_3_boucle.mp4', function () {
+        loading += 1
+    });
+    video6 = createVideo('assets/videos/TRANSITION_3.mp4', function () {
+        loading += 1
+    });
+    video7 = createVideo('assets/videos/PARTIE_4_boucle.mp4', function () {
+        loading += 1
+    });
     // video8 = createVideo('assets/videos/TRANSITION_4.mp4');
-    video9 = createVideo('assets/videos/TRANSITION_5.mp4', function(){loading +=1});
-    video10 = createVideo('assets/videos/TRANSITION_6.mp4', function(){loading +=1});
-    video11 = createVideo('assets/videos/TRANSITION_7.mp4', function(){loading +=1});
-    video12 = createVideo('assets/videos/PARTIE_8_boucle.mp4', function(){loading +=1});
+    video9 = createVideo('assets/videos/TRANSITION_5.mp4', function () {
+        loading += 1
+    });
+    video10 = createVideo('assets/videos/TRANSITION_6.mp4', function () {
+        loading += 1
+    });
+    video11 = createVideo('assets/videos/TRANSITION_7.mp4', function () {
+        loading += 1
+    });
+    video12 = createVideo('assets/videos/PARTIE_8_boucle.mp4', function () {
+        loading += 1
+    });
     // video13 = createVideo('assets/videos/TRANSITION_8.mp4');
 
 
@@ -280,12 +338,12 @@ function setup() {
 
 function draw() {
 
-    if (avancement == -2){
+    if (avancement == -2) {
         background(0);
-         image(logo, width / 2, height / 3, animSize * 4, animSize * 4);
+        image(logo, width / 2, height / 3, animSize * 4, animSize * 4);
         fill(255)
         var pct = map(loading, 0, 482, 0, 100);
-        text(int(pct) + " % ", width/2,height*3/4);
+        text(int(pct) + " % ", width / 2, height * 3 / 4);
         if (pct == 100) avancement = -1;
     }
 
@@ -931,7 +989,7 @@ function draw() {
 
     if (avancement == 10) {
         var maintenant = millis() - chrono;
-        if(video3_playing == false){
+        if (video3_playing == false) {
             video3.time(0)
             video3.play()
             video3_playing = true;
