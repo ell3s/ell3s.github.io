@@ -1,4 +1,11 @@
+
+
+// mentioner que c'est developpé pour chrome sous android
+
+// vérifier sous safari mais ne pas trop faire de changements ou pusher un tag avant.
+
 /*
+
  Elle(s) est une représentation abstraite des émotions ressenties
  par une femme victime d’agression sexuelle.
 
@@ -38,7 +45,7 @@
 
 
 var x0, y0, x1, y1;
-var avancement = -1;
+var avancement = -2;
 var derniere_action = 0;
 var moment_derniere_action = 0;
 
@@ -79,6 +86,19 @@ var reconstruction_playing = false;
 var verouiller_playing = false;
 var heatbeat_playing = false;
 
+var video1_playing = false;
+var video2_playing = false;
+var video3_playing = false;
+var video4_playing = false;
+var video5_playing = false;
+var video6_playing = false;
+var video7_playing = false;
+var video8_playing = false;
+var video9_playing = false;
+var video10_playing = false;
+var video11_playing = false;
+var video12_playing = false;
+
 var choix_ok = -1;
 /*
  1 : gauche
@@ -99,17 +119,19 @@ var agression
 var marcherue
 var lumiere
 
+// responsive values
 var animSize
 var dialogSize
 
+// camera
 var capture
 var w = 640
 var h = 480
 
 
 var canvas
-
 var french = true
+var loading = 0;
 
 
 function windowResized() {
@@ -122,45 +144,28 @@ function windowResized() {
 
 
 function preload() {
-
-
-
-    hit = loadSound("assets/vibeurtelephone.mp3");
-    run = loadSound("assets/run.mp3");
-    porte = loadSound("assets/porte2.mp3");
-    habits = loadSound("assets/habits.mp3");
-    marche = loadSound("assets/marche3.mp3");
-    fete = loadSound("assets/fete2.mp3");
-    fete2 = loadSound("assets/fete2_lop.mp3");
-    agres = loadSound("assets/agression.mp3");
-    debut = loadSound("assets/debut.mp3");
-    ruepeur = loadSound("assets/ruepeur.mp3");
-    amour = loadSound("assets/amour.mp3");
-    peur2 = loadSound("assets/peur2.mp3");
-    fin2 = loadSound("assets/fin2.mp3");
-    fin1 = loadSound("assets/fin1.mp3");
-    reconstruction = loadSound("assets/reconstruction.mp3");
-    verouiller = loadSound("assets/verouiller.mp3");
-    heatbeat = loadSound("assets/heatbeat.mp3");
-
-
-
-
-
+     logo = loadImage("assets/images/logoelles.png")
 }
 
 function setup() {
+    // canvas
     canvas = createCanvas(windowWidth - 2, windowHeight - 2);
     canvas.position(1, 1)
 
+    // some responsive values
     animSize = ((width + height) / 2) / 10
     dialogSize = ((width + height) / 2) / 35
 
     pixelDensity(1);
-
-
     setShakeThreshold(20);
+    frameRate(25);
+    textFont('Lato');
+    textAlign(CENTER, BOTTOM);
+    textSize(dialogSize);
+    imageMode(CENTER);
 
+
+    // capture
     capture = createCapture({
         audio: false,
         video: {
@@ -183,22 +188,31 @@ function setup() {
             }
             var n = w * h;
             ambientL = int(total / n);
-
-
         }
-        //console.log(ambientL)
     });
     capture.elt.setAttribute('playsinline', '');
     capture.size(w, h);
     capture.hide();
 
+    // sounds
+    hit = loadSound("assets/vibeurtelephone.mp3", function(){loading +=1});
+    run = loadSound("assets/run.mp3", function(){loading +=1});
+    porte = loadSound("assets/porte2.mp3", function(){loading +=1});
+    habits = loadSound("assets/habits.mp3", function(){loading +=1});
+    marche = loadSound("assets/marche3.mp3", function(){loading +=1});
+    fete = loadSound("assets/fete2.mp3", function(){loading +=1});
+    fete2 = loadSound("assets/fete2_lop.mp3", function(){loading +=1});
+    agres = loadSound("assets/agression.mp3", function(){loading +=1});
+    debut = loadSound("assets/debut.mp3", function(){loading +=1});
+    ruepeur = loadSound("assets/ruepeur.mp3", function(){loading +=1});
+    amour = loadSound("assets/amour.mp3", function(){loading +=1});
+    peur2 = loadSound("assets/peur2.mp3", function(){loading +=1});
+    fin2 = loadSound("assets/fin2.mp3", function(){loading +=1});
+    fin1 = loadSound("assets/fin1.mp3", function(){loading +=1});
+    reconstruction = loadSound("assets/reconstruction.mp3", function(){loading +=1});
+    verouiller = loadSound("assets/verouiller.mp3", function(){loading +=1});
+    heatbeat = loadSound("assets/heatbeat.mp3", function(){loading +=1});
 
-    frameRate(25);
-    textFont('Lato');
-    textAlign(CENTER, BOTTOM);
-    textSize(dialogSize);
-    imageMode(CENTER);
-    logo = loadImage("assets/images/logoelles.png")
     //Chargement de nos animations
     lumiere = new Animation("assets/anim_lumiere/lumiere_", 120);
     deverouiller = new Animation("assets/anim_deverouiller/deverrouiller_", 48);
@@ -207,20 +221,20 @@ function setup() {
     agression = new Animation("assets/anim_agression/agression_", 36);
     marcherue = new Animation("assets/anim_marche/marcherrue_", 32);
 
-
-    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4');
-    video2 = createVideo('assets/videos/TRANSITION_1.mp4');
-    video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4');
-    video4 = createVideo('assets/videos/TRANSITION_2.mp4');
-    video5 = createVideo('assets/videos/PARTIE_3_boucle.mp4');
-    video6 = createVideo('assets/videos/TRANSITION_3.mp4');
-    video7 = createVideo('assets/videos/PARTIE_4_boucle.mp4');
-    video8 = createVideo('assets/videos/TRANSITION_4.mp4');
-    video9 = createVideo('assets/videos/TRANSITION_5.mp4');
-    video10 = createVideo('assets/videos/TRANSITION_6.mp4');
-    video11 = createVideo('assets/videos/TRANSITION_7.mp4');
-    video12 = createVideo('assets/videos/PARTIE_8_boucle.mp4');
-    video13 = createVideo('assets/videos/TRANSITION_8.mp4');
+    // videos
+    video1 = createVideo('assets/videos/PARTIE_1_boucle.mp4', function(){loading +=1});
+    video2 = createVideo('assets/videos/TRANSITION_1.mp4', function(){loading +=1});
+    video3 = createVideo('assets/videos/PARTIE_2_boucle.mp4', function(){loading +=1});
+    video4 = createVideo('assets/videos/TRANSITION_2.mp4', function(){loading +=1});
+    video5 = createVideo('assets/videos/PARTIE_3_boucle.mp4', function(){loading +=1});
+    video6 = createVideo('assets/videos/TRANSITION_3.mp4', function(){loading +=1});
+    video7 = createVideo('assets/videos/PARTIE_4_boucle.mp4', function(){loading +=1});
+    // video8 = createVideo('assets/videos/TRANSITION_4.mp4');
+    video9 = createVideo('assets/videos/TRANSITION_5.mp4', function(){loading +=1});
+    video10 = createVideo('assets/videos/TRANSITION_6.mp4', function(){loading +=1});
+    video11 = createVideo('assets/videos/TRANSITION_7.mp4', function(){loading +=1});
+    video12 = createVideo('assets/videos/PARTIE_8_boucle.mp4', function(){loading +=1});
+    // video13 = createVideo('assets/videos/TRANSITION_8.mp4');
 
 
     video1.hide();
@@ -230,41 +244,50 @@ function setup() {
     video5.hide();
     video6.hide();
     video7.hide();
-    video8.hide();
+    // video8.hide();
     video9.hide();
     video10.hide();
     video11.hide();
     video12.hide();
-    video13.hide();
+    // video13.hide();
 
-    video1.elt.setAttribute('playsinline','')
-    video2.elt.setAttribute('playsinline','')
-    video3.elt.setAttribute('playsinline','')
-    video4.elt.setAttribute('playsinline','')
-    video5.elt.setAttribute('playsinline','')
-    video6.elt.setAttribute('playsinline','')
-    video7.elt.setAttribute('playsinline','')
-    video8.elt.setAttribute('playsinline','')
-    video9.elt.setAttribute('playsinline','')
-    video10.elt.setAttribute('playsinline','')
-    video11.elt.setAttribute('playsinline','')
-    video12.elt.setAttribute('playsinline','')
-    video13.elt.setAttribute('playsinline','')
+    video1.elt.setAttribute('playsinline', '')
+    video2.elt.setAttribute('playsinline', '')
+    video3.elt.setAttribute('playsinline', '')
+    video4.elt.setAttribute('playsinline', '')
+    video5.elt.setAttribute('playsinline', '')
+    video6.elt.setAttribute('playsinline', '')
+    video7.elt.setAttribute('playsinline', '')
+    // video8.elt.setAttribute('playsinline','')
+    video9.elt.setAttribute('playsinline', '')
+    video10.elt.setAttribute('playsinline', '')
+    video11.elt.setAttribute('playsinline', '')
+    video12.elt.setAttribute('playsinline', '')
+    //  video13.elt.setAttribute('playsinline','')
 
-    console.log(deviceOrientation)
+
 
     buttonfr = new Button("Français", "French", 1)
     buttoneng = new Button("Anglais", "English", 1)
-    buttonstart = new Button("Cliquer pour démarrer", "Click to start", 3)
-    buttonhome = new Button("Retour", "Home", 3)
+    buttonstart = new Button(" Cliquer pour démarrer ", " Click to start ", 3)
+    buttonhome = new Button(" Retour ", " Home ", 3)
 
+    console.log(deviceOrientation)
+    console.log("setup done")
 
 }
 
 
 function draw() {
 
-    // mouseIsPressed = false;
+    if (avancement == -2){
+        background(0);
+         image(logo, width / 2, height / 3, animSize * 4, animSize * 4);
+        fill(255)
+        var pct = map(loading, 0, 482, 0, 100);
+        text(int(pct) + " % ", width/2,height*3/4);
+        if (pct == 100) avancement = -1;
+    }
 
     if (avancement == -1) {
         push()
@@ -293,33 +316,13 @@ function draw() {
         if (buttonfr.isPressed) {
             french = true
         }
-        /*
-        textFont('La+Belle+Aurore');
-        textAlign(CENTER, BOTTOM);
-        textSize(dialogSize);
-            text("Elle(s)", width / 2, height / 3,)
-        */
+
         image(logo, width / 2, height / 3, animSize * 4, animSize * 4);
 
         if (buttonstart.isPressed) {
             avancement = 0
             video1.loop()
             derniere_action = 0;
-            /*
-            video1.loop()
-            video2.loop();
-            video3.loop();
-            // video4.loop();
-            video5.loop();
-            // video6.loop();
-            video7.loop();
-            // video8.loop();
-            video9.loop();
-            video10.loop();
-            video11.loop();
-            video12.loop();
-            video13.loop();*/
-
             chrono = millis()
         }
         pop()
@@ -348,8 +351,6 @@ function draw() {
             derniere_action = 0;
             chrono = millis();
             hit.stop();
-           // video1.stop()
-            video2.loop()
         }
 
     }
@@ -410,7 +411,7 @@ function draw() {
                 chrono = millis();
                 choix_ok = -1;
                 video1.stop()
-                video2.loop()
+                //video2.loop()
                 video3.loop()
 
             }
@@ -435,7 +436,7 @@ function draw() {
                 chrono = millis();
                 choix_ok = -1;
                 video1.stop()
-                video2.loop()
+                //video2.loop()
                 video3.loop()
 
             }
@@ -547,7 +548,7 @@ function draw() {
                 avancement = 4;
                 run.stop();
                 video3.stop()
-                video4.loop()
+                //video4.loop()
                 video5.loop()
             }
 
@@ -578,7 +579,8 @@ function draw() {
                 derniere_action = 0;
                 chrono = millis();
                 video4.stop();
-                video6.loop();
+                //video6.loop();
+                video7.loop();
             }
 
             if (key == '7') evenement(3)
@@ -624,7 +626,7 @@ function draw() {
                     choix_ok = -1;
                     video5.stop()
                     video6.stop()
-                    video7.loop()
+                    //video7.loop()
                 }
             } else if (derniere_action == 2) {
                 if (choix_ok == -1) {
@@ -645,7 +647,7 @@ function draw() {
                     choix_ok = -1;
                     video5.stop()
                     video6.stop()
-                    video7.loop()
+                    //video7.loop()
                 }
             }
             if (key == '7') evenement(1)
@@ -703,6 +705,8 @@ function draw() {
                     derniere_action = 0;
                     chrono = millis();
                     choix_ok = -1;
+                    //video8.stop();
+                    //video9.loop();
                 }
             } else if (derniere_action == 2) {
                 if (choix_ok == -1) {
@@ -721,6 +725,8 @@ function draw() {
                     derniere_action = 0;
                     chrono = millis();
                     choix_ok = -1;
+                    //video8.stop();
+                    // video9.loop();
                 }
             }
 
@@ -801,7 +807,7 @@ function draw() {
             if (key == 'l') {
                 evenement(5)
             }
-            if(mouseIsPressed){
+            if (mouseIsPressed) {
                 evenement(5)
             }
 
@@ -864,7 +870,7 @@ function draw() {
             agres.setVolume(0)
             amour.setVolume(0)
 
-             marche.stop()
+            marche.stop()
             verouiller.stop()
             heatbeat.stop()
             fin1.stop()
@@ -899,6 +905,21 @@ function draw() {
             reconstruction_playing = false;
             verouiller_playing = false;
             heatbeat_playing = false;
+
+            video1_playing = false;
+            video2_playing = false;
+            video3_playing = false;
+            video4_playing = false;
+            video5_playing = false;
+            video6_playing = false;
+            video7_playing = false;
+            video8_playing = false;
+            video9_playing = false;
+            video10_playing = false;
+            video11_playing = false;
+            video12_playing = false;
+
+
             chrono = millis()
 
 
@@ -910,12 +931,21 @@ function draw() {
 
     if (avancement == 10) {
         var maintenant = millis() - chrono;
+        if(video3_playing == false){
+            video3.time(0)
+            video3.play()
+            video3_playing = true;
+        }
         image(video3, width / 2, height / 2, width, height)
-        buttonhome.display(width / 2, height * 4.5 / 5, dialogSize * 3)
-        buttonhome.over(mouseX, mouseY)
-        if (buttonhome.isPressed) {
-            avancement = -1;
 
+        if (maintenant > 2600) {
+            buttonhome.display(width / 2, height * 4.5 / 5, dialogSize * 3)
+            buttonhome.over(mouseX, mouseY)
+            if (buttonhome.isPressed) {
+                avancement = -1;
+                video3.stop()
+                video3_playing = false;
+            }
         }
         if ((maintenant > 2600) && (maintenant < 12600)) {
 
@@ -931,20 +961,20 @@ function draw() {
             text("d'avoir participer à la conception de notre projet et de nous avoir aidé à le réaliser", width / 4, height * 1.5 / 8, width / 2)
             textStyle(BOLD);
             textSize(dialogSize * 0.8);
-            text("Merci à Pierre COMMENGE", width / 4, height * 2.7 / 8, width / 2)
+            text("Merci à Pierre COMMENGE", width / 4, height * 2.5 / 8, width / 2)
             textStyle(NORMAL);
             textSize(dialogSize * 0.7);
-            text("pour son aide lors du workshop", width / 4, height * 3.2 / 8, width / 2)
+            text("pour son aide lors du workshop", width / 4, height * 3 / 8, width / 2)
             noFill();
             stroke(255)
             textStyle(BOLD);
             textSize(dialogSize);
             var txt1 = " Par Auriane POUZIN, Raphaëlle GORENBOUH "
             var txt2 = " Camille CAMPO et Bérenger RECOULES "
-            line(width / 4, height * 4 / 8, width * 3 / 4, height * 4 / 8)
-            text(txt1, width / 4, height * 4.5 / 8, width / 2)
-            text(txt2, width / 4, height * 5 / 8, width / 2)
-            line(width / 4, height * 5.5 / 8, width * 3 / 4, height * 5.5 / 8)
+            line(width / 4, height * 3.7 / 8, width * 3 / 4, height * 3.7 / 8)
+            text(txt1, width / 4, height * 4.2 / 8, width / 2)
+            text(txt2, width / 4, height * 4.7 / 8, width / 2)
+            line(width / 4, height * 5.2 / 8, width * 3 / 4, height * 5.2 / 8)
             textStyle(NORMAL);
             strokeWeight(1)
             text("L'Ecole de design de Nantes Atlantique  ", width / 4, height * 6 / 8, width / 2)

@@ -15,7 +15,8 @@ function Animation(imagePrefix, count) {
     for (var i = 0; i < this.imageCount; i++) {
         // Use nf() to number format 'i' varo four digits
         var filename = imagePrefix + nf(i, 4) + ".png";
-        this.images.push(loadImage(filename));
+        var img =
+        this.images.push(loadImage(filename ,function(){loading +=1}));
     }
 
 

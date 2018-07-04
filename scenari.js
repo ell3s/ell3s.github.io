@@ -1,7 +1,9 @@
 function scenario0() {
 
-    if(millis() - chrono < 100){
+    if (video1_playing == false) {
+        video1.time(0)
         video1.loop();
+        video1_playing = true;
     }
     push()
     image(video1, width / 2, height / 2, width, height)
@@ -109,9 +111,26 @@ function scenario2() {
     var maintenant = millis() - chrono;
     textSize(dialogSize);
 
+
+    if (maintenant > 0 && maintenant < 3500) {
+        if (video2_playing == false) {
+            video2.time(0);
+            video2.play();
+            video2_playing = true;
+        }
+        image(video2, width / 2, height / 2, width, height)
+    } else {
+        if (video3_playing == false) {
+            video3.time(0);
+            video3.loop();
+            video3_playing = true;
+        }
+        image(video3, width / 2, height / 2, width, height)
+    }
+
     if ((maintenant > 0) && (maintenant < 4000)) {
 
-        image(video2, width / 2, height / 2, width, height)
+
 
         if (millis() - chrono < 4000) {
             if (!porte_playing) {
@@ -135,7 +154,7 @@ function scenario2() {
 
     if ((maintenant > 4000) && (maintenant < 8000)) {
 
-        image(video3, width / 2, height / 2, width, height)
+
 
         if (millis() - chrono > 4000) {
 
@@ -168,14 +187,13 @@ function scenario2() {
     }
     if (maintenant > 8000) {
 
-        image(video3, width / 2, height / 2, width, height)
+        //image(video3, width / 2, height / 2, width, height)
         boule1();
         if (millis() - chrono > 100) {
             ruepeur.setVolume(1.2);
         }
 
         if (millis() - chrono > 9000) {
-
 
             fairechoix.display(width / 2, height * 6.8 / 8, animSize * 2, animSize);
             stroke(255, 255, 255, (millis() - chrono - 9000) / 10);
@@ -205,6 +223,11 @@ function scenario2() {
 function scenario3() {
     push()
     textSize(dialogSize);
+    if (video3_playing == false) {
+        video3.time(0);
+        video3.loop();
+        video3_playing = true;
+    }
     image(video3, width / 2, height / 2, width, height)
     boule2();
     if (millis() - chrono < 4000) {
@@ -272,10 +295,23 @@ function scenario4() {
             debut.setVolume(0.5);
         }
     }
+
+
+
     var maintenant = millis() - chrono;
     if ((maintenant > 0) && (maintenant < 2200)) {
+        if (video4_playing == false) {
+            video4.time(0)
+            video4.play();
+            video4_playing = true;
+        }
         image(video4, width / 2, height / 2, width, height)
     } else {
+        if (video5_playing == false) {
+            video5.time(0);
+            video5.loop();
+            video5_playing = true;
+        }
         image(video5, width / 2, height / 2, width, height)
     }
     boule3(); // boule principale
@@ -326,12 +362,26 @@ function scenario4() {
 function scenario5() {
     push()
     textSize(dialogSize);
-    if (millis() - chrono < 6000) {
+    if (millis() - chrono < 7200) {
         image(video5, width / 2, height / 2, width, height)
-    } else {
+    } else if (millis() - chrono > 7200 && millis() - chrono < 14200) {
+        if (video6_playing == false) {
+            video6.time(0);
+            video6.play();
+            video6_playing = true;
+        }
+
         image(video6, width / 2, height / 2, width, height)
+    } else {
+        if (video7_playing == false) {
+            video7.time(0);
+            video7.loop();
+            video7_playing = true;
+        }
+
+        image(video7, width / 2, height / 2, width, height)
     }
-    // image(video4, width / 2, height / 2, width, height)
+
     /*
     La boule séduction est composée de plusieurs boules,
      une grosse au milieu et d'autre plus petites autour
@@ -365,7 +415,7 @@ function scenario5() {
     }
 
     if (millis() - chrono > 7000) {
-        image(video6, width / 2, height / 2, width, height)
+        //image(video6, width / 2, height / 2, width, height)
         boule4();
         boulea();
         bouleb();
@@ -407,6 +457,12 @@ function scenario6() {
     textSize(dialogSize);
     // background(0);
     var maintenant = millis() - chrono;
+    if (video7_playing == false) {
+            video7.time(0);
+            video7.play();
+            video7_playing = true;
+        }
+
     image(video7, width / 2, height / 2, width, height)
     if (maintenant > 1 && maintenant < 10000) {
         if (!peur2_playing) {
@@ -524,6 +580,11 @@ function scenario6() {
 
 function scenario7() {
     push()
+    if (video9_playing == false) {
+        video9.time(0)
+        video9.loop();
+        video9_playing = true;
+    }
     image(video9, width / 2, height / 2, width, height)
     textSize(dialogSize);
 
@@ -563,6 +624,11 @@ function scenario8() {
     textSize(dialogSize);
     // background(0);
     if (millis() - chrono < 5000) {
+          if (video9_playing == false) {
+        video9.time(0)
+        video9.loop();
+        video9_playing = false;
+    }
         image(video9, width / 2, height / 2, width, height)
         if (!fin1_playing) {
             fin1.play();
@@ -572,9 +638,21 @@ function scenario8() {
             heatbeat.setVolume(0);
         }
     }
-    if (millis() - chrono > 5000) {
+    if (millis() - chrono > 5000 && millis() - chrono < 8000) {
+        if (video10_playing == false) {
+            video10.time(0)
+            video10.play()
+            video10_playing = true
+        }
         image(video10, width / 2, height / 2, width, height)
 
+    } else if (millis() - chrono > 8000) {
+        if (video11_playing == false) {
+            video11.time(0)
+            video11.play()
+            video11_playing = true
+        }
+        image(video11, width / 2, height / 2, width, height)
     }
     var maintenant = millis() - chrono;
     if ((maintenant > 0) && (maintenant < 5000)) {
@@ -594,7 +672,7 @@ function scenario8() {
         fill(255, 255, 255, 255);
 
         if (millis() - chrono > 8000) {
-            image(video11, width / 2, height / 2, width, height)
+
             if (french) text("Cacher le capteur de luminosité du téléphone ", width / 2, height * 6.8 / 8);
             else text("Hide the light sensor of the smartphone ", width / 2, height * 6.8 / 8);
         }
@@ -612,9 +690,15 @@ function scenario9() {
     //background(0);
 
     var maintenant = millis() - chrono;
-    if (maintenant < 18000) {
-        image(video12, width / 2, height / 2, width, height)
+    //if (maintenant < 18000) {
+    //if (maintenant < 18000) {
+    if (video12_playing == false) {
+        video12.time(0)
+        video12.loop()
+        video12_playing = true
     }
+    image(video12, width / 2, height / 2, width, height)
+    //}
 
 
     if ((maintenant > 0) && (maintenant < 4000)) {
@@ -643,7 +727,8 @@ function scenario9() {
         boule8();
     }
     if (maintenant > 18000) {
-        image(video12, width / 2, height / 2, width, height)
+
+        //  image(video12, width / 2, height / 2, width, height)
         boule0bis();
         boule10();
         textAlign(CENTER, CENTER);
